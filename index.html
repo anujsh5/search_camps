@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P.R.I.S.M. — Purple Retail Intelligence &amp; Sales Management</title>
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#9C00AD; --purple-d:#6E0079; --purple-lt:#FDF1FF; --purple-mid:#F7E4FA;
+    --green:#1E7A4C; --green-lt:#E7F6EE;
+    --red:#C0281C; --red-lt:#FDE9E7;
+    --amber:#B45309; --amber-lt:#FEF6E0;
+    --g90:#12101A; --g70:#2B2833; --g50:#6B6675; --g40:#948FA0; --g30:#C9C5D2;
+    --g20:#E7E4EC; --g10:#F2F0F5; --g08:#F8F7FA; --page:#FAFAFB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+  body{background:var(--page);color:var(--g70);font-size:13px;-webkit-font-smoothing:antialiased}
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  input,select{font:inherit;color:inherit}
+  a{text-decoration:none;color:inherit}
+  .hide{display:none!important}
+
+  /* ================= SIDEBAR ================= */
+  .side{position:fixed;left:0;top:0;bottom:0;width:205px;display:flex;flex-direction:column;z-index:50;
+        background:linear-gradient(160deg,#7A0089 0%,#9C00AD 45%,#B21EC4 100%);color:#fff}
+  .side-brand{padding:16px 14px 14px;text-align:center}
+  .side-brand .nm{font-size:17px;font-weight:800;letter-spacing:2px}
+  .side-brand .tl{font-size:9px;font-weight:500;color:rgba(255,255,255,.72);line-height:1.35;margin-top:4px}
+  .side-nav{flex:1;overflow-y:auto;padding:4px 0 10px}
+  .grp{border-top:1px solid rgba(255,255,255,.12)}
+  .grp-h{display:flex;align-items:center;gap:8px;padding:11px 14px;font-size:12.5px;font-weight:700;cursor:pointer}
+  .grp-h i.ico{font-size:14px;opacity:.9}
+  .grp-h .cv{margin-left:auto;font-size:16px;opacity:.8;transition:transform .18s}
+  .grp-h .cv.dn{transform:rotate(-90deg)}
+  .grp-b{padding-bottom:6px}
+  a.nv,a.nv:link,a.nv:visited{display:block;margin:1px 8px;padding:6px 14px;border-radius:6px;
+      font-size:12px;font-weight:500;color:rgba(255,255,255,.86);text-decoration:none}
+  a.nv:hover{background:rgba(255,255,255,.12);color:#fff}
+  a.nv.on,a.nv.on:link,a.nv.on:visited{background:rgba(255,255,255,.20);color:#fff;font-weight:700}
+  .side-foot{border-top:1px solid rgba(255,255,255,.12);padding:14px;display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;cursor:pointer}
+  .side-nav::-webkit-scrollbar{width:5px}
+  .side-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25);border-radius:3px}
+
+  .shell{margin-left:205px}
+
+  /* ================= TOPBAR ================= */
+  .topbar{background:#fff;border-bottom:1px solid var(--g20);display:flex;align-items:center;justify-content:space-between;
+          padding:13px 24px;position:sticky;top:0;z-index:40}
+  .crumb{font-size:12.5px;color:var(--g50)}
+  .crumb b{color:var(--g70);font-weight:700}
+  .topright{display:flex;align-items:center;gap:10px}
+  .wbox{display:flex;align-items:stretch;border:1px solid var(--g30);border-radius:8px;overflow:hidden;background:#fff}
+  .wbox .amt{padding:5px 11px;border-right:1px solid var(--g20)}
+  .wbox .amt .l{font-size:9px;color:var(--g40);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+  .wbox .amt .v{font-size:12.5px;font-weight:700;color:var(--g70)}
+  .wbox .mg{display:flex;align-items:center;gap:14px;padding:5px 11px;font-size:13px;font-weight:600;color:var(--purple)}
+  .ctl{display:flex;align-items:center;gap:8px;border:1px solid var(--g30);border-radius:8px;background:#fff;padding:7px 11px;font-size:13px;font-weight:600}
+  .ctl:hover{border-color:var(--purple)}
+  .ctl i{color:var(--g50);font-size:15px}
+  .av{width:20px;height:20px;border-radius:50%;background:var(--purple-lt);color:var(--purple);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .menu{position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--g20);border-radius:10px;
+        box-shadow:0 12px 28px rgba(18,16,26,.14);padding:6px;width:210px;z-index:60}
+  .menu-l{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--g40);font-weight:800;padding:7px 10px 4px}
+  .menu button{display:block;width:100%;text-align:left;padding:8px 10px;border-radius:6px;font-size:12.5px}
+  .menu button:hover{background:var(--purple-lt);color:var(--purple)}
+  .menu button.sel{font-weight:800;color:var(--purple);background:var(--purple-lt)}
+  .menu hr{border:none;border-top:1px solid var(--g20);margin:5px 0}
+
+  /* ================= PAGE ================= */
+  .page{padding:22px 24px 40px}
+  .page-section{display:none}
+  .page-section.active{display:block}
+  .ph{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:18px}
+  .ph h1{font-size:25px;font-weight:800;color:var(--g90);letter-spacing:-.4px}
+  .ph .sub{font-size:12px;color:var(--g50);margin-top:4px}
+  .phacts{display:flex;gap:9px}
+  .btn-p{background:var(--purple);color:#fff;font-weight:700;padding:9px 15px;border-radius:8px;font-size:12.5px}
+  .btn-p:hover{background:#83008f}
+  .btn-s{background:#fff;border:1px solid var(--g30);color:var(--g70);font-weight:700;padding:9px 15px;border-radius:8px;font-size:12.5px}
+  .btn-s:hover{border-color:var(--purple);color:var(--purple)}
+
+  /* KPI cards */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:16px}
+  .kpi{position:relative;background:#fff;border:1px solid var(--g20);border-radius:9px;padding:15px 16px 14px}
+  .kpi.hl{border:1.5px solid var(--purple);background:var(--purple-lt)}
+  .kpi .lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--g40);padding-right:20px}
+  .kpi .num{font-size:23px;font-weight:800;color:var(--g90);margin:7px 0 3px;letter-spacing:-.3px}
+  .kpi.hl .num{color:var(--purple)}
+  .kpi .sub{font-size:10.5px;color:var(--g50)}
+  .kpi .ii{position:absolute;top:13px;right:13px;color:var(--g30);font-size:14px;cursor:help}
+  .kpi .ii:hover{color:var(--purple)}
+
+  /* wallet cards */
+  .wcards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:18px}
+  .wc{position:relative;background:#fff;border:1px solid var(--g20);border-radius:9px;padding:15px 16px 14px}
+  .wc .hd{display:flex;align-items:center;gap:9px}
+  .wc .ic{width:26px;height:26px;border-radius:7px;background:var(--purple-lt);color:var(--purple);display:flex;align-items:center;justify-content:center;font-size:14px}
+  .wc.promo .ic{background:var(--amber-lt);color:var(--amber)}
+  .wc .nm{font-size:13.5px;font-weight:800;color:var(--g90)}
+  .wc .tg{font-size:10px;color:var(--g40);margin-top:1px}
+  .wc .amt{font-size:22px;font-weight:800;color:var(--g90);margin:11px 0 3px;letter-spacing:-.3px}
+  .wc .ft{font-size:10.5px;color:var(--g50);margin-bottom:12px}
+  .wc .ii{position:absolute;top:13px;right:13px;color:var(--g30);font-size:14px;cursor:help}
+  .wc .ii:hover{color:var(--purple)}
+  .wc .act{display:block;width:100%;text-align:center;padding:9px;border-radius:8px;font-size:12px;font-weight:700;
+           border:1px solid var(--g30);background:#fff;color:var(--g70)}
+  .wc .act:hover{border-color:var(--purple);color:var(--purple)}
+  .wc .act.pr{border-color:var(--purple);background:var(--purple-lt);color:var(--purple)}
+  .wc .act.off{background:var(--g10);border-color:var(--g20);color:var(--g40);cursor:not-allowed}
+  .wc .act.off:hover{border-color:var(--g20);color:var(--g40)}
+
+  /* ================= CARD / TABLE ================= */
+  .card{background:#fff;border:1px solid var(--g20);border-radius:9px;margin-bottom:18px;overflow:hidden}
+  .card.hl{border-color:var(--purple)}
+  .chd{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:15px 18px 13px}
+  .chd h2{font-size:14.5px;font-weight:800;color:var(--g90)}
+  .chd .sb{font-size:11px;color:var(--g50);margin-top:3px}
+  .chd .sb .em{color:var(--purple);font-weight:600}
+  .ttl{display:flex;align-items:center;gap:8px}
+  .cnt{min-width:21px;height:19px;padding:0 7px;border-radius:99px;font-size:10.5px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+  .cnt.p{background:var(--purple);color:#fff}
+  .cnt.a{background:var(--amber-lt);color:var(--amber)}
+  .cnt.g{background:var(--g10);color:var(--g50)}
+  .grain{display:inline-block;background:var(--g10);color:var(--g50);border-radius:5px;padding:2px 7px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
+  .inper{display:inline-block;background:var(--purple-lt);color:var(--purple);border-radius:5px;padding:2px 7px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
+  .asof{display:inline-block;background:var(--g10);color:var(--g50);border-radius:5px;padding:2px 7px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
+  .ctools{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
+  .dl{display:inline-flex;align-items:center;gap:6px;color:var(--purple);font-size:12px;font-weight:700}
+  .dl:hover{text-decoration:underline}
+  .dl.off{color:var(--g40);cursor:not-allowed;pointer-events:none}
+  .dlwrap{display:inline-flex;cursor:not-allowed}
+  .selfmt{border:1px solid var(--g30);border-radius:7px;background:#fff;padding:5px 7px;font-size:11.5px;font-weight:700}
+  .caret{color:var(--g40);font-size:17px;transition:transform .18s}
+  .caret.dn{transform:rotate(-90deg)}
+
+  .chips{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .chips .cl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--g40)}
+  .chip{border:1px solid var(--g30);background:#fff;border-radius:99px;padding:4px 11px;font-size:11px;font-weight:600;color:var(--g50);white-space:nowrap}
+  .chip:hover{border-color:var(--purple);color:var(--purple)}
+  .chip.on{background:var(--purple);border-color:var(--purple);color:#fff}
+
+  .tw{overflow-x:auto}
+  table{width:100%;border-collapse:collapse}
+  thead th{background:var(--g08);color:var(--g40);font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;
+           text-align:left;padding:10px 18px;white-space:nowrap;border-top:1px solid var(--g20);border-bottom:1px solid var(--g20)}
+  tbody td{padding:13px 18px;font-size:12.5px;border-bottom:1px solid var(--g10);white-space:nowrap;vertical-align:middle}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:var(--g08)}
+  .r{text-align:right}
+  .mono{font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:11px}
+  .bold{font-weight:700}
+  .muted{color:var(--g50)}
+  .num{font-variant-numeric:tabular-nums;font-weight:700}
+  .neg{color:var(--red)}
+  .pos{color:var(--green)}
+  .wlink{color:var(--purple);font-weight:600}
+
+  .pill{display:inline-block;border-radius:99px;padding:3px 9px;font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+  .p-cur{background:var(--purple-lt);color:var(--purple)}
+  .p-next{background:var(--amber-lt);color:var(--amber)}
+  .p-credited{background:var(--green);color:#fff}
+  .p-submitted{background:var(--g10);color:var(--g50)}
+  .p-review{background:#E9EAFB;color:#3F3D9E}
+  .p-hold{background:var(--amber-lt);color:var(--amber)}
+  .p-approved{background:var(--green-lt);color:var(--green)}
+  .p-sched{background:var(--amber-lt);color:var(--amber)}
+  .p-rejected{background:var(--red-lt);color:var(--red)}
+  .chipm{display:inline-block;background:var(--g10);color:var(--g50);border-radius:5px;padding:3px 8px;font-size:10.5px;font-weight:700}
+  .chips-spend{display:inline-block;background:var(--red-lt);color:var(--red);border-radius:5px;padding:3px 8px;font-size:10.5px;font-weight:700}
+  .chips-in{display:inline-block;background:var(--green-lt);color:var(--green);border-radius:5px;padding:3px 8px;font-size:10.5px;font-weight:700}
+  .chips-adj{display:inline-block;background:var(--purple-lt);color:var(--purple);border-radius:5px;padding:3px 8px;font-size:10.5px;font-weight:700}
+  .flag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+  .f-ok{color:var(--green)} .f-bad{color:var(--red)} .f-warn{color:var(--amber)}
+  .blink{animation:bl 2s infinite} @keyframes bl{0%,100%{opacity:1}50%{opacity:.5}}
+  .view{color:var(--purple);font-weight:700;font-size:12px}
+  .view:hover{text-decoration:underline}
+  .acts{display:flex;gap:6px;align-items:center}
+  .a-ok{background:var(--green);color:#fff;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:700}
+  .a-no{background:#fff;border:1px solid var(--red);color:var(--red);border-radius:6px;padding:5px 10px;font-size:11px;font-weight:700}
+  .a-hd{background:#fff;border:1px solid var(--g30);color:var(--g50);border-radius:6px;padding:5px 10px;font-size:11px;font-weight:700}
+  .a-hd:hover{border-color:var(--amber);color:var(--amber)}
+
+  .pag{display:flex;align-items:center;justify-content:flex-end;gap:22px;padding:12px 18px;border-top:1px solid var(--g20);font-size:12px;color:var(--g50)}
+  .pag select{border:1px solid var(--g30);border-radius:6px;padding:3px 6px;font-size:12px;background:#fff}
+  .pag .rp{display:flex;align-items:center;gap:8px}
+  .pag .ar{display:flex;gap:5px}
+  .pag .ar button{width:25px;height:25px;border:1px solid var(--g30);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--g50)}
+  .pag .ar button:hover{border-color:var(--purple);color:var(--purple)}
+
+  .empty{padding:38px 18px;text-align:center}
+  .empty i{font-size:32px;color:var(--g30)}
+  .empty .t{font-size:13px;font-weight:700;color:var(--g70);margin-top:9px}
+  .empty .s{font-size:11.5px;color:var(--g50);margin-top:3px}
+  .emptyline{padding:13px 18px;font-size:11.5px;color:var(--g50)}
+
+  .note{display:flex;gap:10px;padding:13px 18px;font-size:11.5px;color:var(--g50);line-height:1.55;border-top:1px solid var(--g20);background:var(--g08)}
+  .note i{color:var(--g40);font-size:15px;flex-shrink:0;margin-top:1px}
+  .note b{color:var(--g70)}
+  .has-tip{cursor:help}
+  .qi{color:var(--g30);font-size:13px;cursor:help;vertical-align:middle}
+  .qi:hover{color:var(--purple)}
+
+  /* wallet ledger waterfall */
+  .lg{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px 18px}
+  .lgb{border:1px solid var(--g20);border-radius:9px;overflow:hidden;align-self:start}
+  .lgb.money .lgh{background:var(--purple-lt);color:var(--purple)}
+  .lgb.pr .lgh{background:var(--amber-lt);color:var(--amber)}
+  .lgh{padding:10px 13px;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:space-between}
+  .lgh .s{font-weight:600;font-size:10px;opacity:.85}
+  .lgr{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;font-size:12.5px;border-top:1px solid var(--g10)}
+  .lgr .l{color:var(--g50)} .lgr .v{font-variant-numeric:tabular-nums;font-weight:600}
+  .lgr.t{background:var(--g08)} .lgr.t .l{color:var(--g70);font-weight:800} .lgr.t .v{font-weight:800}
+  .lgr.it{padding:6px 13px 6px 26px;border-top:none;font-size:11.5px}
+  .lgr.it .l{color:var(--g40)} .lgr.it .v{font-weight:500;color:var(--g50)}
+  .lgf{padding:9px 13px;border-top:1px solid var(--g20);font-size:10.5px;color:var(--g50);display:flex;align-items:center;gap:6px}
+  .tog{font-size:10.5px;font-weight:700;color:var(--purple)}
+
+  /* tooltip — fixed, escapes table overflow */
+  #tt{position:fixed;z-index:9999;background:var(--g90);color:#fff;padding:9px 11px;border-radius:7px;font-size:11.5px;
+      line-height:1.45;font-weight:500;max-width:280px;box-shadow:0 8px 22px rgba(18,16,26,.28);opacity:0;pointer-events:none;transition:opacity .13s;display:none}
+  #tt.on{opacity:1}
+  #tt:after{content:'';position:absolute;top:100%;left:var(--ax,50%);transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--g90)}
+  #tt.below:after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:var(--g90)}
+
+  /* drawer + modal */
+  .ovl{position:fixed;inset:0;background:rgba(18,16,26,.34);z-index:70;display:none}
+  .drw{position:fixed;top:0;right:0;bottom:0;width:560px;background:#fff;z-index:80;display:flex;flex-direction:column;
+       transform:translateX(100%);transition:transform .24s ease-out;box-shadow:-8px 0 30px rgba(18,16,26,.16)}
+  .drw.open{transform:translateX(0)}
+  .dh{display:flex;align-items:center;justify-content:space-between;padding:17px 20px;border-bottom:1px solid var(--g20)}
+  .dh .l{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--g40)}
+  .dh .id{font-family:Menlo,monospace;font-size:13px;font-weight:700;color:var(--purple);margin-top:2px}
+  .db{flex:1;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:15px}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;background:var(--g08);border-radius:9px;padding:15px}
+  .fl .k{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--g40);display:flex;align-items:center;gap:5px}
+  .fl .v{font-size:12.5px;font-weight:700;color:var(--g70);margin-top:3px}
+  .fl.w{grid-column:1/-1}
+  .out{border-radius:9px;padding:14px;font-size:12px}
+  .out .ot{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+  .out .rr{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .out .rr>div{display:flex;gap:5px} .out .rr .w{grid-column:1/-1}
+  .out .rr span{color:var(--g50)}
+  .out .ft{margin-top:9px;padding-top:8px;border-top:1px solid rgba(0,0,0,.09);font-size:11px}
+  .o-g{background:var(--green-lt);border:1px solid var(--green)} .o-g .ot{color:var(--green)}
+  .o-r{background:var(--red-lt);border:1px solid var(--red)} .o-r .ot{color:var(--red)} .o-r .ft{color:var(--red)}
+  .o-a{background:var(--amber-lt);border:1px solid #E9A23B} .o-a .ot{color:var(--amber)} .o-a .ft{color:var(--amber)}
+  .df{border-top:1px solid var(--g20);padding:15px 20px;display:flex;justify-content:flex-end;gap:9px}
+  .modal{position:fixed;inset:0;background:rgba(18,16,26,.42);z-index:90;display:none;align-items:center;justify-content:center}
+  .modal.on{display:flex}
+  .mb{background:#fff;border-radius:11px;width:470px;padding:21px;box-shadow:0 20px 50px rgba(18,16,26,.3)}
+  .mb h3{font-size:15.5px;font-weight:800;color:var(--g90);margin-bottom:5px}
+  .mb p{font-size:11.5px;color:var(--g50);line-height:1.5;margin-bottom:15px}
+  .mb label{display:block;font-size:10px;font-weight:800;color:var(--g50);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+  .mb textarea{width:100%;border:1px solid var(--g30);border-radius:8px;padding:10px;font-size:12.5px;resize:vertical}
+  .mb textarea:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px var(--purple-lt)}
+  .mb .hint{display:flex;gap:6px;margin-top:9px;font-size:10.5px;color:var(--g50)}
+  .mb .ma{display:flex;justify-content:flex-end;gap:9px;margin-top:17px}
+  .btn-r{background:var(--red);color:#fff;font-weight:700;padding:9px 16px;border-radius:8px;font-size:12.5px}
+  .btn-g{background:var(--green);color:#fff;font-weight:700;padding:9px 16px;border-radius:8px;font-size:12.5px}
+
+  #toast{position:fixed;bottom:24px;right:24px;z-index:95;display:none}
+  #toast div{background:var(--g90);color:#fff;font-size:12px;font-weight:600;padding:11px 16px;border-radius:9px;
+             box-shadow:0 10px 26px rgba(18,16,26,.3);animation:up .22s ease-out}
+  @keyframes up{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ---------- Finance Queue additions ---------- */
+  .search{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--g20);border-radius:9px;padding:0 12px;height:38px;margin-bottom:16px;max-width:520px}
+  .search i{color:var(--g40);font-size:15px}
+  .search input{flex:1;border:0;outline:0;font-size:12.5px;font-weight:600;color:var(--g90);background:transparent}
+  .search input::placeholder{color:var(--g40);font-weight:500}
+
+  .bold{font-weight:800;color:var(--g90)}
+  .f-bad{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.4px;padding:3px 7px;border-radius:5px;background:#FEECEC;color:#B42318;border:1px solid #F9C9C9}
+  .f-warn{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.4px;padding:3px 7px;border-radius:5px;background:#FFF6E5;color:#8A5300;border:1px solid #FBE0AE}
+  .f-bad.dot:before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:#D92D20;margin-right:5px;vertical-align:1px;animation:blink 1.4s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+  table.wl{min-width:1120px}
+  table.wl thead th{background:var(--g08);font-size:9.5px;padding:8px 12px}
+  table.wl tbody td{padding:11px 12px}
+  table.wl thead th[rowspan]{vertical-align:middle}
+  table.wl thead th.gh{text-align:center;background:var(--purple-lt);color:var(--purple-d);border-bottom:1px solid var(--g20);letter-spacing:.6px}
+  table.wl thead tr.gr2 th{text-align:right;font-size:9.5px}
+  table.wl thead tr.gr2 th.sep,table.wl thead th.sep{border-left:1px solid var(--g20)}
+  table.wl td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+  table.wl td.bal{font-weight:800;color:var(--g90);background:var(--g08)}
+  table.wl td.sep{border-left:1px solid var(--g20);text-align:center}
+  .zero{color:var(--g40)}
+  .ok{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.4px;padding:3px 7px;border-radius:5px;background:#E9F7EF;color:#046C4E;border:1px solid #BFE7D2}
+
+  .dcard{border:1px solid var(--g20);border-radius:9px;overflow:hidden;margin-bottom:14px}
+  .dcard .ct{font-size:10.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--g50);background:var(--g08);padding:8px 12px;border-bottom:1px solid var(--g20)}
+  .proof{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;font-size:12px}
+
+  /* ---------- Search campaigns list ---------- */
+  .banner{position:relative;border-radius:12px;padding:34px 40px;margin-bottom:22px;overflow:hidden;
+          background:linear-gradient(100deg,#9C00AD 0%,#8A0FB0 55%,#6E4CC4 100%);color:#fff}
+  .banner h2{font-size:22px;font-weight:800;margin-bottom:8px;letter-spacing:-.2px}
+  .banner p{font-size:12.5px;opacity:.92;max-width:400px;line-height:1.5}
+  .banner .x{position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:50%;
+             background:rgba(255,255,255,.18);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .banner .spark{position:absolute;right:44px;top:38px;width:290px;height:120px;opacity:.95}
+  .banner .cvbox{position:absolute;right:96px;top:26px;background:#fff;border-radius:8px;padding:6px 11px;text-align:center;
+                 box-shadow:0 6px 18px rgba(0,0,0,.18)}
+  .banner .cvbox .l{font-size:8.5px;color:var(--g50);font-weight:700}
+  .banner .cvbox .v{font-size:14px;font-weight:800;color:var(--purple)}
+
+  .sect-lbl{font-size:12px;font-weight:800;color:var(--g90);margin-bottom:10px}
+  .kpigrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--g20);border-radius:10px;background:#fff;overflow:hidden;margin-bottom:6px}
+  .kpigrid .c{padding:20px 22px;border-right:1px solid var(--g20);border-bottom:1px solid var(--g20);position:relative;text-align:center}
+  .kpigrid .c:nth-child(3n){border-right:none}
+  .kpigrid .c .v{font-size:23px;font-weight:700;color:var(--g70);letter-spacing:-.4px}
+  .kpigrid .c .l{font-size:10.5px;color:var(--g50);margin-top:5px}
+  .kpigrid .c .dots{position:absolute;top:8px;right:10px;color:var(--g30);font-size:12px;letter-spacing:1px}
+  .trend{border:1px solid var(--g20);border-top:none;border-radius:0 0 10px 10px;background:#fff;padding:14px 18px;margin-bottom:20px}
+  .trend .hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+  .trend .t{font-size:11.5px;font-weight:800;color:var(--g90)}
+  .lg-dots{display:flex;flex-wrap:wrap;gap:12px}
+  .lg-dots span{font-size:9.5px;color:var(--g50);display:flex;align-items:center;gap:4px}
+  .lg-dots i{width:6px;height:6px;border-radius:50%;display:inline-block}
+  .metsel{border:1px solid var(--g20);border-radius:6px;padding:3px 8px;font-size:10px;color:var(--g50);display:flex;align-items:center;gap:6px}
+
+  .ctools2{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .srch2{display:flex;align-items:center;gap:7px;border:1px solid var(--g20);border-radius:7px;padding:0 10px;height:32px;background:#fff}
+  .srch2 i{color:var(--g40);font-size:13px}
+  .srch2 input{border:0;outline:0;font-size:11.5px;width:130px;background:transparent;color:var(--g90)}
+  .btn-o{border:1px solid var(--g20);background:#fff;border-radius:7px;padding:7px 12px;font-size:11.5px;font-weight:700;color:var(--g70);display:inline-flex;align-items:center;gap:6px}
+  .btn-o:hover{border-color:var(--purple);color:var(--purple)}
+  .btn-o.off{color:var(--g30);border-color:var(--g20);cursor:not-allowed}
+  .btn-cta{background:var(--purple);color:#fff;border-radius:7px;padding:8px 14px;font-size:11.5px;font-weight:800}
+  .btn-cta:hover{background:var(--purple-d)}
+  .st-active{color:var(--amber);font-weight:800;font-size:11.5px}
+  .cmp-nm{color:var(--g90);font-weight:600;max-width:270px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:middle}
+  .tabs{display:flex;gap:20px;border-bottom:1px solid var(--g20);padding:0 18px;margin-bottom:0}
+  .tabs button{padding:10px 0;font-size:11.5px;font-weight:700;color:var(--g50);border-bottom:2px solid transparent}
+  .tabs button.on{color:var(--purple);border-bottom-color:var(--purple)}
+  table.dense thead th{font-size:9px;padding:8px 10px}
+  table.dense tbody td{font-size:11px;padding:8px 10px;white-space:nowrap}
+
+  /* ---------- Create campaign wizard ---------- */
+  .wiz{position:fixed;inset:0 0 0 205px;background:#fff;z-index:60;display:none;flex-direction:column}
+  .wiz.on{display:flex}
+  .wiz-hd{display:flex;align-items:center;justify-content:space-between;padding:18px 26px 0}
+  .wiz-hd h1{font-size:16px;font-weight:800;color:var(--g90)}
+  .wiz-hd .x{color:var(--g40);font-size:20px}
+  .steps{display:flex;gap:34px;padding:14px 26px 0;border-bottom:1px solid var(--g20)}
+  .steps button{display:flex;align-items:center;gap:8px;padding:10px 2px 12px;font-size:12px;font-weight:700;color:var(--g40);border-bottom:2px solid transparent}
+  .steps button .ic{width:16px;height:16px;font-size:14px;display:flex;align-items:center;justify-content:center}
+  .steps button.on{color:var(--purple);border-bottom-color:var(--purple)}
+  .steps button.done{color:var(--green)}
+  .wiz-bd{flex:1;overflow-y:auto;padding:22px 26px 26px;background:var(--page)}
+  .wiz-ft{border-top:1px solid var(--g20);background:#fff;padding:14px 26px;display:flex;justify-content:space-between}
+  .wstep{display:none}
+  .wstep.on{display:block}
+
+  .fcard{background:#fff;border:1px solid var(--g20);border-radius:10px;padding:20px 22px;margin-bottom:16px}
+  .fcard.lav{background:linear-gradient(90deg,var(--purple-lt),#fff);border-color:var(--purple-mid)}
+  .fcard .hd2{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+  .fcard .hd2 .sq{width:30px;height:30px;border-radius:8px;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .fcard .hd2 .t{font-size:13px;font-weight:800;color:var(--g90)}
+  .fcard .hd2 .s{font-size:11px;color:var(--g50);margin-top:2px}
+  .fcard h3{font-size:12.5px;font-weight:800;color:var(--g90);margin-bottom:16px}
+  .fld{margin-bottom:20px}
+  .fld label{display:block;font-size:11px;font-weight:700;color:var(--g70);margin-bottom:7px}
+  .fld label .opt{font-weight:500;color:var(--g40);font-size:10px}
+  .fld input[type=text],.fld input[type=number],.fld select{width:100%;border:0;border-bottom:1px solid var(--g20);padding:7px 0;font-size:12.5px;color:var(--g90);background:transparent;outline:0}
+  .fld input::placeholder{color:var(--g30)}
+  .fld input:focus,.fld select:focus{border-bottom-color:var(--purple)}
+  .fld .withic{position:relative}
+  .fld .withic i{position:absolute;right:2px;top:6px;color:var(--purple);font-size:14px}
+  .selbox{width:100%;border:1px solid var(--g20);border-radius:8px;background:#fff;padding:10px 12px;font-size:12.5px;color:var(--g90);appearance:none}
+  .radio2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .radio2 label{border:1px solid var(--g20);border-radius:9px;padding:13px 15px;display:flex;gap:10px;align-items:flex-start;cursor:pointer;background:#fff}
+  .radio2 label.on{border-color:var(--purple);box-shadow:inset 0 0 0 1px var(--purple)}
+  .radio2 .dot{width:13px;height:13px;border-radius:50%;border:1.5px solid var(--g30);margin-top:2px;flex-shrink:0}
+  .radio2 label.on .dot{border-color:var(--purple);background:radial-gradient(var(--purple) 0 45%,#fff 50%)}
+  .radio2 .t{font-size:12px;font-weight:700;color:var(--g90)}
+  .radio2 .s{font-size:10.5px;color:var(--g50);margin-top:2px}
+  .fgrid{display:grid;grid-template-columns:1.4fr 1.4fr 2fr auto auto;gap:16px;align-items:end}
+  .kwgrid{display:grid;grid-template-columns:1fr 150px 120px 34px;gap:12px;align-items:end}
+  .kwgrid.neg{grid-template-columns:1fr 150px 34px}
+  .addrow{display:inline-flex;align-items:center;gap:7px;color:var(--purple);font-size:12px;font-weight:800;margin-top:14px}
+  .thin{border:1px solid var(--g20);border-radius:7px;padding:8px 10px;font-size:12px;background:#fff;color:var(--g90);width:100%}
+  .icobtn{color:var(--g40);font-size:15px;padding-bottom:8px}
+  .icobtn:hover{color:var(--red)}
+  .aip{background:var(--purple-lt);color:var(--purple);border:1px solid var(--purple-mid);border-radius:20px;padding:3px 10px;font-size:9.5px;font-weight:800}
+  .cnt2{font-size:10px;color:var(--g50)}
+  .found{font-size:11.5px;color:var(--g50);margin:14px 0 10px}
+  .found b{color:var(--purple)}
+  .pgn{display:flex;justify-content:center;gap:6px;padding:16px 0 4px}
+  .pgn button{width:26px;height:26px;border-radius:50%;font-size:11px;color:var(--g50);font-weight:700}
+  .pgn button.on{background:var(--purple);color:#fff}
+  .pnum{width:15px;height:15px;border-radius:50%;background:var(--purple);color:#fff;font-size:9px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+  .ta{width:100%;border:1px solid var(--g20);border-radius:8px;padding:11px 13px;font-size:11.5px;font-family:'SFMono-Regular',Consolas,Menlo,monospace;color:var(--g70);background:var(--g08);resize:vertical}
+  .up{display:flex;align-items:center;gap:14px}
+  .hint2{font-size:10.5px;color:var(--g40);margin-top:8px;line-height:1.5}
+  .rdy{border-radius:10px;padding:16px 20px;margin-bottom:16px;color:#fff;background:linear-gradient(100deg,#9C00AD,#7A2AB8)}
+  .rdy .t{font-size:13px;font-weight:800}
+  .rdy .s{font-size:11px;opacity:.9;margin-top:2px}
+  .rev2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  .rv{background:#fff;border:1px solid var(--g20);border-radius:10px;padding:16px 18px}
+  .rv h4{font-size:12px;font-weight:800;color:var(--g90);margin-bottom:12px}
+  .rv .l2{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--g10);font-size:11.5px}
+  .rv .l2:last-child{border-bottom:none}
+  .rv .l2 .k{color:var(--g50);text-transform:uppercase;font-size:9.5px;font-weight:800;letter-spacing:.4px;padding-top:2px}
+  .rv .l2 .v{font-weight:700;color:var(--g90)}
+  .kwchip{display:inline-flex;align-items:center;gap:6px;background:var(--purple-lt);color:var(--purple-d);border:1px solid var(--purple-mid);border-radius:14px;padding:4px 11px;font-size:11px;font-weight:700;margin:4px 6px 0 0}
+  .kwchip .mt{font-size:9px;font-weight:800;opacity:.75}
+
+  /* ---------- suggestion table additions ---------- */
+  .mt-pill{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.3px;padding:3px 8px;border-radius:5px;white-space:nowrap}
+  .mt-phrase{background:var(--purple-lt);color:var(--purple-d);border:1px solid var(--purple-mid)}
+  .mt-exact{background:var(--g10);color:var(--g50);border:1px solid var(--g20)}
+  .bidr{font-variant-numeric:tabular-nums;white-space:nowrap;font-size:11.5px;color:var(--g50)}
+  .bidr b{color:var(--g90);font-weight:800}
+  .bidr .no{color:var(--g40);font-style:italic;font-size:11px}
+  .addk{border:1px solid var(--purple);color:var(--purple);background:#fff;border-radius:6px;padding:4px 12px;font-size:11px;font-weight:800}
+  .addk:hover{background:var(--purple);color:#fff}
+  .addk.added{border-color:var(--green);color:var(--green);background:var(--green-lt);cursor:default}
+  .volb{font-size:11px;font-weight:700;color:var(--green)}
+  .catl{color:var(--purple);font-size:11.5px}
+  .bidin{width:66px;border:1px solid var(--g20);border-radius:6px;padding:4px 7px;font-size:11.5px;text-align:right;
+         font-variant-numeric:tabular-nums;color:var(--g90);background:#fff;outline:0}
+  .bidin:focus{border-color:var(--purple)}
+  .bidin:disabled{background:var(--g08);color:var(--g50);border-color:var(--g10)}
+  .bidin::placeholder{color:var(--g30)}
+</style>
+</head>
+<body>
+<aside class="side">
+  <div class="side-brand">
+    <div class="nm">P.R.I.S.M.</div>
+    <div class="tl">Purple Retail Intelligence &amp; Sales Management</div>
+  </div>
+
+  <nav class="side-nav">
+    <div class="grp">
+      <div class="grp-h" onclick="tgrp(this)"><span>Purple Ads</span><i class="ri-arrow-up-s-line cv"></i></div>
+      <div class="grp-b"></div>
+    </div>
+
+    <div class="grp">
+      <div class="grp-h" onclick="tgrp(this)"><i class="ri-megaphone-line ico"></i><span>Awareness</span><i class="ri-arrow-up-s-line cv"></i></div>
+      <div class="grp-b">
+        <a href="#" class="nv">Visibility Campaigns - test</a>
+        <a href="#" class="nv">Takeover - test</a>
+        <a href="#" class="nv">Product Display Ads - Test</a>
+        <a href="#" class="nv">Visibility Campaigns</a>
+        <a href="#" class="nv">Takeover</a>
+        <a href="#" class="nv">Product Display Ads</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <div class="grp-h" onclick="tgrp(this)"><i class="ri-line-chart-line ico"></i><span>Performance</span><i class="ri-arrow-up-s-line cv"></i></div>
+      <div class="grp-b">
+        <a href="#" class="nv">Smart Shopping - Test</a>
+        <a href="#" class="nv">Search Campaigns - Test</a>
+        <a href="#" class="nv">Smart Shopping</a>
+        <a href="#" class="nv" id="nv-search" onclick="go('search','Search Only',this)">Search Campaigns</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <div class="grp-h" onclick="tgrp(this)"><i class="ri-sliders-line ico"></i><span>PAP Control Center</span><i class="ri-arrow-up-s-line cv"></i></div>
+      <div class="grp-b">
+        <a href="#" class="nv">Yield Controls</a>
+        <a href="#" class="nv">Announcement Banner</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <div class="grp-h" onclick="tgrp(this)"><i class="ri-wallet-3-line ico"></i><span>PAP Balance &amp; Manage</span><i class="ri-arrow-up-s-line cv"></i></div>
+      <div class="grp-b">
+        <a href="#" class="nv on" id="nv-overview" onclick="go('overview','Overview',this)">Overview</a>
+        <a href="#" class="nv" onclick="go('bizq','Business Queue',this)">Business Queue</a>
+        <a href="#" class="nv" id="nv-finq" onclick="go('finq','Finance Queue',this)">Finance Queue</a>
+        <a href="#" class="nv" onclick="go('wadj','Wallet adjustments',this)">Wallet adjustments</a>
+      </div>
+    </div>
+
+    <div class="grp">
+      <div class="grp-h" onclick="tgrp(this)"><span>PAP Balance &amp; Manage - test</span><i class="ri-arrow-down-s-line cv dn"></i></div>
+      <div class="grp-b hide">
+        <a href="#" class="nv">Overview - test</a>
+        <a href="#" class="nv">Finance Queue - test</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="side-foot"><i class="ri-logout-box-line"></i><span>Logout</span></div>
+</aside>
+
+<div class="shell">
+  <div class="topbar">
+    <div class="crumb">Home / Balance &amp; Manage<span id="crumb2"></span></div>
+    <div class="topright">
+      <div class="wbox">
+        <div class="amt"><div class="l">Wallet</div><div class="v">₹ 1,41,30,831.73</div></div>
+        <button class="mg">Manage <i class="ri-arrow-down-s-line" style="color:var(--purple)"></i></button>
+      </div>
+      <div style="position:relative">
+        <button class="ctl has-tip" data-tip="Sets the period for Transactions, Campaign Wallet Spend and the Wallet ledger. The balance cards at the top always show today." onclick="tg('dm')">
+          <i class="ri-calendar-line"></i><span id="dlbl">28 Jul - 3 Aug</span><i class="ri-arrow-down-s-line"></i>
+        </button>
+        <div class="menu hide" id="dm">
+          <div class="menu-l">Quick ranges</div>
+          <button onclick="setD('Today · 4 Aug')">Today</button>
+          <button class="sel" onclick="setD('28 Jul - 3 Aug')">Last 7 days</button>
+          <button onclick="setD('1 Aug - 4 Aug')">This month</button>
+          <button onclick="setD('1 Jul - 31 Jul')">Last month</button>
+          <hr>
+          <button onclick="setD('Custom range')" style="color:var(--purple);font-weight:800">Custom range…</button>
+        </div>
+      </div>
+      <div style="position:relative">
+        <button class="ctl" onclick="tg('bm')"><span class="av">L</span><span id="blbl">Lakme</span><i class="ri-arrow-down-s-line"></i></button>
+        <div class="menu hide" id="bm">
+          <button class="sel" onclick="setB('Lakme')">Lakme</button>
+          <button onclick="setB('Lakme Makeup')">Lakme Makeup</button>
+          <button onclick="setB('Lakme Skin')">Lakme Skin</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page">
+
+  <!-- ======================= OVERVIEW ======================= -->
+  <section class="page-section active" id="pg-overview">
+
+    <div class="ph">
+      <h1>Lakme · Wallet</h1>
+      <div class="phacts">
+        <button class="btn-s"><i class="ri-add-line"></i> Create Sub-wallet</button>
+        <button class="btn-s">Move Funds</button>
+        <button class="btn-p">+ Recharge Wallet</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">
+      <div style="font-size:12.5px;font-weight:800;color:var(--g90)">Balances</div>
+      <span class="asof">as of today</span>
+      <i class="ri-information-line qi has-tip" data-tip="These four cards always show your position right now. They do not follow the date filter — use the Wallet ledger further down to see how a balance changed over a period."></i>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi">
+        <i class="ri-information-line ii has-tip" data-tip="Everything across Primary, all sub-wallets and promo credits."></i>
+        <div class="lbl">Total Wallet Balance</div>
+        <div class="num">₹ 1,41,80,831.73</div>
+        <div class="sub">Cash ₹ 1,41,30,831.73 + promo ₹ 50,000.00</div>
+      </div>
+      <div class="kpi hl">
+        <i class="ri-information-line ii has-tip" data-tip="Cash-funded balances only. Excludes promo credits, which cannot be transferred or withdrawn."></i>
+        <div class="lbl">Available Cash Balance</div>
+        <div class="num">₹ 1,41,30,831.73</div>
+        <div class="sub">Primary + sub-wallets · spendable now</div>
+      </div>
+      <div class="kpi">
+        <i class="ri-information-line ii has-tip" data-tip="Credit requests and adjustments waiting on Business or Finance."></i>
+        <div class="lbl">Pending Approvals</div>
+        <div class="num">1</div>
+        <div class="sub">1 waiting on your document</div>
+      </div>
+      <div class="kpi">
+        <i class="ri-information-line ii has-tip" data-tip="Approved credit requests marked for next month. These credit automatically at 00:00 on the 1st."></i>
+        <div class="lbl">Scheduled Next Month</div>
+        <div class="num">₹ 6,00,000</div>
+        <div class="sub">1 request · credits 1 Sep</div>
+      </div>
+    </div>
+
+    <div class="wcards">
+      <div class="wc">
+        <i class="ri-information-line ii has-tip" data-tip="Your main wallet and the parent for every sub-wallet. Campaigns can spend directly from it."></i>
+        <div class="hd"><div class="ic"><i class="ri-wallet-3-line"></i></div><div><div class="nm">Primary</div><div class="tg">Parent wallet</div></div></div>
+        <div class="amt">₹ 1,25,30,831.73</div>
+        <div class="ft">Default for unassigned campaigns</div>
+        <button class="act pr">View sub-wallets (2)</button>
+      </div>
+      <div class="wc">
+        <i class="ri-information-line ii has-tip" data-tip="System sub-wallet for performance campaigns. Funds can be moved in from Primary."></i>
+        <div class="hd"><div class="ic"><i class="ri-line-chart-line"></i></div><div><div class="nm">Performance</div><div class="tg">System sub-wallet</div></div></div>
+        <div class="amt">₹ 9,00,000.00</div>
+        <div class="ft">Auto-provisioned · transferable</div>
+        <button class="act">Move Funds</button>
+      </div>
+      <div class="wc">
+        <i class="ri-information-line ii has-tip" data-tip="System sub-wallet for display campaigns. Funds can be moved in from Primary."></i>
+        <div class="hd"><div class="ic"><i class="ri-image-line"></i></div><div><div class="nm">Display</div><div class="tg">System sub-wallet</div></div></div>
+        <div class="amt">₹ 7,00,000.00</div>
+        <div class="ft">Sub-wallet · transferable</div>
+        <button class="act">Move Funds</button>
+      </div>
+      <div class="wc promo">
+        <i class="ri-information-line ii has-tip" data-tip="Credit granted by Purplle. Ring-fenced: it is only drawn when a campaign has no cash balance left, it cannot be moved out, and it expires if unused."></i>
+        <div class="hd"><div class="ic"><i class="ri-gift-line"></i></div><div><div class="nm">Promo Credits</div><div class="tg">Org-funded fallback</div></div></div>
+        <div class="amt">₹ 50,000.00</div>
+        <div class="ft">Ring-fenced · not transferable</div>
+        <button class="act off" disabled>Not transferable</button>
+      </div>
+    </div>
+
+    <!-- My Credit Requests — unchanged -->
+    <div class="card">
+      <div class="chd">
+        <div>
+          <div class="ttl"><h2>My Credit Requests</h2></div>
+          <div class="sb">Canonical Request ID · CR-YYYY-MM-XXXXXXX · use this ID across queues, ledger and audit log</div>
+        </div>
+        <div class="ctools"><button class="dl" onclick="tst('Downloading credit requests · CSV')"><i class="ri-download-2-line"></i> Download CSV</button></div>
+      </div>
+      <div class="tw"><table>
+        <thead><tr>
+          <th>Request ID</th><th>Payment Method</th><th>Credit To Wallet</th><th class="r">Amount</th>
+          <th>Credit Month</th><th>Status</th><th>Submitted At</th><th>Actions</th>
+        </tr></thead>
+        <tbody id="b-cr"></tbody>
+      </table></div>
+      <div class="pag">
+        <div class="rp">Rows per page: <select><option>10</option><option>25</option></select></div>
+        <div>Showing 1–3 of 3</div>
+        <div class="ar"><button><i class="ri-arrow-left-s-line"></i></button><button><i class="ri-arrow-right-s-line"></i></button></div>
+      </div>
+    </div>
+
+    <!-- Transactions (was Recent Transactions) -->
+    <div class="card">
+      <div class="chd">
+        <div>
+          <div class="ttl">
+            <h2>Transactions</h2>
+            <span class="cnt g" id="c-tx">0</span>
+            <span class="inper" id="tx-per">28 Jul - 3 Aug</span>
+            <i class="ri-information-line qi has-tip" data-tip="One row per day per reference. Several charges to the same campaign on the same day are added together, so you see what each campaign cost you that day instead of every individual charge."></i>
+          </div>
+          <div class="sb"><span class="em">Selected period</span> · ledger-derived · all wallets · recharges, transfers, adjustments, and spend · grouped by day</div>
+        </div>
+        <div class="ctools">
+          <button class="dl" onclick="dlTx()"><i class="ri-download-2-line"></i> Download CSV</button>
+          <div class="chips">
+            <span class="cl">Type</span>
+            <button class="chip on" id="t-all" onclick="setT('all')">All</button>
+            <button class="chip" id="t-spend" onclick="setT('spend')">Spend</button>
+            <button class="chip" id="t-in" onclick="setT('in')">Money in</button>
+            <button class="chip" id="t-adj" onclick="setT('adj')">Adjustments</button>
+          </div>
+        </div>
+      </div>
+      <div class="tw"><table>
+        <thead><tr><th>Date</th><th>Method</th><th>Wallet</th><th class="r">Amount</th><th>Reference</th></tr></thead>
+        <tbody id="b-tx"></tbody>
+      </table></div>
+      <div id="e-tx" class="empty hide">
+        <i class="ri-inbox-line"></i><div class="t">No transactions in this period</div><div class="s">Widen the date range to see more.</div>
+      </div>
+      <div class="pag">
+        <div class="rp">Rows per page: <select><option>25</option><option>50</option></select></div>
+        <div id="pg-tx">Showing 1–11 of 11</div>
+        <div class="ar"><button><i class="ri-arrow-left-s-line"></i></button><button><i class="ri-arrow-right-s-line"></i></button></div>
+      </div>
+    </div>
+
+    <!-- Campaign Wallet Spend — unchanged -->
+    <div class="card">
+      <div class="chd">
+        <div>
+          <div class="ttl"><h2>Campaign Wallet Spend</h2></div>
+          <div class="sb"><span class="em">Single day · today IST (4 Aug 2026)</span> · campaign debits per wallet · includes promo fallback draws</div>
+        </div>
+        <div class="ctools"><button class="dl" onclick="tst('Downloading campaign wallet spend · CSV')"><i class="ri-download-2-line"></i> Download CSV</button></div>
+      </div>
+      <div class="tw"><table>
+        <thead><tr><th>Date</th><th>Campaign</th><th>Wallet</th><th class="r">Daily Debit</th><th>Reference</th></tr></thead>
+        <tbody id="b-cs"></tbody>
+      </table></div>
+      <div class="pag">
+        <div class="rp">Rows per page: <select><option>10</option><option>25</option></select></div>
+        <div>Showing 1–10 of 123</div>
+        <div class="ar"><button><i class="ri-arrow-left-s-line"></i></button><button><i class="ri-arrow-right-s-line"></i></button></div>
+      </div>
+    </div>
+
+    <!-- Wallet Ledger — NEW, sits after Campaign Wallet Spend -->
+    <div class="card hl">
+      <div class="chd">
+        <div>
+          <div class="ttl">
+            <button onclick="tsec('lg')" style="display:flex;align-items:center;gap:8px">
+              <h2>Wallet Ledger</h2><i class="ri-arrow-up-s-line caret" id="crlg"></i>
+            </button>
+            <span class="inper" id="lg-per">28 Jul - 3 Aug</span>
+            <i class="ri-information-line qi has-tip" data-tip="How your balance changed over the selected period. Opening, plus what came in, minus what went out, equals closing — so every number accounts for itself."></i>
+          </div>
+          <div class="sb">Opening and closing balance for the selected period · real money kept separate from promo credits</div>
+        </div>
+        <div class="ctools">
+          <div style="display:flex;align-items:center;gap:8px">
+            <select class="selfmt" id="fmt-lg"><option value="xlsx">XLSX</option><option value="csv">CSV</option></select>
+            <button class="dl" onclick="dlLg()"><i class="ri-download-2-line"></i> Download</button>
+          </div>
+        </div>
+      </div>
+      <div id="cblg">
+        <div class="lg">
+          <div class="lgb money">
+            <div class="lgh"><span>Real money</span><span class="s">Primary + sub-wallets</span></div>
+            <div class="lgr"><span class="l">Opening balance</span><span class="v" id="p-open">—</span></div>
+            <div class="lgr"><span class="l">Money in</span><span class="v pos" id="p-in">—</span></div>
+            <div id="p-i1"></div>
+            <div class="lgr"><span class="l">Money out</span><span class="v neg" id="p-out">—</span></div>
+            <div id="p-i2"></div>
+            <div class="lgr t"><span class="l">Closing balance</span><span class="v" id="p-close">—</span></div>
+            <div class="lgf"><button class="tog" onclick="tItems()" id="p-tog">Show breakdown</button></div>
+          </div>
+          <div class="lgb pr">
+            <div class="lgh"><span>Promo credits</span><span class="s">ring-fenced</span></div>
+            <div class="lgr"><span class="l">Opening balance</span><span class="v" id="m-open">—</span></div>
+            <div class="lgr"><span class="l">Credit granted</span><span class="v pos" id="m-gr">—</span></div>
+            <div class="lgr"><span class="l">Used on campaigns</span><span class="v neg" id="m-sp">—</span></div>
+            <div class="lgr"><span class="l">Expired unused</span><span class="v neg" id="m-lp">—</span></div>
+            <div class="lgr t"><span class="l">Closing balance</span><span class="v" id="m-close">—</span></div>
+            <div class="lgf"><i class="ri-error-warning-line" style="color:var(--amber)"></i> Promo credits expire if unused. They cannot be transferred or withdrawn.</div>
+          </div>
+        </div>
+        <div class="note">
+          <i class="ri-information-line"></i>
+          <div><b>Campaign spend this period:</b> <b id="sp-tot">—</b> — of which <b id="sp-cash">—</b> came from real money and <b id="sp-promo">—</b> from promo credits. Only the real-money portion is billable.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ======================= FINANCE QUEUE ======================= -->
+  <section class="page-section" id="pg-finq">
+    <div class="ph">
+      <h1>Finance Queue</h1>
+      <div class="phacts"><button class="btn-s"><i class="ri-refresh-line"></i> Refresh</button></div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="lbl">Awaiting your action <i class="ri-information-line qi has-tip" data-tip="Requests waiting on Finance — submitted, under review, or on hold."></i></div>
+        <div class="num" style="color:var(--amber)">6</div>
+        <div class="sub">in selected date range</div>
+      </div>
+      <div class="kpi">
+        <div class="lbl">Approved today <i class="ri-information-line qi has-tip" data-tip="Requests you confirmed today. These are the rows to match against today's bank statement."></i></div>
+        <div class="num" style="color:var(--green)">3</div>
+        <div class="sub">ready to reconcile</div>
+      </div>
+      <div class="kpi">
+        <div class="lbl">Awaiting credit <i class="ri-information-line qi has-tip" data-tip="Approved but the wallet has not been credited yet. Current-month requests credit in the next batch; next-month requests credit on day 1."></i></div>
+        <div class="num" style="color:var(--amber)">4</div>
+        <div class="sub">not yet in wallet</div>
+      </div>
+      <div class="kpi">
+        <div class="lbl">Check overdue <i class="ri-information-line qi has-tip" data-tip="Waiting more than 4 hours for Finance action."></i></div>
+        <div class="num" style="color:var(--red)">2</div>
+        <div class="sub">over 4 hours</div>
+      </div>
+    </div>
+
+    <div class="search">
+      <i class="ri-search-line"></i>
+      <input id="q" oninput="renderAll()" placeholder="Search by Request ID, Brand, Payment Reference">
+    </div>
+
+    <!-- SECTION 1 -->
+    <section class="card hl">
+      <div class="chd">
+        <div>
+          <div class="ttl">
+            <h2>Needs your action</h2>
+            <span class="cnt p" id="c1">0</span>
+          </div>
+          <div class="sb">Approve, reject, or hold. Nothing here has been decided yet.</div>
+        </div>
+        <div class="ctools">
+          <span class="dlwrap has-tip" data-tip="Nothing to download — these requests have not been actioned yet."><button class="dl off" disabled><i class="ri-download-2-line"></i> Download</button></span>
+        </div>
+      </div>
+      <div class="tw">
+        <table>
+          <thead><tr>
+            <th>Request ID</th><th>Brand</th><th>Credit to Wallet</th><th style="text-align:right">Amount</th>
+            <th>Payment Reference</th><th>Payment Method</th><th>Credit Month</th><th>Status</th><th>Flag</th><th>Waiting</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="b1"></tbody>
+        </table>
+      </div>
+      <div class="empty hide" id="e1">
+        <i class="ri-checkbox-circle-line"></i>
+        <div class="t">Nothing awaiting your action</div>
+        <div class="s">Every request in this date range has been decided.</div>
+      </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="card">
+      <div class="chd">
+        <div>
+          <div class="ttl">
+            <button onclick="tsec(2)" style="display:flex;align-items:center;gap:9px">
+              <h2>In flight — awaiting credit</h2>
+              <span class="cnt a" id="c2">0</span>
+              <i class="ri-arrow-down-s-line caret" id="cr2"></i>
+            </button>
+            <i class="ri-information-line qi has-tip" data-tip="Approved, but the wallet has not been credited yet. Because you approve by confirming funds arrived, these are the rows to match against your bank statement today."></i>
+          </div>
+          <div class="sb">Decided. Waiting on the credit to post. No action needed.</div>
+        </div>
+        <div class="ctools">
+          <button class="dl has-tip" data-tip="Exports the filtered rows with payment reference, approver, and approval time. Stamped with the time of download — these rows can still move to Credited." onclick="dl(2)"><i class="ri-download-2-line"></i> Download for reconciliation</button>
+          <div class="chips">
+            <span class="cl">Method</span>
+            <button class="chip on has-tip" id="m-bank" data-tip="Default. Payment Reference only matches a bank statement for bank transfers — other methods carry document or order numbers." onclick="setM('bank')">Bank transfer</button>
+            <button class="chip" id="m-post" onclick="setM('post')">PO / RO / MV</button>
+            <button class="chip" id="m-all" onclick="setM('all')">All</button>
+          </div>
+        </div>
+      </div>
+      <div id="cb2">
+        <div class="tw">
+          <table>
+            <thead><tr>
+              <th>Request ID</th><th>Brand</th><th>Credit to Wallet</th><th style="text-align:right">Amount</th>
+              <th>Payment Reference</th><th>Payment Method</th><th>Credit Month</th><th>Status</th>
+              <th>Approved By</th><th>Approved At</th><th>Credits On</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="b2"></tbody>
+          </table>
+        </div>
+        <div class="emptyline hide" id="e2"><i class="ri-inbox-line"></i> Nothing awaiting credit in this range.</div>
+      </div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="card">
+      <div class="chd">
+        <div>
+          <div class="ttl">
+            <button onclick="tsec(3)" style="display:flex;align-items:center;gap:9px">
+              <h2>Reports</h2>
+              <span class="cnt g" id="c3">0</span>
+              <i class="ri-arrow-down-s-line caret" id="cr3"></i>
+            </button>
+            <i class="ri-information-line qi has-tip" data-tip="Closed requests only — credited or rejected. Nothing here can change again, so a downloaded file stays accurate. Use this for month-end close."></i>
+          </div>
+          <div class="sb">Closed and final. Safe to archive and tie out.</div>
+        </div>
+        <div class="ctools">
+          <div style="display:flex;align-items:center;gap:9px">
+            <select class="selfmt" id="fmt"><option value="xlsx">XLSX</option><option value="csv">CSV</option></select>
+            <button class="dl has-tip" data-tip="Exports every filtered row in the date range, not just this page. Includes payment reference, approver, and approval time." onclick="dl(3)"><i class="ri-download-2-line"></i> Download</button>
+          </div>
+          <div class="chips">
+            <span class="cl">Status</span>
+            <button class="chip on" id="o-all" onclick="setO('all')">All</button>
+            <button class="chip" id="o-CREDITED" onclick="setO('CREDITED')">Credited</button>
+            <button class="chip" id="o-REJECTED" onclick="setO('REJECTED')">Rejected</button>
+          </div>
+        </div>
+      </div>
+      <div id="cb3">
+        <div class="tw">
+          <table>
+            <thead><tr>
+              <th>Request ID</th><th>Brand</th><th>Credit to Wallet</th><th style="text-align:right">Amount</th>
+              <th>Payment Reference</th><th>Payment Method</th><th>Credit Month</th><th>Status</th>
+              <th>Actioned By</th><th>Actioned At</th><th>Actions</th>
+            </tr></thead>
+            <tbody id="b3"></tbody>
+          </table>
+        </div>
+        <div class="empty hide" id="e3">
+          <i class="ri-file-list-3-line"></i>
+          <div class="t">No closed requests in this range</div>
+          <div class="s">Widen the date range to see credited and rejected requests.</div>
+        </div>
+        <div class="pag">
+          <div class="rp">Rows per page: <select><option>10</option><option>25</option><option>50</option></select></div>
+          <div id="pg3">Showing 1–8 of 8</div>
+          <div class="ar">
+            <button><i class="ri-arrow-left-s-line"></i></button>
+            <button><i class="ri-arrow-right-s-line"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 4 — WALLET LEDGER ============ -->
+    <section class="card hl">
+      <div class="chd">
+        <div>
+          <div class="ttl">
+            <button onclick="tsec(4)" style="display:flex;align-items:center;gap:9px">
+              <h2>Wallet ledger</h2>
+              <span class="cnt g" id="c4">0</span>
+              <i class="ri-arrow-down-s-line caret" id="cr4"></i>
+            </button>
+            <span class="grain">per brand</span>
+            <i class="ri-information-line qi has-tip" data-tip="One row per brand for the selected period, not one row per request. Shows what each brand started with, what came in, what went out, and what's left \u2014 real money kept separate from promotional credit."></i>
+          </div>
+          <div class="sb">Opening balance, credits, debits and closing balance for every brand. Real money and promotional credit kept apart.</div>
+        </div>
+        <div class="ctools">
+          <div style="display:flex;align-items:center;gap:9px">
+            <select class="selfmt" id="fmt4"><option value="xlsx">XLSX</option><option value="csv">CSV</option></select>
+            <button class="dl has-tip" data-tip="Every brand in the selected date range, with each transaction type itemised. Includes reconciliation checks." onclick="dl(4)"><i class="ri-download-2-line"></i> Download</button>
+          </div>
+          <div class="chips">
+            <span class="cl">Pool</span>
+            <button class="chip on" id="w-both" onclick="setPool('both')">Both</button>
+            <button class="chip" id="w-primary" onclick="setPool('primary')">Real money</button>
+            <button class="chip" id="w-promo" onclick="setPool('promo')">Promotional</button>
+          </div>
+        </div>
+      </div>
+      <div id="cb4">
+        <div class="tw">
+          <table class="wl">
+            <thead>
+              <tr>
+                <th rowspan="2">Brand</th>
+                <th class="gh" colspan="4" id="hp">Real money</th>
+                <th class="gh" colspan="4" id="hm">Promotional credit</th>
+                <th rowspan="2" class="sep">Checks</th>
+              </tr>
+              <tr class="gr2">
+                <th class="sep">Opening</th><th>Credits</th><th>Debits</th><th>Closing</th>
+                <th class="sep">Opening</th><th>Credits</th><th>Debits</th><th>Closing</th>
+              </tr>
+            </thead>
+            <tbody id="b4"></tbody>
+          </table>
+        </div>
+        <div id="e4" class="empty hide">
+          <i class="ri-wallet-3-line"></i>
+          <div class="t">No wallet activity in this range</div>
+          <div class="s">Widen the date range to see brand balances.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="note">
+      <i class="ri-information-line"></i>
+      <div>
+        <b>What these reports cover:</b> bank transfers and post-paid credit requests approved through this queue. They do not include online card or netbanking top-ups, wallet-to-wallet transfers, refunds, manual credits, or promotional credits — those appear in the brand's wallet transaction history.
+        <i class="ri-question-line has-tip" style="color:var(--purple);cursor:help" data-tip="If you need a total of everything credited to wallets in a period, use the brand wallet transaction history rather than this export."></i>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======================= SEARCH CAMPAIGNS ======================= -->
+  <section class="page-section" id="pg-search">
+
+    <div class="ph" style="margin-bottom:14px">
+      <h1 style="font-size:15px">Campaigns</h1>
+    </div>
+
+    <div class="banner">
+      <button class="x" onclick="this.closest('.banner').style.display='none'"><i class="ri-close-line"></i></button>
+      <h2>I 💜 B Sale is Now Live !!</h2>
+      <p>Start scaling up and optimise campaigns. Act now to make the most of the Purplle IHB Sale.</p>
+      <div class="cvbox"><div class="l">Conversion Rate</div><div class="v">+24.8%</div></div>
+      <svg class="spark" viewBox="0 0 290 120" fill="none">
+        <path d="M4 96 C60 92 90 74 120 56 C150 38 180 30 286 22" stroke="#5BE49B" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round"/>
+        <circle cx="152" cy="36" r="7" fill="#FFB020"/><circle cx="152" cy="36" r="3" fill="#fff"/>
+      </svg>
+    </div>
+
+    <div class="sect-lbl">Performance Campaign Analytics</div>
+
+    <div class="card" style="padding:0">
+      <div class="chd" style="border-bottom:none;padding-bottom:6px">
+        <div class="ttl"><h2>Performance Summary</h2></div>
+        <div class="ctools"><button class="dl" onclick="tst('Downloading performance summary · CSV')"><i class="ri-download-2-line"></i></button></div>
+      </div>
+      <div style="padding:0 18px 18px">
+        <div class="kpigrid">
+          <div class="c"><div class="dots">···</div><div class="v">₹2,842,715.00</div><div class="l">Attributed Ad Revenue</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">6,777</div><div class="l">Attributed Orders</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">6.19</div><div class="l">ROAS</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">₹459,018.64</div><div class="l">Ad Spend <i class="ri-information-line qi has-tip" data-tip="Total amount debited from your wallet for clicks in the selected period."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">68,057.0</div><div class="l">Ad Impressions <i class="ri-information-line qi has-tip" data-tip="Times your ads were served on search results in the selected period."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">9,385</div><div class="l">Ad Clicks <i class="ri-information-line qi has-tip" data-tip="Clicks on your ads. Every click is charged at your bid or lower."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">6,744.62</div><div class="l">CPM</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">48.91</div><div class="l">CPC</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">14%</div><div class="l">CTR% <i class="ri-information-line qi has-tip" data-tip="Clicks divided by impressions."></i></div></div>
+        </div>
+        <div class="trend">
+          <div class="hd"><div class="t">Trend</div><div class="metsel">Metrics : 2 selections <i class="ri-close-line"></i></div></div>
+          <div class="lg-dots">
+            <span><i style="background:#4C6FFF"></i>ROAS</span><span><i style="background:#22C1D6"></i>CPM</span>
+            <span><i style="background:#F5A623"></i>Ad Impressions</span><span><i style="background:#2FBF71"></i>Attributed Orders</span>
+            <span><i style="background:#8E7CFF"></i>CTR %</span><span><i style="background:#5AA9FF"></i>Ad Clicks</span>
+            <span><i style="background:#E2506B"></i>Attributed Ad Revenue</span><span><i style="background:#C0281C"></i>Ad Spend</span>
+            <span><i style="background:#F2C744"></i>CPC</span>
+          </div>
+          <svg viewBox="0 0 900 120" style="width:100%;height:110px;margin-top:6px" fill="none">
+            <text x="0" y="12" font-size="9" fill="#948FA0">180.0k</text>
+            <path d="M20 96 C140 88 200 60 300 66 C420 74 520 40 640 48 C740 55 820 30 880 34" stroke="#4C6FFF" stroke-width="2"/>
+            <path d="M20 104 C140 100 220 92 320 88 C450 82 560 70 700 74 C790 77 850 66 880 62" stroke="#E2506B" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chd">
+        <div><div class="ttl"><h2>Campaigns</h2></div></div>
+        <div class="ctools2">
+          <div class="srch2"><i class="ri-search-line"></i><input placeholder="Search campaigns..."></div>
+          <button class="btn-o"><i class="ri-equalizer-line"></i> Filter</button>
+          <button class="btn-o">Bulk Campaign Create</button>
+          <button class="btn-o off" disabled>Bulk Edit</button>
+          <button class="btn-cta" onclick="wizOpen()">+ Create New Campaign</button>
+        </div>
+      </div>
+      <div class="tw">
+        <table class="dense">
+          <thead><tr>
+            <th style="width:26px"><input type="checkbox"></th>
+            <th>Status</th><th>Name</th><th>Campaign Subtype</th><th>Bidding Strategy</th>
+            <th>Avg Daily Budget</th><th>Spend</th><th>Impressions</th><th>Clicks</th><th>CTR</th><th>CPC</th>
+            <th>Start Date</th><th>End Date</th><th>Campaign ID</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="b-cmp"></tbody>
+        </table>
+      </div>
+      <div class="pag">
+        <div class="rp">Rows per page: <select><option>10</option><option>25</option></select></div>
+        <div>1–10 of 40</div>
+        <div class="ar"><button><i class="ri-arrow-left-s-line"></i></button><button><i class="ri-arrow-right-s-line"></i></button></div>
+      </div>
+    </div>
+
+    <div class="card" style="padding-bottom:6px">
+      <div class="chd" style="border-bottom:none;padding-bottom:4px">
+        <div><div class="ttl"><h2>Performance</h2></div></div>
+        <div class="ctools"><button class="dl" onclick="tst('Downloading funnel · CSV')"><i class="ri-download-2-line"></i></button></div>
+      </div>
+      <div class="tabs">
+        <button class="on">Campaign Funnel</button><button>Product Funnel</button>
+        <button>Category Funnel</button><button>Keyword Funnel</button>
+      </div>
+      <div style="padding:12px 18px 0"><button class="btn-o"><i class="ri-table-line"></i> Campaign ID <i class="ri-arrow-down-s-line"></i></button></div>
+      <div class="tw" style="margin-top:10px">
+        <table class="dense">
+          <thead><tr>
+            <th>Date</th><th>Campaign Name</th><th>Campaign ID</th><th>Campaign Status</th><th>Campaign Type</th>
+            <th>Spend</th><th>Ad Impressions</th><th>Ad Clicks</th><th>CTR</th><th>Attributed Detail Page Views</th>
+            <th>Attributed Add to Cart</th><th>Orders - SKU</th><th>Attributed Ad Revenue</th><th>ROI</th><th>CPC</th><th>CPM</th>
+          </tr></thead>
+          <tbody id="b-fun"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ======================= STUB ======================= -->
+  <section class="page-section" id="pg-stub">
+    <div class="ph"><h1 id="stub-nm">—</h1></div>
+    <div class="card">
+      <div class="empty">
+        <i class="ri-layout-grid-line"></i>
+        <div class="t">Not part of this walkthrough</div>
+        <div class="s">Use Overview or Finance Queue in the left menu.</div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+</div>
+
+
+<!-- ======================= CREATE SEARCH ONLY CAMPAIGN ======================= -->
+<div class="wiz" id="wiz">
+  <div class="wiz-hd">
+    <h1>Create Search Only Campaign</h1>
+    <button class="x" onclick="wizClose()"><i class="ri-close-line"></i></button>
+  </div>
+
+  <div class="steps">
+    <button id="st1" class="on" onclick="wizGo(1)"><span class="ic"><i class="ri-information-line"></i></span> Step 1: Basic Information</button>
+    <button id="st2" onclick="wizGo(2)"><span class="ic"><i class="ri-shopping-cart-line"></i></span> Step 2: Product Selection</button>
+    <button id="st3" onclick="wizGo(3)"><span class="ic"><i class="ri-equalizer-line"></i></span> Step 3: Keywords &amp; Bidding</button>
+    <button id="st4" onclick="wizGo(4)"><span class="ic"><i class="ri-checkbox-circle-line"></i></span> Step 4: Review &amp; Save</button>
+  </div>
+
+  <div class="wiz-bd">
+
+    <!-- ---------------- STEP 1 ---------------- -->
+    <div class="wstep on" id="ws1">
+      <div class="fcard lav">
+        <div class="hd2">
+          <div class="sq"><i class="ri-wallet-3-line"></i></div>
+          <div><div class="t">Select Wallet for this Campaign</div><div class="s">Choose which wallet will fund this campaign</div></div>
+        </div>
+        <select class="selbox">
+          <option>Primary Wallet — INR 37,97,480.99</option>
+          <option>Performance — INR 9,00,000.00</option>
+          <option>Display — INR 7,00,000.00</option>
+        </select>
+      </div>
+
+      <div class="fcard">
+        <h3>Basic Information</h3>
+        <div class="fld"><label>Campaign Name</label><input type="text" placeholder="e.g. Brand Keywords 2026"></div>
+        <div class="fld"><label>Daily Budget (INR)</label><input type="text" placeholder="5000"></div>
+        <div class="fld">
+          <label>Budget Pacing Type</label>
+          <div class="radio2">
+            <label class="on" onclick="pace(this)"><span class="dot"></span><span><span class="t">Accelerated</span><span class="s">Per platform demand</span></span></label>
+            <label onclick="pace(this)"><span class="dot"></span><span><span class="t">Partitioned</span><span class="s">Paced through day</span></span></label>
+          </div>
+        </div>
+        <div class="fld"><label>Start Date &amp; Time</label><div class="withic"><input type="text" value="06/08/2026 03:02 PM"><i class="ri-calendar-line"></i></div></div>
+        <div class="fld" style="margin-bottom:0"><label>End Date &amp; Time <span class="opt">(Optional)</span></label><div class="withic"><input type="text" placeholder="dd/mm/yyyy, h:mm am/pm"><i class="ri-calendar-line"></i></div></div>
+      </div>
+    </div>
+
+    <!-- ---------------- STEP 2 ---------------- -->
+    <div class="wstep" id="ws2">
+      <div class="fcard">
+        <div class="fld" style="margin-bottom:0">
+          <label>Product Selection Method <i class="ri-information-line qi has-tip" data-tip="Filters build the product set from your catalogue. You can also paste product IDs."></i></label>
+          <select class="selbox"><option>Select Products using Filters</option><option>Enter Product IDs</option></select>
+        </div>
+      </div>
+
+      <div class="fcard">
+        <h3>Filters <i class="ri-information-line qi has-tip" data-tip="Every product matching these filters is eligible to serve on the keywords you add in Step 3."></i></h3>
+        <div class="fgrid">
+          <div class="fld" style="margin:0"><label>Field</label><select class="thin"><option>Product Name</option><option>Category</option><option>Brand</option><option>Price</option></select></div>
+          <div class="fld" style="margin:0"><label>Operator</label><select class="thin"><option>contains</option><option>equals</option><option>starts with</option></select></div>
+          <div class="fld" style="margin:0"><label>Value</label><input class="thin" type="text" value="serum"></div>
+          <button class="icobtn" style="padding:0 0 6px"><i class="ri-delete-bin-line"></i></button>
+          <button class="icobtn" style="padding:0 0 6px;color:var(--purple)"><i class="ri-add-line"></i></button>
+        </div>
+        <button class="btn-cta" style="margin-top:16px" onclick="tst('74 products matched')">Apply Filters</button>
+
+        <div class="found">Found <b>74</b> total products &nbsp;·&nbsp; <b id="p-sel">1 selected</b></div>
+        <div class="tw">
+          <table class="dense">
+            <thead><tr><th style="width:26px"><input type="checkbox"></th><th>Image</th><th>Name</th><th>Category</th><th>Brand</th><th>Price</th><th>Sale Price</th></tr></thead>
+            <tbody id="b-prd"></tbody>
+          </table>
+        </div>
+        <div class="pgn">
+          <button><i class="ri-arrow-left-s-line"></i></button>
+          <button class="on">1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>…</button><button>8</button>
+          <button><i class="ri-arrow-right-s-line"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------------- STEP 3 ---------------- -->
+    <div class="wstep" id="ws3">
+      <div class="fcard">
+        <h3>Individual Keywords</h3>
+        <div id="b-ikw"></div>
+        <button class="addrow" onclick="addKwRow()"><i class="ri-add-line"></i> Add keyword row</button>
+      </div>
+
+      <div class="fcard">
+        <h3 style="margin-bottom:6px">Negative Keywords</h3>
+        <p style="font-size:11px;color:var(--g50);margin-bottom:16px">Negative keywords prevent your ads from showing when users search for these terms.</p>
+        <div class="kwgrid neg">
+          <div class="fld" style="margin:0"><label>Keyword</label><input class="thin" type="text" placeholder="Enter negative keyword"></div>
+          <div class="fld" style="margin:0"><label>Match Type <i class="ri-information-line qi has-tip" data-tip="Negative Exact blocks only that exact search. Negative Phrase blocks any search containing the words in the same order — use it carefully, it can stop your ads showing more widely than you expect."></i></label>
+            <select class="thin"><option>Negative Exact</option><option>Negative Phrase</option></select></div>
+          <button class="icobtn"><i class="ri-delete-bin-line"></i></button>
+        </div>
+        <button class="addrow"><i class="ri-add-line"></i> Add negative keyword row</button>
+      </div>
+
+      <div class="fcard">
+        <div class="chd" style="padding:0 0 12px;border:none">
+          <div>
+            <div class="ttl"><h2 style="font-size:12.5px">Keyword Suggestions</h2><span class="cnt g" id="c-kw">100</span></div>
+            <div class="sb">Suggested keywords for your brand and the categories of the products you selected. Select a keyword and its base bid fills the Bid column. <span class="em">Search volume is last 30 days. Suggested bid is based on the last 90 days.</span></div>
+          </div>
+          <div class="ctools2">
+            <span class="aip">AI Powered</span>
+            <button class="btn-o" onclick="tst('Downloading 100 suggestions with match type and suggested bid · CSV')"><i class="ri-download-2-line"></i> Download Suggestions</button>
+          </div>
+        </div>
+        <div class="tw">
+          <table class="dense">
+            <thead><tr>
+              <th style="width:26px"><input type="checkbox" id="kw-all" onclick="kwAll(this)"></th>
+              <th>Keyword</th>
+              <th>Category</th>
+              <th>Root Category</th>
+              <th>Search Vol.</th>
+              <th>Match Type <i class="ri-information-line qi has-tip" data-tip="Phrase Match reaches every search that contains your keyword. Exact Match reaches only that search. We suggest Phrase for the most general keyword in a group and Exact for the more specific ones, so they do not compete with each other."></i></th>
+              <th class="r">Min (₹) <i class="ri-information-line qi has-tip" data-tip="The lower end of what a click cost on this category over the last 90 days."></i></th>
+              <th class="r">Base (₹) <i class="ri-information-line qi has-tip" data-tip="Our suggested bid. This is what fills the Bid column when you select the keyword."></i></th>
+              <th class="r">Max (₹) <i class="ri-information-line qi has-tip" data-tip="The upper end of what a click cost on this category over the last 90 days."></i></th>
+              <th class="r">Bid (₹) <i class="ri-information-line qi has-tip" data-tip="Select the keyword and this fills with the base bid. Change it to anything you like before adding."></i></th>
+              <th style="text-align:right">Add</th>
+            </tr></thead>
+            <tbody id="b-kws"></tbody>
+          </table>
+        </div>
+        <div class="pag">
+          <div class="rp">Rows per page: <select><option>25</option><option>50</option><option>100</option></select></div>
+          <div>Showing 1–25 of 100</div>
+          <div class="ar"><button><i class="ri-arrow-left-s-line"></i></button><button><i class="ri-arrow-right-s-line"></i></button></div>
+        </div>
+        <div style="padding:12px 0 0"><button class="btn-o" id="bulkadd" onclick="kwBulk()"><i class="ri-add-line"></i> Add selected keywords</button></div>
+      </div>
+
+      <div class="fcard">
+        <h3>Bulk Upload</h3>
+        <div style="border:1px solid var(--g20);border-radius:9px;padding:16px 18px;margin-bottom:14px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span class="pnum">1</span><span style="font-size:12px;font-weight:800;color:var(--g90)">Enter Manually</span></div>
+          <textarea class="ta" rows="4" placeholder="keyword,bid,match_type,is_negative&#10;lip tint,8,exact,false&#10;face wash,12,phrase,false&#10;free sample,0,exact,true"></textarea>
+          <button class="btn-o off" disabled style="margin-top:12px">Add Bulk Keywords</button>
+          <div class="hint2">Format: keyword,bid,match_type,is_negative (match_type: exact / phrase, is_negative: true/false or 1/0)</div>
+        </div>
+        <div style="border:1px solid var(--g20);border-radius:9px;padding:16px 18px">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span class="pnum">2</span><span style="font-size:12px;font-weight:800;color:var(--g90)">Upload File</span></div>
+          <div class="up">
+            <button class="btn-cta"><i class="ri-file-upload-line"></i> Upload File</button>
+            <button class="dl">Download Template</button>
+          </div>
+          <div class="hint2">Excel format (.xlsx / .xls): campaign_id, campaign_name, keyword, bid, match_type, is_negative — one row per keyword. Download the template for the campaign's existing keywords.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------------- STEP 4 ---------------- -->
+    <div class="wstep" id="ws4">
+      <div class="rdy"><div class="t">Campaign Ready</div><div class="s">Review your campaign details and save changes</div></div>
+      <div class="rev2">
+        <div class="rv">
+          <h4>Basic Information</h4>
+          <div class="l2"><span class="k">Campaign Name</span><span class="v">Hair Care — Search — Aug 26</span></div>
+          <div class="l2"><span class="k">Type</span><span class="v">Search Only</span></div>
+          <div class="l2"><span class="k">Start Date</span><span class="v">Aug 6, 2026</span></div>
+          <div class="l2"><span class="k">Ad Type</span><span class="v">Product</span></div>
+        </div>
+        <div class="rv">
+          <h4>Budget &amp; Strategy</h4>
+          <div class="l2"><span class="k">Daily Budget</span><span class="v">₹5,000</span></div>
+          <div class="l2"><span class="k">Strategy</span><span class="v">Manual CPC</span></div>
+          <div class="l2"><span class="k">Pacing Strategy</span><span class="v">Accelerated</span></div>
+          <div class="l2"><span class="k">Duration</span><span class="v">Open-ended</span></div>
+          <div class="l2"><span class="k">Est. Spend</span><span class="v">₹1,50,000</span></div>
+        </div>
+      </div>
+      <div class="rv" style="margin-bottom:16px">
+        <h4>Keywords</h4>
+        <div class="cnt2" id="rv-kwn">0 keywords configured</div>
+        <div id="rv-kws" style="margin-top:6px"></div>
+      </div>
+      <div class="rv">
+        <h4>Selected Products (1)</h4>
+        <div class="tw">
+          <table class="dense">
+            <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Brand</th><th>Price</th><th>Sale Price</th><th>Availability</th><th>Product ID</th></tr></thead>
+            <tbody><tr>
+              <td><i class="ri-image-line" style="color:var(--g30);font-size:16px"></i></td>
+              <td>L'Oreal Paris Fall Resist Anti Hair Fall Serum with 1.5% Aminexil, Caffeine &amp; Arginine, 102 ml</td>
+              <td>Hair Serum</td><td>L'Oreal Paris</td><td>₹999</td><td>₹749</td>
+              <td><span class="flag f-ok">In Stock</span></td><td class="mono">397513</td>
+            </tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="wiz-ft">
+    <button class="btn-s" onclick="wizBack()">Back</button>
+    <button class="btn-p" id="wiz-next" onclick="wizNext()">Next</button>
+  </div>
+</div>
+
+<div id="tt"></div>
+<div class="ovl" id="ovl" onclick="closeD()"></div>
+<aside class="drw" id="drawer">
+  <div class="dh">
+    <div>
+      <div class="l">Credit request</div>
+      <div class="id" id="d-id">—</div>
+    </div>
+    <button onclick="closeD()" style="color:var(--g40);font-size:22px"><i class="ri-close-line"></i></button>
+  </div>
+  <div class="db">
+    <div class="g2">
+      <div class="fl"><div class="k">Brand</div><div class="v" id="d-brand">—</div></div>
+      <div class="fl"><div class="k">Status</div><div class="v" id="d-status">—</div></div>
+      <div class="fl"><div class="k">Credit to Wallet</div><div class="v" id="d-wallet">—</div></div>
+      <div class="fl"><div class="k">Amount</div><div class="v" id="d-amt">—</div></div>
+      <div class="fl"><div class="k">Credit Month <i class="ri-information-line qi has-tip" data-tip="Which month the brand wants this credit booked to. Next-month credits post on day 1."></i></div><div class="v" id="d-cim">—</div></div>
+      <div class="fl"><div class="k">Payment Method</div><div class="v" id="d-method">—</div></div>
+      <div class="fl w"><div class="k">Payment Reference <i class="ri-information-line qi has-tip" data-tip="The reference the brand entered — UTR, NEFT/RTGS reference, or cheque number. Match this against your bank statement."></i></div><div class="v mono" id="d-ref">—</div></div>
+      <div class="fl"><div class="k">Submitted At</div><div class="v" style="font-weight:500" id="d-sub">—</div></div>
+      <div class="fl"><div class="k">Submitted By</div><div class="v" style="font-weight:500" id="d-by">—</div></div>
+    </div>
+
+    <div class="dcard">
+      <div class="ct">Payment proof</div>
+      <div class="proof">
+        <div style="display:flex;align-items:center;gap:8px"><i class="ri-file-pdf-line" style="color:var(--red)"></i><b>payment-advice.pdf</b></div>
+        <button class="view">View</button>
+      </div>
+    </div>
+
+    <div class="out o-g hide" id="o-app">
+      <div class="ot">Approved</div>
+      <div class="rr">
+        <div><span>Approved by:</span><b id="d-appby">—</b></div>
+        <div><span>Approved at:</span><b id="d-appat">—</b></div>
+        <div class="w"><span>Wallet credits on:</span><b id="d-cred">—</b></div>
+      </div>
+    </div>
+
+    <div class="out o-g hide" id="o-crd">
+      <div class="ot">Credited</div>
+      <div class="rr">
+        <div><span>Approved by:</span><b id="d-cby">—</b></div>
+        <div><span>Approved at:</span><b id="d-cat">—</b></div>
+        <div class="w"><span>Credited at:</span><b id="d-crat">—</b></div>
+      </div>
+    </div>
+
+    <div class="out o-r hide" id="o-rej">
+      <div class="ot">Rejected</div>
+      <div class="rr">
+        <div><span>Rejected by:</span><b id="d-rby">—</b></div>
+        <div><span>Rejected at:</span><b id="d-rat">—</b></div>
+        <div class="w"><span>Reason:</span><b>Payment reference not found in bank statement</b></div>
+      </div>
+      <div class="ft"><i class="ri-mail-line"></i> Brand notified. They can submit a new request.</div>
+    </div>
+
+    <div class="out o-a hide" id="o-hld">
+      <div class="ot">On hold</div>
+      <div class="rr">
+        <div><span>Held by:</span><b>k.ahuja@purplle.com</b></div>
+        <div><span>Held at:</span><b>27 Jul 2026, 11:05 AM</b></div>
+        <div class="w"><span>Note to brand:</span><b>Payment advice is not legible — please re-upload a clear copy.</b></div>
+      </div>
+      <div class="ft"><i class="ri-time-line"></i> Auto-rejects on 10 Aug 2026 if the brand does not respond.</div>
+    </div>
+  </div>
+  <div class="df">
+    <button class="btn-s" onclick="closeD()">Close</button>
+    <button class="btn-s hide" id="d-hold" onclick="mo('mh')"><i class="ri-pause-circle-line"></i> Put on hold</button>
+    <button class="btn-r hide" id="d-rej" onclick="mo('mr')">Reject</button>
+    <button class="btn-g hide" id="d-ok" onclick="appr()">Confirm &amp; approve</button>
+  </div>
+</aside>
+
+<!-- hold modal -->
+<div class="modal" id="mh">
+  <div class="mb">
+    <h3>Put request on hold</h3>
+    <p>The brand sees your note and can respond with a corrected document. The request comes back to you as Under Review.</p>
+    <label>Note to brand *</label>
+    <textarea rows="3" placeholder="Tell the brand exactly what needs fixing"></textarea>
+    <div class="hint"><i class="ri-time-line"></i><span>If the brand does not respond within 14 days, this request is rejected automatically.</span></div>
+    <div class="ma"><button class="btn-s" onclick="mc('mh')">Cancel</button><button class="btn-p" onclick="okHold()">Put on hold</button></div>
+  </div>
+</div>
+
+<!-- reject modal -->
+<div class="modal" id="mr">
+  <div class="mb">
+    <h3>Reject request</h3>
+    <p>The brand is notified and will need to submit a new request. This cannot be undone.</p>
+    <label>Reason *</label>
+    <textarea rows="3" placeholder="Why this request is being rejected"></textarea>
+    <div class="ma"><button class="btn-s" onclick="mc('mr')">Cancel</button><button class="btn-r" onclick="okRej()">Reject request</button></div>
+  </div>
+</div>
+
+<!-- cap modal -->
+<div class="modal" id="mc">
+  <div class="mb">
+    <div style="display:flex;gap:12px"><i class="ri-error-warning-line" style="font-size:24px;color:var(--red)"></i>
+      <div><h3>Too many rows to download</h3><p style="margin-bottom:0">This range has 24,180 rows. The limit is 20,000. Narrow the date range or add a filter, then try again.</p></div>
+    </div>
+    <div class="ma"><button class="btn-p" onclick="mc('mc')">Got it</button></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<div id="toast"></div>
+
+<script>
+(function(){
+  const $ = i => document.getElementById(i);
+  window.$$ = $;
+
+  /* ---------- tooltip: single fixed node so it escapes table overflow ---------- */
+  const tt = $('tt'); let ttT = null;
+  function showTip(el){
+    const txt = el.getAttribute('data-tip'); if(!txt) return;
+    tt.textContent = txt; tt.style.display='block'; tt.classList.remove('below');
+    const r = el.getBoundingClientRect(), t = tt.getBoundingClientRect();
+    let left = r.left + r.width/2 - t.width/2;
+    left = Math.max(8, Math.min(left, window.innerWidth - t.width - 8));
+    let top = r.top - t.height - 9;
+    if (top < 8){ top = r.bottom + 9; tt.classList.add('below'); }
+    tt.style.left = Math.round(left)+'px'; tt.style.top = Math.round(top)+'px';
+    const ax = r.left + r.width/2 - left;
+    tt.style.setProperty('--ax', Math.round(Math.max(12, Math.min(ax, t.width-12)))+'px');
+    tt.classList.add('on');
+  }
+  function hideTip(){ tt.classList.remove('on'); clearTimeout(ttT); ttT=setTimeout(()=>{tt.style.display='none';},140); }
+  document.addEventListener('mouseover', e=>{ const el=e.target.closest('[data-tip]'); if(el){ clearTimeout(ttT); showTip(el);} });
+  document.addEventListener('mouseout',  e=>{ if(e.target.closest('[data-tip]')) hideTip(); });
+  document.addEventListener('scroll', hideTip, true);
+
+  /* ---------- toast ---------- */
+  let tT=null;
+  window.tst = function(html){
+    const t=$('toast'); t.innerHTML='<div>'+html+'</div>'; t.style.display='block';
+    clearTimeout(tT); tT=setTimeout(()=>t.style.display='none',2700);
+  };
+
+  /* ---------- shell ---------- */
+  window.tgrp = function(h){ h.nextElementSibling.classList.toggle('hide'); h.querySelector('.cv').classList.toggle('dn'); };
+  window.tg = function(id){ ['dm','bm'].forEach(k=>{ if(k!==id) $(k).classList.add('hide'); }); $(id).classList.toggle('hide'); };
+  document.addEventListener('click', e=>{ if(!e.target.closest('.ctl') && !e.target.closest('.menu')){ $('dm').classList.add('hide'); $('bm').classList.add('hide'); } });
+
+  const PER = { 'Today · 4 Aug':'4 Aug', '28 Jul - 3 Aug':'28 Jul - 3 Aug', '1 Aug - 4 Aug':'1 Aug - 4 Aug', '1 Jul - 31 Jul':'1 Jul - 31 Jul', 'Custom range':'custom range' };
+  window.setD = function(l){
+    $('dlbl').textContent = l; $('dm').classList.add('hide');
+    const p = PER[l] || l;
+    ['tx-per','lg-per'].forEach(k=>{ if($(k)) $(k).textContent = p; });
+    tst('Date range updated — Transactions, Campaign Wallet Spend and the Wallet ledger refreshed');
+  };
+  window.setB = function(l){ $('blbl').textContent=l; $('bm').classList.add('hide'); tst('Brand switched to '+l); };
+
+  const PAGES = { overview:'Overview', bizq:'Business Queue', finq:'Finance Queue', wadj:'Wallet adjustments', search:'Search Only' };
+  window.go = function(id, label, el){
+    document.querySelectorAll('a.nv').forEach(a=>a.classList.remove('on'));
+    if (el) el.classList.add('on');
+    const target = ['overview','finq','search'].includes(id) ? id : null;
+    document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
+    if (target) $('pg-'+target).classList.add('active');
+    else { $('pg-stub').classList.add('active'); $('stub-nm').textContent = label; }
+    $('crumb2').innerHTML = (id==='search' ? ' / Campaign / Performance / <b>Search Only</b>' : ' / <b>'+label+'</b>');
+    window.scrollTo(0,0);
+    return false;
+  };
+
+  /* ================= OVERVIEW DATA ================= */
+  const inr = n => '₹ ' + Math.abs(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const sgn = n => (n<0?'− ':'') + inr(n);
+
+  const CR = [
+    {id:'CR-2026-08-0004310',m:'RTGS',w:'Primary',amt:600000,cim:'Current · Aug',s:'APPROVED',sub:'3 Aug 2026, 11:12 AM'},
+    {id:'CR-2026-07-0004204',m:'MV',w:'Display',amt:320000,cim:'Current · Jul',s:'ON HOLD',sub:'27 Jul 2026, 11:05 AM'},
+    {id:'CR-2026-07-0004183',m:'RTGS',w:'Primary',amt:600000,cim:'Next · Sep',s:'SCHEDULED',sub:'3 Aug 2026, 09:30 AM'}
+  ];
+  const SP = {SUBMITTED:'p-submitted','UNDER REVIEW':'p-review','ON HOLD':'p-hold',APPROVED:'p-approved',SCHEDULED:'p-sched',CREDITED:'p-credited',REJECTED:'p-rejected'};
+  const STIP = {
+    SUBMITTED:'Sent to Purplle. Waiting to be reviewed.',
+    'UNDER REVIEW':'Purplle is checking your payment reference and proof.',
+    'ON HOLD':'Purplle needs a corrected document from you. Check your email.',
+    APPROVED:'Funds confirmed. Your wallet is credited in the next batch.',
+    SCHEDULED:'Approved for next month. Credits on the 1st.',
+    CREDITED:'In your wallet.',
+    REJECTED:'Not accepted. Raise a new request.'
+  };
+  const cimP = c => '<span class="pill '+(c.indexOf('Next')===0?'p-next':'p-cur')+'">'+c.toUpperCase()+'</span>';
+
+  $('b-cr').innerHTML = CR.map(r=>'<tr>'
+    + '<td class="mono">'+r.id+'</td>'
+    + '<td class="muted">'+r.m+'</td>'
+    + '<td><span class="wlink">'+r.w+'</span></td>'
+    + '<td class="r">'+inr(r.amt)+'</td>'
+    + '<td>'+cimP(r.cim)+'</td>'
+    + '<td><span class="pill '+SP[r.s]+' has-tip" data-tip="'+STIP[r.s]+'">'+r.s+'</span></td>'
+    + '<td class="muted">'+r.sub+'</td>'
+    + '<td><button class="view">View</button></td></tr>').join('');
+
+  /* ---------- Transactions: one row per date x reference ---------- */
+  /* k: spend | in | adj  — drives the filter chips */
+  const TX = [
+    {d:'3 Aug 2026', m:'Bank transfer',    w:'Primary',     amt: 600000,  ref:'CR-2026-08-0004310', k:'in',    t:'Recharge'},
+    {d:'3 Aug 2026', m:'Campaign spend',   w:'Display',     amt:-118420,  ref:'CMP-DSP-88120',      k:'spend', t:'Campaign spend'},
+    {d:'3 Aug 2026', m:'Campaign spend',   w:'Performance', amt:-64180,   ref:'CMP-SS-44012',       k:'spend', t:'Campaign spend'},
+    {d:'2 Aug 2026', m:'Transfer',         w:'Performance', amt: 200000,  ref:'TRF-2026-08-0221',   k:'in',    t:'Moved in from Primary'},
+    {d:'2 Aug 2026', m:'Transfer',         w:'Primary',     amt:-200000,  ref:'TRF-2026-08-0221',   k:'in',    t:'Moved out to Performance'},
+    {d:'2 Aug 2026', m:'Campaign spend',   w:'Display',     amt:-96500,   ref:'CMP-DSP-88118',      k:'spend', t:'Campaign spend'},
+    {d:'1 Aug 2026', m:'Promotional credit',w:'Promo',      amt: 100000,  ref:'PRM-2026-08-0044',   k:'in',    t:'Promotional credit granted'},
+    {d:'1 Aug 2026', m:'Correction',       w:'Primary',     amt: 18400,   ref:'ADJ-2026-08-0117',   k:'adj',   t:'Correction in your favour'},
+    {d:'31 Jul 2026',m:'Correction',       w:'Primary',     amt:-6250,    ref:'ADJ-2026-07-0388',   k:'adj',   t:'Correction against your wallet'},
+    {d:'30 Jul 2026',m:'Penalty',          w:'Primary',     amt:-12000,   ref:'PEN-2026-07-0021',   k:'adj',   t:'Penalty charged'},
+    {d:'29 Jul 2026',m:'Campaign spend',   w:'Promo',       amt:-34600,   ref:'CMP-DSP-88090',      k:'spend', t:'Campaign spend covered by promotional credit'}
+  ];
+  let tk = 'all';
+  function rTx(){
+    const rows = TX.filter(x => tk==='all' || x.k===tk);
+    $('c-tx').textContent = rows.length;
+    let last = null;
+    $('b-tx').innerHTML = rows.map(x=>{
+      const first = x.d !== last; last = x.d;
+      return '<tr>'
+        + '<td>'+(first ? '<b>'+x.d+'</b>' : '<span class="muted" style="opacity:.45">·</span>')+'</td>'
+        + '<td><span class="has-tip" data-tip="'+x.t+'">'+x.m+'</span></td>'
+        + '<td><span class="wlink">'+x.w+'</span></td>'
+        + '<td class="r '+(x.amt<0?'neg':'pos')+'">'+(x.amt<0?'− ':'+ ')+inr(x.amt)+'</td>'
+        + '<td class="mono">'+x.ref+'</td></tr>';
+    }).join('');
+    $('e-tx').classList.toggle('hide', rows.length>0);
+    $('pg-tx').textContent = 'Showing 1–'+rows.length+' of '+rows.length;
+  }
+  window.setT = function(k){ tk=k; ['all','spend','in','adj'].forEach(x=>$('t-'+x).classList.toggle('on',x===k)); rTx(); };
+  window.dlTx = function(){ tst('<i class="ri-download-2-line"></i> Downloading '+$('c-tx').textContent+' rows · CSV'); };
+
+  /* ---------- Campaign wallet spend ---------- */
+  const CS = [
+    {d:'4 Aug 2026',c:'Lakme 9to5 · Display · Home',    w:'Display',     amt:41200, ref:'CMP-DSP-88131'},
+    {d:'4 Aug 2026',c:'Lakme Absolute · Display · PDP',  w:'Display',     amt:33850, ref:'CMP-DSP-88132'},
+    {d:'4 Aug 2026',c:'Lakme Eyeconic · Smart Shopping',      w:'Performance', amt:28400, ref:'CMP-SS-44031'},
+    {d:'4 Aug 2026',c:'Lakme Lip Care · Search',              w:'Performance', amt:19260, ref:'CMP-SR-21004'},
+    {d:'4 Aug 2026',c:'Lakme Sun Expert · Display · Cat',w:'Display',     amt:17900, ref:'CMP-DSP-88133'},
+    {d:'4 Aug 2026',c:'Lakme Blush · Smart Shopping',         w:'Performance', amt:14120, ref:'CMP-SS-44032'},
+    {d:'4 Aug 2026',c:'Lakme Peach Milk · Search',            w:'Performance', amt:11640, ref:'CMP-SR-21005'},
+    {d:'4 Aug 2026',c:'Lakme Rose Powder · Display · PDP',w:'Display',    amt: 9480, ref:'CMP-DSP-88134'},
+    {d:'4 Aug 2026',c:'Lakme Kajal · Takeover',               w:'Display',     amt: 7250, ref:'CMP-TKO-9014'},
+    {d:'4 Aug 2026',c:'Lakme Primer · Display · Home',    w:'Promo',       amt: 6100, ref:'CMP-DSP-88135'}
+  ];
+  $('b-cs').innerHTML = CS.map(x=>'<tr>'
+    + '<td>'+x.d+'</td><td class="bold">'+x.c+'</td>'
+    + '<td><span class="wlink">'+x.w+'</span></td>'
+    + '<td class="r neg">− '+inr(x.amt)+'</td>'
+    + '<td class="mono">'+x.ref+'</td></tr>').join('');
+
+  /* ---------- Wallet ledger (period) ---------- */
+  /* Real money closing must equal Available cash on the cards. */
+  const LG = {
+    open: 13809781.73,
+    inItems: [['Recharges credited',600000],['Moved in between your wallets',200000],['Corrections in your favour',18400]],
+    outItems:[['Campaign spend',279100],['Moved out between your wallets',200000],['Corrections against your wallet',6250],['Penalties',12000]],
+    promo: {open:0, granted:100000, used:34600, lapsed:15400},
+    spend: {total:313700, cash:279100, promo:34600}
+  };
+  const sum = a => a.reduce((t,x)=>t+x[1],0);
+  const mIn = sum(LG.inItems), mOut = sum(LG.outItems);
+  const pClose = LG.open + mIn - mOut;
+  const mClose = LG.promo.open + LG.promo.granted - LG.promo.used - LG.promo.lapsed;
+  $('p-open').textContent  = inr(LG.open);
+  $('p-in').textContent    = '+ '+inr(mIn);
+  $('p-out').textContent   = '− '+inr(mOut);
+  $('p-close').textContent = inr(pClose);
+  $('m-open').textContent  = inr(LG.promo.open);
+  $('m-gr').textContent    = '+ '+inr(LG.promo.granted);
+  $('m-sp').textContent    = '− '+inr(LG.promo.used);
+  $('m-lp').textContent    = '− '+inr(LG.promo.lapsed);
+  $('m-close').textContent = inr(mClose);
+  $('sp-tot').textContent  = inr(LG.spend.total);
+  $('sp-cash').textContent = inr(LG.spend.cash);
+  $('sp-promo').textContent= inr(LG.spend.promo);
+
+  const line = (l,v,neg) => '<div class="lgr it"><span class="l">'+l+'</span><span class="v '+(neg?'neg':'pos')+'">'+(neg?'− ':'+ ')+inr(v)+'</span></div>';
+  let shown = false;
+  window.tItems = function(){
+    shown = !shown;
+    $('p-i1').innerHTML = shown ? LG.inItems.map(x=>line(x[0],x[1],false)).join('') : '';
+    $('p-i2').innerHTML = shown ? LG.outItems.map(x=>line(x[0],x[1],true)).join('') : '';
+    $('p-tog').textContent = shown ? 'Hide breakdown' : 'Show breakdown';
+  };
+  window.dlLg = function(){ tst('<i class="ri-download-2-line"></i> Downloading wallet ledger · every line itemised · '+$('fmt-lg').value.toUpperCase()); };
+
+
+  /* ================= SEARCH CAMPAIGNS ================= */
+  const CMP = [
+    ['OAP - HACA - HYA - Shampoo - Brand - phrase - Aug 24','3,438','7,425','1,038','228','21.97%','33','Jul 21, 2026','5177'],
+    ['OAP - HACA - HYA - Shampoo - Brand - Exact - Aug 24','8,790','14,520','892','484','54.26%','30','Jul 21, 2026','5176'],
+    ['OAP - HACA - HYA - Shampoo - Generic - Exact - Aug 24','12,631','28,950','3,473','539','15.52%','54','Jul 21, 2026','5175'],
+    ['OAP_HACA_HYA_Conditioner_Generic_Phrase - Search','11,593','20,460','3,028','500','16.51%','41','Jul 21, 2026','5174'],
+    ['OAP_HACA_HYA_Conditioner_Generic_Exact - Search','13,164','20,160','3,285','454','13.82%','44','Jul 21, 2026','5173'],
+    ['OAP_HACA_HYA_Conditioner_Brand_Exact - Search','4,785','12,120','611','303','49.59%','40','Jul 21, 2026','5172'],
+    ['OAP_HACA_HA Pure_Sham_340ml_Comp_Exact - Search','3,926','12,738','2,081','253','12.16%','50','Jul 8, 2026','3645'],
+    ['OAP_SC_Glyco Lumi Matte cream_Gene_Exact_Search','1,000','6,985','3,059','255','8.34%','27','Jul 8, 2026','3644'],
+    ['OAP_HACA_GG_serum_80ml+40ml_Generic_Exact - Search','2,044','3,362','650','89','13.69%','38','Jul 8, 2026','3643'],
+    ['OAP_HACA_HA Pure_Sham_340ml_Generic_Phrase - Search','20,217','50,068','11,545','1,141','9.88%','44','Jul 8, 2026','3642']
+  ];
+  if ($('b-cmp')) $('b-cmp').innerHTML = CMP.map(c=>'<tr>'
+    + '<td><input type="checkbox"></td>'
+    + '<td><span class="st-active">Active</span></td>'
+    + '<td><span class="cmp-nm has-tip" data-tip="'+c[0]+'">'+c[0]+'</span></td>'
+    + '<td>Search Only</td><td>Manual CPC</td>'
+    + '<td>Rs. '+c[1]+'/day</td><td>Rs. '+c[2]+'</td><td>'+c[3]+'</td><td>'+c[4]+'</td><td>'+c[5]+'</td><td>Rs. '+c[6]+'</td>'
+    + '<td>'+c[7]+'</td><td>N/A</td><td>'+c[8]+'</td>'
+    + '<td><i class="ri-bar-chart-line" style="color:var(--g50);margin-right:9px"></i><i class="ri-more-2-fill" style="color:var(--g50)"></i></td></tr>').join('');
+
+  const FUN = [
+    ['5/8/2026','OAP_HACA_TR5_Sham-1Ltr_Cate','3,537','Smart Shopping','32,700','42,353','327','0.01','299','24','960','359,902','11.01','100','0.01'],
+    ['5/8/2026','OAP_HACA_HA Pure_Sham_340ml_Cate','3,533','Smart Shopping','30,690','32,089','310','0.01','281','40','305','135,057','4.4','99','0.01'],
+    ['5/8/2026','OAP_SC_Glyco Lumi Matte Cream _Category','3,534','Smart Shopping','20,989.6','57,557','345','0.01','308','23','1,231','521,510','24.85','60.84','0.01'],
+    ['5/8/2026','OAP_HACA_HA Pure_Sham_340ml_Generic_Phrase - Search','3,642','Search','17,682','3,889','344','0.09','289','66','182','73,450','4.15','51.4','0.02'],
+    ['5/8/2026','OAP_HACA_TR5_conditioner_Cate','5,180','Smart Shopping','13,752','26,363','151','0.01','132','18','799','284,573','20.69','91.07','0.01'],
+    ['5/8/2026','OAP_SC_Glyco Cleanser_Cate','3,568','Smart Shopping','12,053.6','28,931','270','0.01','236','42','1,478','556,338','46.16','44.64','0.02'],
+    ['5/8/2026','OAP_SC_Glyco Serum _Category','3,592','Smart Shopping','11,847.63','12,044','274','0.02','247','43','473','195,795','16.53','43.24','0.02'],
+    ['5/8/2026','OAP_HACA_TR5 Shampoo_Generic_Exacr_Aug 24 - Search','3,639','Search','10,644.82','282','109','0.39','100','19','16','6,611','0.62','97.66','0.02']
+  ];
+  if ($('b-fun')) $('b-fun').innerHTML = FUN.map(f=>'<tr>'
+    + '<td>'+f[0]+'</td><td><span class="cmp-nm">'+f[1]+'</span></td><td class="mono">'+f[2]+'</td>'
+    + '<td><span class="flag f-ok">ACTIVE</span></td><td>'+f[3]+'</td>'
+    + '<td>'+f[4]+'</td><td>'+f[5]+'</td><td>'+f[6]+'</td><td>'+f[7]+'</td>'
+    + '<td>'+f[8]+'</td><td>'+f[9]+'</td><td>'+f[10]+'</td><td>'+f[11]+'</td><td>'+f[12]+'</td><td>'+f[13]+'</td><td>'+f[14]+'</td></tr>').join('');
+
+  /* ================= CREATE CAMPAIGN WIZARD ================= */
+  let step = 1;
+  window.wizOpen = function(){ $('wiz').classList.add('on'); wizGo(1); };
+  window.wizClose = function(){ $('wiz').classList.remove('on'); };
+  window.wizGo = function(n){
+    step = n;
+    for (let i=1;i<=4;i++){
+      $('ws'+i).classList.toggle('on', i===n);
+      const b = $('st'+i);
+      b.classList.toggle('on', i===n);
+      b.classList.toggle('done', i<n);
+      b.querySelector('.ic').innerHTML = i<n ? '<i class="ri-checkbox-circle-fill"></i>'
+        : ['','<i class="ri-information-line"></i>','<i class="ri-shopping-cart-line"></i>','<i class="ri-equalizer-line"></i>','<i class="ri-checkbox-circle-line"></i>'][i];
+    }
+    $('wiz-next').textContent = n===4 ? 'Save & Launch' : 'Next';
+    if (n===4) renderReview();
+    $('wiz').querySelector('.wiz-bd').scrollTop = 0;
+  };
+  window.wizNext = function(){ if (step<4) wizGo(step+1); else { wizClose(); tst('Campaign saved and launched'); } };
+  window.wizBack = function(){ if (step>1) wizGo(step-1); else wizClose(); };
+  window.pace = function(el){ el.parentElement.querySelectorAll('label').forEach(l=>l.classList.remove('on')); el.classList.add('on'); };
+
+  /* ---------- Step 2: products ---------- */
+  const PRD = [
+    ["L'Oreal Paris Fall Resist Anti Hair Fall Serum with 1.5% Aminexil, Caffeine & Arginine for lesser visible scalp & hair fall, 102 ml",'Hair Serum','₹999','₹749',true],
+    ["L'Oreal Paris Infallible 24H Tinted Serum Foundation, Light-weight Coverage, Dewy & Radiant Finish, Transfer-proof, 0.5-2 Very Light, 30 ml",'Foundation','₹999','₹669',false],
+    ["L'Oreal Paris Infallible 24H Tinted Serum Foundation, Light-weight Coverage, Dewy & Radiant Finish, Transfer-proof, 1-2 Rosy Light, 30 ml",'Foundation','₹999','₹669',false],
+    ["L'Oreal Paris Infallible 24H Tinted Serum Foundation, Light-weight Coverage, Dewy & Radiant Finish, Transfer-proof, 2-3 Light, 30 ml",'Foundation','₹999','₹669',false],
+    ["L'Oreal Paris Infallible 24H Tinted Serum Foundation, Light-weight Coverage, Dewy & Radiant Finish, Transfer-proof, 3-4 Light - Medium, 30 ml",'Foundation','₹999','₹669',false]
+  ];
+  if ($('b-prd')) $('b-prd').innerHTML = PRD.map(p=>'<tr>'
+    + '<td><input type="checkbox"'+(p[4]?' checked':'')+'></td>'
+    + '<td><i class="ri-image-line" style="color:var(--g30);font-size:16px"></i></td>'
+    + '<td><span class="catl">'+p[0]+'</span></td>'
+    + '<td>'+p[1]+'</td><td>L\'Oreal Paris</td><td>'+p[2]+'</td><td>'+p[3]+'</td></tr>').join('');
+
+  /* ---------- Step 3: individual keyword rows ---------- */
+  let added = [];
+  function kwRow(kw,mt,bid){
+    return '<div class="kwgrid" style="margin-bottom:14px">'
+      + '<div class="fld" style="margin:0"><label>Keyword</label><input class="thin" type="text" value="'+(kw||'')+'" placeholder="Enter keyword"></div>'
+      + '<div class="fld" style="margin:0"><label>Match Type</label><select class="thin">'
+        + '<option'+(mt==='Phrase'?' selected':'')+'>Phrase</option><option'+(mt!=='Phrase'?' selected':'')+'>Exact</option></select></div>'
+      + '<div class="fld" style="margin:0"><label>Bid (₹)</label><input class="thin" type="text" value="'+(bid!=null?bid:'0')+'"></div>'
+      + '<button class="icobtn" onclick="this.closest(\'.kwgrid\').remove();syncKw()"><i class="ri-delete-bin-line"></i></button></div>';
+  }
+  window.addKwRow = function(){ $('b-ikw').insertAdjacentHTML('beforeend', kwRow('', 'Exact', '0')); };
+  window.syncKw = function(){};
+  if ($('b-ikw')) $('b-ikw').innerHTML = kwRow('', 'Exact', '0');
+
+  /* ---------- Step 3: keyword suggestions ---------- */
+  /* vol = last 30 days, banded. min/base/max from the last 90 days. */
+  const KWS = [
+    ['loreal paris shampoo','Shampoo','hair','67K - 69K','Exact',33.6,39.0,42.0],
+    ['shampoo','Shampoo','hair','90K - 92K','Phrase',33.6,41.4,42.0],
+    ['repairing shampoo','Shampoo','hair','90K - 92K','Exact',33.6,37.6,42.0],
+    ['hair fall control conditioner','Conditioner','hair','60K - 62K','Exact',35.6,39.2,41.3],
+    ['hair serum','Hair Serum','hair','65K - 67K','Phrase',32.0,36.2,38.3],
+    ['conditioner','Conditioner','hair','49K - 51K','Phrase',35.6,40.8,41.3],
+    ['frizzy hair serum','Hair Serum','hair','53K - 55K','Exact',32.0,38.0,38.3],
+    ['anti dandruff shampoo','Shampoo','hair','68K - 70K','Exact',33.6,37.8,42.0],
+    ['loreal paris conditioner','Conditioner','hair','28K - 30K','Exact',35.6,40.5,41.3],
+    ['loreal shampoo','Shampoo','hair','22K - 24K','Exact',33.6,40.7,42.0],
+    ['loreal paris hair serum','Hair Serum','hair','19K - 21K','Exact',32.0,38.3,38.3],
+    ['alps goodness rosemary water','Hair Care Kit','hair','4.5L - 5.2L','Phrase',31.6,37.7,39.8],
+    ['wishcare hair growth serum','Hair Serum','hair','47K - 49K','Exact',32.0,32.7,38.3],
+    ['loreal','Shampoo','hair','37K - 39K','Phrase',31.6,36.4,39.8],
+    ['dove shampoo','Shampoo','hair','25K - 27K','Exact',33.6,34.0,42.0],
+    ['hair colour','Hair Colour','hair','16K - 18K','Phrase',30.7,33.1,35.5],
+    ['conditioner for frizzy hair','Conditioner','hair','16K - 18K','Exact',35.6,41.3,41.3],
+    ['tresemme shampoo','Shampoo','hair','21K - 23K','Exact',33.6,36.4,42.0],
+    ['hair mask','Hair Mask','hair','69K - 71K','Phrase',31.9,36.7,38.1],
+    ['plum shampoo','Shampoo','hair','21K - 23K','Exact',33.6,41.2,42.0],
+    ['mamaearth shampoo','Shampoo','hair','25K - 27K','Exact',33.6,41.9,42.0],
+    ['streax hair serum','Hair Serum','hair','24K - 26K','Exact',32.0,38.3,38.3],
+    ['hair removal','Shaving & Hair Removal','Other','2K - 4K','Phrase',null,null,null],
+    ['loreal conditioner','Conditioner','hair','9K - 11K','Exact',35.6,41.3,41.3],
+    ['serum for hair growth','Hair Serum','hair','18K - 20K','Phrase',32.0,32.0,38.3]
+  ];
+  const rs = n => n.toFixed(2);
+  function kwsRender(){
+    $('b-kws').innerHTML = KWS.map((k,i)=>{
+      const priced = k[5]!=null;
+      const isAdded = added.some(a=>a.kw===k[0]);
+      const cells = priced
+        ? '<td class="r bidr">'+rs(k[5])+'</td><td class="r bidr"><b>'+rs(k[6])+'</b></td><td class="r bidr">'+rs(k[7])+'</td>'
+        : '<td class="r" colspan="3" style="text-align:center"><span class="bidr"><span class="no has-tip" data-tip="We do not have enough click history on this category to estimate what a click costs. You can still add the keyword and set your own bid.">No estimate</span></span></td>';
+      return '<tr>'
+        + '<td><input type="checkbox" class="kwc" data-i="'+i+'"'+(isAdded?' disabled':'')+' onclick="kwPick('+i+',this)"></td>'
+        + '<td style="font-weight:700;color:var(--g90)">'+k[0]+'</td>'
+        + '<td><span class="catl">'+k[1]+'</span></td>'
+        + '<td class="muted">'+k[2]+'</td>'
+        + '<td><span class="volb">'+k[3]+'</span></td>'
+        + '<td><span class="mt-pill '+(k[4]==='Phrase'?'mt-phrase':'mt-exact')+' has-tip" data-tip="'
+          + (k[4]==='Phrase'
+             ? 'The most general keyword in this group. Phrase Match reaches every search that contains it.'
+             : 'A more specific version of a broader keyword you already have. Exact Match keeps it from competing with that one.')
+          + '">'+k[4]+'</span></td>'
+        + cells
+        + '<td class="r"><input class="bidin" id="bid-'+i+'" type="text" value="'+(isAdded?(added.find(a=>a.kw===k[0]).bid):'')+'" placeholder="—"'+(isAdded?' disabled':'')+'></td>'
+        + '<td style="text-align:right"><button class="addk'+(isAdded?' added':'')+'" onclick="kwAdd('+i+')">'
+          + (isAdded?'Added':'Add')+'</button></td></tr>';
+    }).join('');
+    $('c-kw').textContent = KWS.length;
+  }
+  /* selecting a keyword fills the Bid column with the base bid */
+  window.kwPick = function(i, cb){
+    const f = $('bid-'+i); if (!f) return;
+    const base = KWS[i][6];
+    if (cb.checked){ if (!f.value) f.value = base!=null ? rs(base) : ''; }
+    else if (base!=null && f.value === rs(base)) f.value = '';
+  };
+  function bidFor(i){
+    const f = $('bid-'+i), base = KWS[i][6];
+    if (f && f.value.trim()) return f.value.trim();
+    return base!=null ? rs(base) : '0';
+  }
+  window.kwAdd = function(i){
+    const k = KWS[i];
+    if (added.some(a=>a.kw===k[0])) return;
+    const b = bidFor(i);
+    added.push({kw:k[0], mt:k[4], bid:b});
+    $('b-ikw').insertAdjacentHTML('beforeend', kwRow(k[0], k[4], b));
+    kwsRender();
+    tst('Added <b>'+k[0]+'</b> · '+k[4]+' · ₹'+b);
+  };
+  window.kwAll = function(cb){
+    document.querySelectorAll('.kwc').forEach(c=>{
+      if (c.disabled) return;
+      c.checked = cb.checked;
+      kwPick(+c.dataset.i, c);
+    });
+  };
+  window.kwBulk = function(){
+    const sel = [...document.querySelectorAll('.kwc')].filter(c=>c.checked && !c.disabled).map(c=>+c.dataset.i);
+    if (!sel.length){ tst('Select at least one keyword'); return; }
+    sel.forEach(i=>{
+      const k = KWS[i];
+      if (added.some(a=>a.kw===k[0])) return;
+      const b = bidFor(i);
+      added.push({kw:k[0], mt:k[4], bid:b});
+      $('b-ikw').insertAdjacentHTML('beforeend', kwRow(k[0], k[4], b));
+    });
+    $('kw-all').checked = false;
+    kwsRender();
+    tst('Added '+sel.length+' keyword'+(sel.length>1?'s':''));
+  };
+  if ($('b-kws')) kwsRender();
+
+  function renderReview(){
+    $('rv-kwn').textContent = added.length + ' keyword' + (added.length===1?'':'s') + ' configured';
+    $('rv-kws').innerHTML = added.length
+      ? added.map(a=>'<span class="kwchip">'+a.kw+' <span class="mt">'+a.mt+' · ₹'+a.bid+'</span></span>').join('')
+      : '<span class="muted" style="font-size:11.5px">No keywords added yet. Go back to Step 3.</span>';
+  }
+
+  rTx();
+})();
+
+(function(){
+  const $ = i => document.getElementById(i);
+
+  /* ---------- data ---------- */
+  const inr = n => '₹ ' + n.toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
+  const BANK = ['NEFT','RTGS','Cheque'];
+
+  const ST = {
+    'SUBMITTED':    ['p-submitted','Submitted by the brand. Waiting for you to review.'],
+    'UNDER REVIEW': ['p-review','Someone is checking the payment proof, reference, or contract.'],
+    'ON HOLD':      ['p-hold','Waiting on the brand to send a corrected document.'],
+    'APPROVED':     ['p-approved','Funds confirmed. The wallet credit posts in the next batch.'],
+    'SCHEDULED':    ['p-sched','Approved for next month. Credits on day 1.'],
+    'CREDITED':     ['p-credited','Wallet credited. Closed.'],
+    'REJECTED':     ['p-rejected','Rejected. The brand must submit a new request.']
+  };
+  const FL = {
+    'CLEAR':          ['f-ok','No issues found.'],
+    'CHECK OVERDUE':  ['f-bad dot','Waiting more than 4 hours for Finance action.'],
+    '120-DAY AGING':  ['f-bad','Post-paid credit outstanding beyond 120 days.'],
+    'PROOF REVIEW':   ['f-warn','Payment proof needs a closer look before approving.']
+  };
+  const esc = s => String(s).replace(/"/g,'&quot;');
+  const stPill = s => '<span class="pill '+ST[s][0]+' has-tip" data-tip="'+esc(ST[s][1])+'">'+s+'</span>';
+  const flTxt  = f => '<span class="flag '+FL[f][0]+' has-tip" data-tip="'+esc(FL[f][1])+'">'+f+'</span>';
+  const cimPill= c => '<span class="pill '+(c.indexOf('Next')===0?'p-next':'p-cur')+'">'+c.toUpperCase()+'</span>';
+
+  const R = [
+    {id:'CR-2026-07-0004201',brand:'Swiss Beauty',w:'Primary',amt:41525,ref:'HSBCR2202607',m:'NEFT',cim:'Current · Jul',s:'SUBMITTED',f:'CHECK OVERDUE',wait:'5h 12m',sub:'28 Jul 2026, 04:03 PM',by:'poc@swissbeauty.in'},
+    {id:'CR-2026-07-0004202',brand:'Everteen',w:'Primary',amt:25424,ref:'CMS2042619277887',m:'RTGS',cim:'Current · Jul',s:'SUBMITTED',f:'CHECK OVERDUE',wait:'4h 48m',sub:'28 Jul 2026, 03:27 PM',by:'poc@everteen.in'},
+    {id:'CR-2026-07-0004203',brand:'Neud',w:'Performance',amt:8200,ref:'CMS2042619337899',m:'NEFT',cim:'Current · Jul',s:'UNDER REVIEW',f:'PROOF REVIEW',wait:'2h 50m',sub:'28 Jul 2026, 01:29 PM',by:'poc@neud.in'},
+    {id:'CR-2026-07-0004204',brand:'Lakme',w:'Display',amt:320000,ref:'PI/2026/0721',m:'MV',cim:'Current · Jul',s:'ON HOLD',f:'PROOF REVIEW',wait:'1d 6h',sub:'27 Jul 2026, 11:05 AM',by:'kam.lakme@purplle.com'},
+    {id:'CR-2026-07-0004205',brand:'Fixderma',w:'Primary',amt:191525.42,ref:'HDFCR52026072286590045',m:'RTGS',cim:'Current · Jul',s:'UNDER REVIEW',f:'CLEAR',wait:'1h 05m',sub:'28 Jul 2026, 10:22 AM',by:'poc@fixderma.in'},
+    {id:'CR-2026-07-0004206',brand:'Nua',w:'Primary',amt:50000,ref:'CHQ-0042189',m:'Cheque',cim:'Next · Aug',s:'SUBMITTED',f:'CLEAR',wait:'42m',sub:'28 Jul 2026, 09:14 AM',by:'poc@nua.in'},
+
+    {id:'CR-2026-07-0004180',brand:'Swiss Beauty',w:'Primary',amt:40180,ref:'CMS2032619045460',m:'NEFT',cim:'Current · Jul',s:'APPROVED',appby:'k.ahuja@purplle.com',appat:'28 Jul 2026, 11:42 AM',cred:'Next batch · tonight',sub:'27 Jul 2026, 04:00 PM',by:'poc@swissbeauty.in'},
+    {id:'CR-2026-07-0004181',brand:'Everteen',w:'Primary',amt:24600,ref:'ICICR2402607711',m:'RTGS',cim:'Current · Jul',s:'APPROVED',appby:'k.ahuja@purplle.com',appat:'28 Jul 2026, 11:20 AM',cred:'Next batch · tonight',sub:'27 Jul 2026, 01:27 PM',by:'poc@everteen.in'},
+    {id:'CR-2026-07-0004182',brand:'Vaseline',w:'Performance',amt:100000,ref:'R228/OT/26/008871/00',m:'RO',cim:'Current · Jul',s:'APPROVED',appby:'r.mehta@purplle.com',appat:'28 Jul 2026, 10:05 AM',cred:'Next batch · tonight',sub:'26 Jul 2026, 01:02 PM',by:'kam.vaseline@purplle.com'},
+    {id:'CR-2026-07-0004183',brand:'Lakme',w:'Primary',amt:600000,ref:'AXISR2402607711',m:'RTGS',cim:'Next · Aug',s:'SCHEDULED',appby:'k.ahuja@purplle.com',appat:'27 Jul 2026, 09:30 AM',cred:'1 Aug 2026, 00:00',sub:'26 Jul 2026, 09:30 AM',by:'poc@lakme.in'},
+
+    {id:'CR-2026-07-0004150',brand:'Swiss Beauty',w:'Primary',amt:41525,ref:'CMS2032619045461',m:'NEFT',cim:'Current · Jul',s:'CREDITED',appby:'k.ahuja@purplle.com',appat:'24 Jul 2026, 04:03 PM',crat:'25 Jul 2026, 00:12 AM',sub:'24 Jul 2026, 02:10 PM',by:'poc@swissbeauty.in'},
+    {id:'CR-2026-07-0004151',brand:'Everteen',w:'Primary',amt:25424,ref:'CMS2042619277888',m:'RTGS',cim:'Current · Jul',s:'CREDITED',appby:'k.ahuja@purplle.com',appat:'24 Jul 2026, 03:27 PM',crat:'25 Jul 2026, 00:12 AM',sub:'24 Jul 2026, 01:04 PM',by:'poc@everteen.in'},
+    {id:'CR-2026-07-0004152',brand:'Neud',w:'Primary',amt:8475,ref:'CMS2042619337900',m:'NEFT',cim:'Current · Jul',s:'CREDITED',appby:'r.mehta@purplle.com',appat:'24 Jul 2026, 03:25 PM',crat:'25 Jul 2026, 00:12 AM',sub:'24 Jul 2026, 11:40 AM',by:'poc@neud.in'},
+    {id:'CR-2026-07-0004153',brand:'Ponds',w:'Display',amt:900000,ref:'R228/OT/26/008828/00',m:'RO',cim:'Current · Jul',s:'CREDITED',appby:'r.mehta@purplle.com',appat:'23 Jul 2026, 01:01 PM',crat:'24 Jul 2026, 00:12 AM',sub:'22 Jul 2026, 05:40 PM',by:'kam.ponds@purplle.com'},
+    {id:'CR-2026-07-0004154',brand:'Fixderma',w:'Primary',amt:191525.42,ref:'HDFCR52026072286590044',m:'RTGS',cim:'Current · Jul',s:'CREDITED',appby:'k.ahuja@purplle.com',appat:'22 Jul 2026, 05:22 PM',crat:'23 Jul 2026, 00:12 AM',sub:'22 Jul 2026, 02:15 PM',by:'poc@fixderma.in'},
+    {id:'CR-2026-07-0004155',brand:'Nua',w:'Performance',amt:50000,ref:'CHQ-0042140',m:'Cheque',cim:'Current · Jul',s:'CREDITED',appby:'k.ahuja@purplle.com',appat:'22 Jul 2026, 04:31 PM',crat:'23 Jul 2026, 00:12 AM',sub:'21 Jul 2026, 10:02 AM',by:'poc@nua.in'},
+    {id:'CR-2026-07-0004156',brand:'Neud',w:'Performance',amt:80000,ref:'YESBR2402607201',m:'NEFT',cim:'Current · Jul',s:'REJECTED',appby:'k.ahuja@purplle.com',appat:'21 Jul 2026, 04:10 PM',sub:'21 Jul 2026, 09:15 AM',by:'poc@neud.in'},
+    {id:'CR-2026-07-0004157',brand:'Lakme',w:'Display',amt:150000,ref:'PI/2026/0698',m:'MV',cim:'Current · Jul',s:'REJECTED',appby:'r.mehta@purplle.com',appat:'20 Jul 2026, 12:20 PM',sub:'19 Jul 2026, 03:30 PM',by:'kam.lakme@purplle.com'}
+  ];
+
+  // wallet ledger — one row per brand for the period
+  const WL = [
+    {brand:'Swiss Beauty', po:412000, pc:81705,  pd:79420, promo_o:50000,  promo_c:0,      promo_d:12400, gap:0},
+    {brand:'Lakme',        po:980000, pc:600000, pd:214300,promo_o:150000, promo_c:100000, promo_d:48200, gap:0},
+    {brand:'Everteen',     po:188000, pc:50024,  pd:44180, promo_o:0,      promo_c:0,      promo_d:0,     gap:0},
+    {brand:'Neud',         po:96000,  pc:8200,   pd:31875, promo_o:25000,  promo_c:0,      promo_d:9100,  gap:0},
+    {brand:'Vaseline',     po:540000, pc:100000, pd:96500, promo_o:0,      promo_c:0,      promo_d:0,     gap:0},
+    {brand:'Ponds',        po:1250000,pc:900000, pd:742000,promo_o:200000, promo_c:0,      promo_d:63500, gap:0},
+    {brand:'Fixderma',     po:220000, pc:191525.42, pd:118400, promo_o:0,  promo_c:0,      promo_d:0,     gap:0},
+    {brand:'Nua',          po:75000,  pc:50000,  pd:61200, promo_o:10000,  promo_c:0,      promo_d:10000, gap:0}
+  ];
+  let pool = 'both';
+
+  const S1 = ['SUBMITTED','UNDER REVIEW','ON HOLD'];
+  const S2 = ['APPROVED','SCHEDULED'];
+  const S3 = ['CREDITED','REJECTED'];
+
+  let meth = 'bank', outc = 'all';
+  const hit = r => { const q=($('q').value||'').toLowerCase().trim(); return !q || (r.id+' '+r.brand+' '+r.ref).toLowerCase().includes(q); };
+  const mOk = r => meth==='all' ? true : meth==='bank' ? BANK.includes(r.m) : !BANK.includes(r.m);
+
+  const cells = r => '<td class="mono">'+r.id+'</td>'
+    + '<td class="bold">'+r.brand+'</td>'
+    + '<td><span class="wlink">'+r.w+'</span></td>'
+    + '<td class="r">'+inr(r.amt)+'</td>'
+    + '<td class="mono">'+r.ref+'</td>'
+    + '<td><span class="muted">'+r.m+'</span></td>'
+    + '<td>'+cimPill(r.cim)+'</td>'
+    + '<td>'+stPill(r.s)+'</td>';
+
+  function r1(){
+    const rows = R.filter(r => S1.includes(r.s) && hit(r));
+    $('c1').textContent = rows.length;
+    $('b1').innerHTML = rows.map(r => '<tr>'+cells(r)
+      + '<td>'+flTxt(r.f)+'</td>'
+      + '<td class="muted">'+r.wait+'</td>'
+      + '<td><div class="acts">'
+        + '<button class="a-ok" onclick="od(\''+r.id+'\',1)">Approve</button>'
+        + '<button class="a-no" onclick="od(\''+r.id+'\',2)">Reject</button>'
+        + (r.s!=='ON HOLD' ? '<button class="a-hd has-tip" data-tip="Ask the brand for a corrected document without rejecting the request." onclick="od(\''+r.id+'\',3)">Hold</button>' : '')
+        + '<button class="view" onclick="od(\''+r.id+'\',0)">View</button>'
+      + '</div></td></tr>').join('');
+    $('e1').classList.toggle('hide', rows.length>0);
+  }
+  function r2(){
+    const rows = R.filter(r => S2.includes(r.s) && hit(r) && mOk(r));
+    $('c2').textContent = rows.length;
+    $('b2').innerHTML = rows.map(r => '<tr>'+cells(r)
+      + '<td class="muted">'+r.appby+'</td>'
+      + '<td class="muted">'+r.appat+'</td>'
+      + '<td style="font-weight:700">'+r.cred+'</td>'
+      + '<td><button class="view" onclick="od(\''+r.id+'\',0)">View</button></td></tr>').join('');
+    $('e2').classList.toggle('hide', rows.length>0);
+  }
+  function r3(){
+    const rows = R.filter(r => S3.includes(r.s) && hit(r) && (outc==='all'||r.s===outc));
+    $('c3').textContent = rows.length;
+    $('b3').innerHTML = rows.map(r => '<tr>'+cells(r)
+      + '<td class="muted">'+r.appby+'</td>'
+      + '<td class="muted">'+r.appat+'</td>'
+      + '<td><button class="view" onclick="od(\''+r.id+'\',0)">View</button></td></tr>').join('');
+    $('e3').classList.toggle('hide', rows.length>0);
+    $('pg3').textContent = 'Showing 1–'+rows.length+' of '+rows.length;
+  }
+  function money(n){ return n===0 ? '<span class="zero">\u2014</span>' : '\u20b9 '+n.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+  function r4(){
+    const q=($('q').value||'').toLowerCase().trim();
+    const rows = WL.filter(w => !q || w.brand.toLowerCase().includes(q));
+    $('c4').textContent = rows.length;
+    const showP = pool!=='promo', showM = pool!=='primary';
+    $('hp').style.display = showP ? '' : 'none';
+    $('hm').style.display = showM ? '' : 'none';
+    document.querySelectorAll('table.wl thead tr.gr2 th').forEach((th,i)=>{
+      th.style.display = (i<4 ? showP : showM) ? '' : 'none';
+    });
+    $('b4').innerHTML = rows.map(w => {
+      const pClose = w.po + w.pc - w.pd, mClose = w.promo_o + w.promo_c - w.promo_d;
+      const p = '<td class="r sep">'+money(w.po)+'</td><td class="r">'+money(w.pc)+'</td>'
+              + '<td class="r">'+money(w.pd)+'</td><td class="r bal">'+money(pClose)+'</td>';
+      const m = '<td class="r sep">'+money(w.promo_o)+'</td><td class="r">'+money(w.promo_c)+'</td>'
+              + '<td class="r">'+money(w.promo_d)+'</td><td class="r bal">'+money(mClose)+'</td>';
+      const chk = w.gap===0
+        ? '<span class="ok has-tip" data-tip="Opening plus credits minus debits equals closing. This brand reconciles.">Balanced</span>'
+        : '<span class="f-bad has-tip" data-tip="This wallet does not reconcile. Something moved the balance that is not in the ledger \u2014 raise with tech.">Off by '+money(Math.abs(w.gap))+'</span>';
+      return '<tr><td class="bold">'+w.brand+'</td>'
+        + (showP?p:'') + (showM?m:'')
+        + '<td class="sep">'+chk+'</td></tr>';
+    }).join('');
+    $('e4').classList.toggle('hide', rows.length>0);
+  }
+
+  window.setPool = function(x){ pool=x; ['both','primary','promo'].forEach(k=>$('w-'+k).classList.toggle('on',k===x)); r4(); };
+
+  window.renderAll = function(){ r1(); r2(); r3(); r4(); };
+
+  window.setM = function(m){ meth=m; ['bank','post','all'].forEach(k=>$('m-'+k).classList.toggle('on',k===m)); r2(); };
+  window.setO = function(o){ outc=o; ['all','CREDITED','REJECTED'].forEach(k=>$('o-'+k).classList.toggle('on',k===o)); r3(); };
+  window.tsec = function(n){ $('cb'+n).classList.toggle('hide'); $('cr'+n).classList.toggle('dn'); };
+
+  /* drawer */
+  window.od = function(id, act){
+    const r = R.find(x=>x.id===id); if(!r) return;
+    $('d-id').textContent=r.id; $('d-brand').textContent=r.brand;
+    $('d-status').innerHTML=stPill(r.s);
+    $('d-wallet').textContent=r.w; $('d-amt').textContent=inr(r.amt);
+    $('d-cim').textContent=r.cim; $('d-method').textContent=r.m;
+    $('d-ref').textContent=r.ref; $('d-sub').textContent=r.sub; $('d-by').textContent=r.by;
+
+    ['o-app','o-crd','o-rej','o-hld'].forEach(k=>$(k).classList.add('hide'));
+    ['d-ok','d-rej','d-hold'].forEach(k=>$(k).classList.add('hide'));
+
+    if (S1.includes(r.s)){
+      $('d-ok').classList.remove('hide'); $('d-rej').classList.remove('hide');
+      if (r.s!=='ON HOLD') $('d-hold').classList.remove('hide'); else $('o-hld').classList.remove('hide');
+    } else if (S2.includes(r.s)){
+      $('o-app').classList.remove('hide');
+      $('d-appby').textContent=r.appby; $('d-appat').textContent=r.appat; $('d-cred').textContent=r.cred;
+    } else if (r.s==='CREDITED'){
+      $('o-crd').classList.remove('hide');
+      $('d-cby').textContent=r.appby; $('d-cat').textContent=r.appat; $('d-crat').textContent=r.crat;
+    } else {
+      $('o-rej').classList.remove('hide');
+      $('d-rby').textContent=r.appby; $('d-rat').textContent=r.appat;
+    }
+    $('ovl').style.display='block'; $('drawer').classList.add('open');
+    if (act===2) setTimeout(()=>mo('mr'),160);
+    if (act===3) setTimeout(()=>mo('mh'),160);
+  };
+  window.closeD = function(){ $('ovl').style.display='none'; $('drawer').classList.remove('open'); };
+
+  window.mo = function(id){ $(id).classList.add('on'); };
+  window.mc = function(id){ $(id).classList.remove('on'); };
+  window.okHold = function(){ mc('mh'); closeD(); tst('Request put on hold — brand notified'); };
+  window.okRej  = function(){ mc('mr'); closeD(); tst('Request rejected — brand notified'); };
+  window.appr   = function(){ closeD(); tst('Approved — moved to In flight, awaiting credit'); };
+
+  window.dl = function(sec){
+    const n = parseInt($('c'+sec).textContent,10);
+    if (!n) return;
+    tst('<i class="ri-download-2-line"></i> Downloading ' + n + ' rows · ' +
+      (sec===2 ? 'stamped 28 Jul 2026, 04:15 PM IST' : $('fmt').value.toUpperCase()));
+  };
+
+  renderAll();
+})();
+</script>
+</body>
+</html>
