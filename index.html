@@ -426,6 +426,51 @@
   .bidin:focus{border-color:var(--purple)}
   .bidin:disabled{background:var(--g08);color:var(--g50);border-color:var(--g10)}
   .bidin::placeholder{color:var(--g30)}
+
+  /* ---------- Smart Shopping wizard additions ---------- */
+  .simbar{display:flex;justify-content:flex-end;margin-bottom:16px}
+  .simpill{display:flex;align-items:center;gap:12px;border:1px solid var(--purple-mid);border-radius:22px;padding:4px 12px 4px 4px;background:#fff;font-size:10.5px;color:var(--g50)}
+  .simpill .b{background:var(--purple-d);color:#fff;border-radius:18px;padding:6px 13px;font-weight:800;font-size:11px;display:flex;align-items:center;gap:6px}
+  .simpill b{color:var(--g90)}
+  .optin{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--g20);border-radius:9px;padding:14px 16px;background:#fff}
+  .optin.on{border-color:var(--purple);background:var(--purple-lt)}
+  .optin .t{font-size:12px;font-weight:800;color:var(--g90);display:flex;align-items:center;gap:8px}
+  .optin .s{font-size:11px;color:var(--g50);margin-top:4px;line-height:1.5}
+  .optin .tag{font-size:9px;font-weight:800;letter-spacing:.3px;background:var(--purple);color:#fff;border-radius:4px;padding:2px 6px}
+  .optin.off .tag{background:var(--g30)}
+  .sw{position:relative;display:inline-block;width:34px;height:19px;flex-shrink:0;margin-top:1px}
+  .sw input{opacity:0;width:0;height:0}
+  .sw .tr{position:absolute;inset:0;border-radius:20px;background:var(--g30);cursor:pointer;transition:.15s}
+  .sw .tr:before{content:'';position:absolute;width:15px;height:15px;left:2px;top:2px;border-radius:50%;background:#fff;transition:.15s}
+  .sw input:checked + .tr{background:var(--purple)}
+  .sw input:checked + .tr:before{transform:translateX(15px)}
+  .bcards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .bcards.c3{grid-template-columns:1fr 1fr 1fr}
+  .bcard{border:1px solid var(--g20);border-radius:9px;padding:16px 18px;background:#fff;cursor:pointer}
+  .bcard.on{border-color:var(--purple);box-shadow:inset 0 0 0 1px var(--purple);background:var(--purple-lt)}
+  .bcard .t{font-size:13px;font-weight:800;color:var(--g90);display:flex;align-items:center;gap:9px}
+  .bcard .t .dot{width:11px;height:11px;border-radius:50%;background:var(--g30)}
+  .bcard.on .t .dot{background:var(--purple)}
+  .bcard .s{font-size:11px;color:var(--g50);margin:7px 0 12px}
+  .bcard .pick{font-size:10.5px;font-weight:800;border:1px solid var(--g30);border-radius:5px;padding:4px 10px;color:var(--g70);background:#fff}
+  .bcard.on .pick{background:var(--purple);border-color:var(--purple);color:#fff}
+  .ssrch{display:flex;align-items:center;gap:8px;border:1px solid var(--g20);border-radius:8px;padding:0 12px;height:38px;background:#fff;margin:16px 0 12px}
+  .ssrch input{border:0;outline:0;font-size:12px;flex:1}
+  .ssrch i{color:var(--g40)}
+  .carry{display:flex;gap:9px;align-items:center;font-size:11px;color:var(--purple-d);background:var(--purple-lt);border:1px solid var(--purple-mid);border-radius:7px;padding:8px 12px;margin-top:12px}
+  .nklbl{display:grid;grid-template-columns:1fr 34px;gap:12px;font-size:9.5px;font-weight:800;color:var(--g50);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+  .nkrow{display:grid;grid-template-columns:1fr 34px;gap:12px;align-items:center;margin-bottom:10px}
+  .nkrow .icobtn{padding:0;width:30px;height:30px;border:1px solid var(--g20);border-radius:7px;display:flex;align-items:center;justify-content:center}
+  .nkchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+  .nkchip{display:inline-flex;align-items:center;gap:5px;background:#FDECEC;color:#C0281C;border:1px solid #F5C2C2;border-radius:12px;padding:2px 9px;font-size:10.5px;font-weight:700}
+  .nkchip button{color:#C0281C;font-size:12px;line-height:1}
+  .nkchip .mt{font-size:9px;font-weight:800;opacity:.7}
+  .rvh{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .rvh h4{margin-bottom:0}
+  .rvh .n{font-size:10px;color:var(--g50)}
+  .ext-on{color:var(--green);font-weight:800}
+  .ext-off{color:var(--g40);font-weight:800}
+  .steps button.skip{display:none}
 </style>
 </head>
 <body>
@@ -458,7 +503,7 @@
       <div class="grp-b">
         <a href="#" class="nv">Smart Shopping - Test</a>
         <a href="#" class="nv">Search Campaigns - Test</a>
-        <a href="#" class="nv">Smart Shopping</a>
+        <a href="#" class="nv" id="nv-ssc" onclick="go('ssc','Smart Shopping',this)">Smart Shopping</a>
         <a href="#" class="nv" id="nv-search" onclick="go('search','Search Only',this)">Search Campaigns</a>
       </div>
     </div>
@@ -1064,6 +1109,114 @@
 
   </section>
 
+  <!-- ======================= SMART SHOPPING CAMPAIGNS ======================= -->
+  <section class="page-section" id="pg-ssc">
+
+    <div class="ph" style="margin-bottom:14px">
+      <h1 style="font-size:15px">Campaigns</h1>
+    </div>
+
+    <div class="banner">
+      <button class="x" onclick="this.closest('.banner').style.display='none'"><i class="ri-close-line"></i></button>
+      <h2>I 💜 B Sale is Now Live !!</h2>
+      <p>Start scaling up and optimise campaigns. Act now to make the most of the Purplle IHB Sale.</p>
+      <div class="cvbox"><div class="l">Conversion Rate</div><div class="v">+24.8%</div></div>
+      <svg class="spark" viewBox="0 0 290 120" fill="none">
+        <path d="M4 96 C60 92 90 74 120 56 C150 38 180 30 286 22" stroke="#5BE49B" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round"/>
+        <circle cx="152" cy="36" r="7" fill="#FFB020"/><circle cx="152" cy="36" r="3" fill="#fff"/>
+      </svg>
+    </div>
+
+    <div class="sect-lbl">Performance Campaign Analytics</div>
+
+    <div class="card" style="padding:0">
+      <div class="chd" style="border-bottom:none;padding-bottom:6px">
+        <div class="ttl"><h2>Performance Summary</h2></div>
+        <div class="ctools"><button class="dl" onclick="tst('Downloading performance summary · CSV')"><i class="ri-download-2-line"></i></button></div>
+      </div>
+      <div style="padding:0 18px 18px">
+        <div class="kpigrid">
+          <div class="c"><div class="dots">···</div><div class="v">₹2,842,715.00</div><div class="l">Attributed Ad Revenue</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">6,777</div><div class="l">Attributed Orders</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">6.19</div><div class="l">ROAS</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">₹459,018.64</div><div class="l">Ad Spend <i class="ri-information-line qi has-tip" data-tip="Total amount debited from your wallet for clicks in the selected period."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">68,057.0</div><div class="l">Ad Impressions <i class="ri-information-line qi has-tip" data-tip="Times your ads were served in the selected period, including Search results where Search extension is on."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">9,385</div><div class="l">Ad Clicks <i class="ri-information-line qi has-tip" data-tip="Clicks on your ads. Every click is charged at your bid or lower."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">6,744.62</div><div class="l">CPM</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">48.91</div><div class="l">CPC</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">14%</div><div class="l">CTR% <i class="ri-information-line qi has-tip" data-tip="Clicks divided by impressions."></i></div></div>
+        </div>
+        <div class="trend">
+          <div class="hd"><div class="t">Trend</div><div class="metsel">Metrics : 2 selections <i class="ri-close-line"></i></div></div>
+          <div class="lg-dots">
+            <span><i style="background:#4C6FFF"></i>ROAS</span><span><i style="background:#22C1D6"></i>CPM</span>
+            <span><i style="background:#F5A623"></i>Ad Impressions</span><span><i style="background:#2FBF71"></i>Attributed Orders</span>
+            <span><i style="background:#8E7CFF"></i>CTR %</span><span><i style="background:#5AA9FF"></i>Ad Clicks</span>
+            <span><i style="background:#E2506B"></i>Attributed Ad Revenue</span><span><i style="background:#C0281C"></i>Ad Spend</span>
+            <span><i style="background:#F2C744"></i>CPC</span>
+          </div>
+          <svg viewBox="0 0 900 120" style="width:100%;height:110px;margin-top:6px" fill="none">
+            <text x="0" y="12" font-size="9" fill="#948FA0">180.0k</text>
+            <path d="M20 96 C140 88 200 60 300 66 C420 74 520 40 640 48 C740 55 820 30 880 34" stroke="#4C6FFF" stroke-width="2"/>
+            <path d="M20 104 C140 100 220 92 320 88 C450 82 560 70 700 74 C790 77 850 66 880 62" stroke="#E2506B" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chd">
+        <div><div class="ttl"><h2>Campaigns</h2></div></div>
+        <div class="ctools2">
+          <div class="srch2"><i class="ri-search-line"></i><input placeholder="Search campaigns..."></div>
+          <button class="btn-o"><i class="ri-equalizer-line"></i> Filter</button>
+          <button class="btn-o">Bulk Campaign Create</button>
+          <button class="btn-o off" disabled>Bulk Edit</button>
+          <button class="btn-cta" onclick="wizSOpen()">+ Create New Campaign</button>
+        </div>
+      </div>
+      <div class="tw">
+        <table class="dense">
+          <thead><tr>
+            <th style="width:26px"><input type="checkbox"></th>
+            <th>Status</th><th>Name</th><th>Campaign Subtype</th><th>Bidding Strategy</th><th>Search Ext.</th>
+            <th>Avg Daily Budget</th><th>Spend</th><th>Impressions</th><th>Clicks</th><th>CTR</th><th>CPC</th>
+            <th>Start Date</th><th>End Date</th><th>Campaign ID</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="b-cmp-s"></tbody>
+        </table>
+      </div>
+      <div class="pag">
+        <div class="rp">Rows per page: <select><option>10</option><option>25</option></select></div>
+        <div>1–6 of 6</div>
+        <div class="ar"><button><i class="ri-arrow-left-s-line"></i></button><button><i class="ri-arrow-right-s-line"></i></button></div>
+      </div>
+    </div>
+
+    <div class="card" style="padding-bottom:6px">
+      <div class="chd" style="border-bottom:none;padding-bottom:4px">
+        <div><div class="ttl"><h2>Performance</h2></div></div>
+        <div class="ctools"><button class="dl" onclick="tst('Downloading funnel · CSV')"><i class="ri-download-2-line"></i></button></div>
+      </div>
+      <div class="tabs">
+        <button class="on">Campaign Funnel</button><button>Product Funnel</button>
+        <button>Category Funnel</button><button>Search Term Funnel</button>
+      </div>
+      <div style="padding:12px 18px 0"><button class="btn-o"><i class="ri-table-line"></i> Campaign ID <i class="ri-arrow-down-s-line"></i></button></div>
+      <div class="tw" style="margin-top:10px">
+        <table class="dense">
+          <thead><tr>
+            <th>Date</th><th>Campaign Name</th><th>Campaign ID</th><th>Campaign Status</th><th>Campaign Type</th>
+            <th>Spend</th><th>Ad Impressions</th><th>Ad Clicks</th><th>CTR</th><th>Attributed Detail Page Views</th>
+            <th>Attributed Add to Cart</th><th>Orders - SKU</th><th>Attributed Ad Revenue</th><th>ROI</th><th>CPC</th><th>CPM</th>
+          </tr></thead>
+          <tbody id="b-fun-s"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
   <!-- ======================= STUB ======================= -->
   <section class="page-section" id="pg-stub">
     <div class="ph"><h1 id="stub-nm">—</h1></div>
@@ -1286,6 +1439,209 @@
   </div>
 </div>
 
+
+<!-- ======================= CREATE SMART SHOPPING CAMPAIGN ======================= -->
+<div class="wiz" id="wizS">
+  <div class="wiz-hd">
+    <h1>Create Smart Shopping Campaign</h1>
+    <button class="x" onclick="sClose()"><i class="ri-close-line"></i></button>
+  </div>
+
+  <div class="steps">
+    <button id="sst1" class="on" onclick="sGo(1)"><span class="ic"><i class="ri-information-line"></i></span> Step 1: Basic Information</button>
+    <button id="sst2" onclick="sGo(2)"><span class="ic"><i class="ri-shopping-cart-line"></i></span> Step 2: Product Selection</button>
+    <button id="sst3" onclick="sGo(3)"><span class="ic"><i class="ri-equalizer-line"></i></span> Step 3a: Bidding</button>
+    <button id="sst4" onclick="sGo(4)"><span class="ic"><i class="ri-search-line"></i></span> Step 3b: Keywords</button>
+    <button id="sst5" onclick="sGo(5)"><span class="ic"><i class="ri-checkbox-circle-line"></i></span> Step 4: Review</button>
+  </div>
+
+  <div class="wiz-bd">
+    <div class="simbar"><div class="simpill"><span class="b"><i class="ri-sparkling-2-line"></i> Campaign Simulation</span><span>7D Spend: <b id="s-sim">₹0</b></span><span>7D ROI: <b>0x</b></span></div></div>
+
+    <!-- ---------------- STEP 1 ---------------- -->
+    <div class="wstep on" id="sws1">
+      <div class="fcard lav">
+        <div class="hd2">
+          <div class="sq"><i class="ri-wallet-3-line"></i></div>
+          <div><div class="t">Select Wallet for this Campaign</div><div class="s">Choose which wallet will fund this campaign</div></div>
+        </div>
+        <select class="selbox">
+          <option>Primary Wallet - INR 5,96,557.85</option>
+          <option>Performance - INR 9,00,000.00</option>
+        </select>
+      </div>
+
+      <div class="fcard">
+        <div class="fld"><label>Campaign Name</label><input type="text" id="s-name" placeholder="Summer Sale"></div>
+        <div class="fld"><label>Daily Budget (INR)</label><input type="text" id="s-bud" placeholder="5000"></div>
+        <div class="fld">
+          <label>Budget Pacing Type</label>
+          <div class="radio2" id="s-pace">
+            <label class="on" onclick="pace(this)"><span class="dot"></span><span><span class="t">Accelerated</span><span class="s">Per platform demand</span></span></label>
+            <label onclick="pace(this)"><span class="dot"></span><span><span class="t">Partitioned</span><span class="s">Paced through day</span></span></label>
+          </div>
+        </div>
+        <div class="fld">
+          <label>Search Inventory</label>
+          <div class="optin on" id="s-opt">
+            <label class="sw"><input type="checkbox" id="s-ext" checked onchange="sExt(this.checked)"><span class="tr"></span></label>
+            <div>
+              <div class="t">Extend ads to Search results <span class="tag" id="s-exttag">ON</span></div>
+              <div class="s">Your selected products also show as ads on Search results pages when a search matches the L3 categories you bid on. The same category bids apply. You can block searches you don't want in Step 3b.</div>
+            </div>
+          </div>
+        </div>
+        <div class="fld"><label>Start Date &amp; Time</label><div class="withic"><input type="text" id="s-start" value="29/09/2026 04:18 PM"><i class="ri-calendar-line"></i></div></div>
+        <div class="fld" style="margin-bottom:0"><label>End Date &amp; Time <span class="opt">(Optional)</span></label><div class="withic"><input type="text" id="s-end" placeholder="dd/mm/yyyy, h:mm am/pm"><i class="ri-calendar-line"></i></div></div>
+      </div>
+    </div>
+
+    <!-- ---------------- STEP 2 ---------------- -->
+    <div class="wstep" id="sws2">
+      <div class="fcard">
+        <div class="fld" style="margin-bottom:0">
+          <label>Product Selection Method <i class="ri-information-line qi has-tip" data-tip="Filters build the product set from your catalogue. You can also paste product IDs."></i></label>
+          <select class="selbox"><option>Select Products using Filters</option><option>Enter Product IDs</option></select>
+        </div>
+      </div>
+      <div class="fcard">
+        <h3>Filters <i class="ri-information-line qi has-tip" data-tip="Every product matching these filters can be selected for this campaign."></i></h3>
+        <div class="fgrid">
+          <div class="fld" style="margin:0"><label>Field</label><select class="thin"><option>Product Category</option><option>Product Name</option><option>Brand</option><option>Price</option></select></div>
+          <div class="fld" style="margin:0"><label>Operator</label><select class="thin"><option>contains</option><option>equals</option></select></div>
+          <div class="fld" style="margin:0"><label>Value</label><select class="thin"><option>Skincare &gt; Cleanser &gt; Face Wash and Cleanser</option></select></div>
+          <button class="icobtn" style="padding:0 0 6px"><i class="ri-delete-bin-line"></i></button>
+          <button class="icobtn" style="padding:0 0 6px;color:var(--purple)"><i class="ri-add-line"></i></button>
+        </div>
+        <button class="btn-cta" style="margin-top:16px" onclick="tst('42 products matched')">Apply Filters</button>
+        <div class="found">Found <b>42</b> total products &nbsp;·&nbsp; <b id="s-psel">0 selected</b></div>
+        <div class="tw">
+          <table class="dense">
+            <thead><tr><th style="width:26px"><input type="checkbox" onclick="sPAll(this)"></th><th>Image</th><th>Name</th><th>Category</th><th>Brand</th><th>Price</th></tr></thead>
+            <tbody id="s-prd"></tbody>
+          </table>
+        </div>
+        <div class="pgn">
+          <button><i class="ri-arrow-left-s-line"></i></button>
+          <button class="on">1</button><button>2</button><button>3</button><button>4</button><button>5</button>
+          <button><i class="ri-arrow-right-s-line"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------------- STEP 3a ---------------- -->
+    <div class="wstep" id="sws3">
+      <div class="fcard">
+        <h3>Bidding Strategy</h3>
+        <div class="bcards" id="s-strat">
+          <div class="bcard on" data-v="Manual Bidding" onclick="sStrat(this)">
+            <div class="t"><span class="dot"></span> Manual Bidding</div>
+            <div class="s">You take control of your Ads by placing bids on a Cost per Click basis.</div>
+            <span class="pick">Selected</span>
+          </div>
+          <div class="bcard" data-v="Smart Bidding (ROAS)" onclick="sStrat(this)">
+            <div class="t"><span class="dot"></span> Smart Bidding (ROAS)</div>
+            <div class="s">Set a ROAS target; the system computes placement eCPCs so input ROAS matches output.</div>
+            <span class="pick">Choose</span>
+          </div>
+        </div>
+        <div class="fld hide" id="s-roasf" style="margin:18px 0 0;max-width:260px"><label>Target ROAS</label><input type="text" id="s-roas" value="4"></div>
+      </div>
+
+      <div class="fcard" id="s-catcard">
+        <h3>Category Bidding</h3>
+        <div class="bcards c3" id="s-cbm">
+          <div class="bcard on" onclick="sCbm(this)">
+            <div class="t"><span class="dot"></span> Select Categories</div>
+            <div class="s">Browse and pick from available categories, then set a bid for each.</div>
+          </div>
+          <div class="bcard" onclick="sCbm(this)">
+            <div class="t"><span class="dot"></span> Enter Manually</div>
+            <div class="s">Type category names and bid values directly.</div>
+            <textarea class="ta" rows="3" placeholder="e.g. Skin Care,12.50&#10;Hair Care,9.00&#10;Makeup,15.75"></textarea>
+            <button class="btn-o off" disabled style="margin-top:10px;width:100%;justify-content:center">Add Bulk Categories</button>
+          </div>
+          <div class="bcard" onclick="sCbm(this)">
+            <div class="t"><span class="dot"></span> Upload CSV</div>
+            <div class="s">Upload a CSV file with categories and bids.</div>
+            <button class="btn-cta" style="width:100%"><i class="ri-file-upload-line"></i> Upload CSV</button>
+            <div style="margin-top:8px"><button class="dl">Download Template</button></div>
+            <div class="hint2">Format: categoryName, bid (one per row)</div>
+          </div>
+        </div>
+        <div class="ssrch"><i class="ri-search-line"></i><input placeholder="Search categories..." oninput="sCatRender(this.value)"></div>
+        <div class="tw">
+          <table class="dense">
+            <thead><tr><th style="width:26px"></th><th>Category</th><th class="r">Suggested Bid Range</th><th class="r">Your Bid (₹)</th></tr></thead>
+            <tbody id="s-cat"></tbody>
+          </table>
+        </div>
+        <div class="carry" id="s-carry"><i class="ri-links-line"></i> These category bids also apply to Search results pages while Search extension is on.</div>
+      </div>
+    </div>
+
+    <!-- ---------------- STEP 3b ---------------- -->
+    <div class="wstep" id="sws4">
+      <div class="fcard lav">
+        <div class="hd2" style="margin-bottom:0">
+          <div class="sq"><i class="ri-search-line"></i></div>
+          <div><div class="t">Search extension is on</div><div class="s">Your ads can show on Search results for searches that match your bid categories, at your Step 3a bids. Add negative keywords to stop them showing on searches you don't want.</div></div>
+        </div>
+      </div>
+      <div class="fcard">
+        <h3 style="margin-bottom:6px">Negative Keywords</h3>
+        <p style="font-size:11px;color:var(--g50);margin-bottom:16px">Negative keywords prevent your ads from showing when users search for these terms.</p>
+        <div class="nklbl"><span>Keyword</span><span></span></div>
+        <div id="s-nk"></div>
+        <div class="nkchips" id="s-nkchips"></div>
+        <button class="addrow" onclick="sNkAdd()"><i class="ri-add-line"></i> Add negative keyword row</button>
+      </div>
+    </div>
+
+    <!-- ---------------- STEP 4 ---------------- -->
+    <div class="wstep" id="sws5">
+      <div class="rev2">
+        <div class="rv">
+          <h4>Basic Information</h4>
+          <div class="l2"><span class="k">Campaign Name</span><span class="v" id="r-name">—</span></div>
+          <div class="l2"><span class="k">Campaign Type</span><span class="v">Performance</span></div>
+          <div class="l2"><span class="k">Sub-type</span><span class="v">Smart Shopping</span></div>
+          <div class="l2"><span class="k">Ad Type</span><span class="v">Product</span></div>
+          <div class="l2"><span class="k">Start Date</span><span class="v" id="r-start">—</span></div>
+          <div class="l2"><span class="k">Search Extension</span><span class="v" id="r-ext">—</span></div>
+        </div>
+        <div class="rv">
+          <h4>Budget &amp; Bidding</h4>
+          <div class="l2"><span class="k">Daily Budget</span><span class="v" id="r-bud">—</span></div>
+          <div class="l2"><span class="k">Strategy</span><span class="v" id="r-strat">—</span></div>
+          <div class="l2"><span class="k">Category</span><span class="v" id="r-cat">—</span></div>
+          <div class="l2" id="r-roasrow"><span class="k">Target ROAS</span><span class="v" id="r-roas">—</span></div>
+          <div class="l2"><span class="k">Pacing Strategy</span><span class="v" id="r-pace">—</span></div>
+          <div class="l2"><span class="k">Duration</span><span class="v" id="r-dur">—</span></div>
+        </div>
+      </div>
+      <div class="rv" id="r-nkcard" style="margin-bottom:16px">
+        <div class="rvh"><h4 id="r-nkh">Negative Keywords (0)</h4></div>
+        <div class="nkchips" id="r-nk"></div>
+      </div>
+      <div class="rv">
+        <h4 id="r-ph">Selected Products (0)</h4>
+        <div class="tw">
+          <table class="dense">
+            <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Brand</th><th>Price</th><th>Sale Price</th><th>Availability</th><th>Product ID</th></tr></thead>
+            <tbody id="r-prd"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wiz-ft">
+    <button class="btn-s" onclick="sBack()">Back</button>
+    <button class="btn-p" id="s-next" onclick="sNext()">Next</button>
+  </div>
+</div>
+
 <div id="tt"></div>
 <div class="ovl" id="ovl" onclick="closeD()"></div>
 <aside class="drw" id="drawer">
@@ -1446,15 +1802,15 @@
   };
   window.setB = function(l){ $('blbl').textContent=l; $('bm').classList.add('hide'); tst('Brand switched to '+l); };
 
-  const PAGES = { overview:'Overview', bizq:'Business Queue', finq:'Finance Queue', wadj:'Wallet adjustments', search:'Search Only' };
+  const PAGES = { overview:'Overview', bizq:'Business Queue', finq:'Finance Queue', wadj:'Wallet adjustments', search:'Search Only', ssc:'Smart Shopping' };
   window.go = function(id, label, el){
     document.querySelectorAll('a.nv').forEach(a=>a.classList.remove('on'));
     if (el) el.classList.add('on');
-    const target = ['overview','finq','search'].includes(id) ? id : null;
+    const target = ['overview','finq','search','ssc'].includes(id) ? id : null;
     document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
     if (target) $('pg-'+target).classList.add('active');
     else { $('pg-stub').classList.add('active'); $('stub-nm').textContent = label; }
-    $('crumb2').innerHTML = (id==='search' ? ' / Campaign / Performance / <b>Search Only</b>' : ' / <b>'+label+'</b>');
+    $('crumb2').innerHTML = (id==='search' ? ' / Campaign / Performance / <b>Search Only</b>' : id==='ssc' ? ' / Campaign / Performance / <b>Smart Shopping</b>' : ' / <b>'+label+'</b>');
     window.scrollTo(0,0);
     return false;
   };
@@ -1975,5 +2331,188 @@
   renderAll();
 })();
 </script>
+<script>
+/* ================= SMART SHOPPING: campaigns list + create wizard ================= */
+(function(){
+  const $ = i => document.getElementById(i);
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+
+  /* ---------- campaigns list ---------- */
+  const SCMP = [
+    ['OAP_HACA_TR5_Sham-1Ltr_Cate','Manual CPC','On','32,700','42,353','327','0.77%','100','Jul 21, 2026','3537'],
+    ['OAP_HACA_HA Pure_Sham_340ml_Cate','Manual CPC','On','30,690','32,089','310','0.97%','99','Jul 21, 2026','3533'],
+    ['OAP_SC_Glyco Lumi Matte Cream _Category','Smart Bidding (ROAS)','On','20,989','57,557','345','0.60%','61','Jul 8, 2026','3534'],
+    ['OAP_HACA_TR5_conditioner_Cate','Manual CPC','Off','13,752','26,363','151','0.57%','91','Jul 8, 2026','5180'],
+    ['OAP_SC_Glyco Cleanser_Cate','Smart Bidding (ROAS)','On','12,053','28,931','270','0.93%','45','Jul 8, 2026','3568'],
+    ['OAP_SC_Glyco Serum _Category','Manual CPC','On','11,847','12,044','274','2.27%','43','Jul 8, 2026','3592']
+  ];
+  if ($('b-cmp-s')) $('b-cmp-s').innerHTML = SCMP.map(c=>'<tr>'
+    + '<td><input type="checkbox"></td><td><span class="st-active">Active</span></td>'
+    + '<td><span class="cmp-nm has-tip" data-tip="'+esc(c[0])+'">'+c[0]+'</span></td>'
+    + '<td>Smart Shopping</td><td>'+c[1]+'</td>'
+    + '<td><span class="'+(c[2]==='On'?'ext-on':'ext-off')+'">'+c[2]+'</span></td>'
+    + '<td>Rs. '+c[3]+'</td><td>'+c[4]+'</td><td>'+c[5]+'</td><td>'+c[6]+'</td><td>Rs. '+c[7]+'</td>'
+    + '<td>'+c[8]+'</td><td>N/A</td><td>'+c[9]+'</td>'
+    + '<td><i class="ri-bar-chart-line" style="color:var(--g50);margin-right:9px"></i><i class="ri-more-2-fill" style="color:var(--g50)"></i></td></tr>').join('');
+
+  const SFUN = [
+    ['5/8/2026','OAP_HACA_TR5_Sham-1Ltr_Cate','3,537','32,700','42,353','327','0.77%','299','24','960','359,902','11.01','100','0.77'],
+    ['5/8/2026','OAP_HACA_HA Pure_Sham_340ml_Cate','3,533','30,690','32,089','310','0.97%','281','40','305','135,057','4.4','99','0.96'],
+    ['5/8/2026','OAP_SC_Glyco Lumi Matte Cream _Category','3,534','20,989.6','57,557','345','0.60%','308','23','1,231','521,510','24.85','60.84','0.36'],
+    ['5/8/2026','OAP_HACA_TR5_conditioner_Cate','5,180','13,752','26,363','151','0.57%','132','18','799','284,573','20.69','91.07','0.52'],
+    ['5/8/2026','OAP_SC_Glyco Cleanser_Cate','3,568','12,053.6','28,931','270','0.93%','236','42','1,478','556,338','46.16','44.64','0.42'],
+    ['5/8/2026','OAP_SC_Glyco Serum _Category','3,592','11,847.63','12,044','274','2.27%','247','43','473','195,795','16.53','43.24','0.98']
+  ];
+  if ($('b-fun-s')) $('b-fun-s').innerHTML = SFUN.map(f=>'<tr>'
+    + '<td>'+f[0]+'</td><td><span class="cmp-nm">'+f[1]+'</span></td><td class="mono">'+f[2]+'</td>'
+    + '<td><span class="flag f-ok">ACTIVE</span></td><td>Smart Shopping</td>'
+    + f.slice(3).map(v=>'<td>'+v+'</td>').join('') + '</tr>').join('');
+
+  /* ---------- wizard state ---------- */
+  let st = 1, ext = true;
+  const S_ICONS = ['','ri-information-line','ri-shopping-cart-line','ri-equalizer-line','ri-search-line','ri-checkbox-circle-line'];
+
+  window.wizSOpen = function(){ $('wizS').classList.add('on'); sGo(1); };
+  window.sClose = function(){ $('wizS').classList.remove('on'); };
+  window.sGo = function(n){
+    if (n===4 && !ext) n = 5;
+    st = n;
+    for (let i=1;i<=5;i++){
+      $('sws'+i).classList.toggle('on', i===n);
+      const b = $('sst'+i);
+      b.classList.toggle('on', i===n);
+      b.classList.toggle('done', i<n);
+      b.querySelector('.ic').innerHTML = '<i class="'+(i<n?'ri-checkbox-circle-fill':S_ICONS[i])+'"></i>';
+    }
+    $('s-next').textContent = n===5 ? 'Save & Launch' : 'Next';
+    if (n===5) sReview();
+    $('wizS').querySelector('.wiz-bd').scrollTop = 0;
+  };
+  window.sNext = function(){
+    if (st===5){ sClose(); tst('Smart Shopping campaign saved and launched' + (ext?' · Search extension on':'')); return; }
+    let n = st+1; if (n===4 && !ext) n = 5; sGo(n);
+  };
+  window.sBack = function(){
+    if (st===1){ sClose(); return; }
+    let n = st-1; if (n===4 && !ext) n = 3; sGo(n);
+  };
+
+  /* ---------- step 1: search extension opt-in ---------- */
+  window.sExt = function(on){
+    ext = on;
+    $('s-opt').classList.toggle('on', on); $('s-opt').classList.toggle('off', !on);
+    $('s-exttag').textContent = on ? 'ON' : 'OFF';
+    $('sst4').classList.toggle('skip', !on);
+    $('s-carry').classList.toggle('hide', !on);
+    tst(on ? 'Search extension on — Step 3b Keywords added' : 'Search extension off — Step 3b Keywords hidden');
+  };
+
+  /* ---------- step 2: products ---------- */
+  const SPRD = [
+    ['Lotus Herbals WhiteGlow 3 in 1 Deep Cleansing Facial Foam | Deep Cleansing Formula | Acne-Control | Non-Drying | Fades Dark Spots | with Alpha Arbutin & Saxifraga Extracts | Suits All Skin Types | Women & Men | 200 ml',540,405,'388028'],
+    ['Lotus Herbals Whiteglow 3 In 1 Deep Cleaning Skin Whitening Facial Foam | Chemical Free | With Milk Enzymes & Aloe Vera Gel | For All Skin Types | 50 gm',195,156,'388031'],
+    ['Lotus Herbals Whiteglow 3 In 1 Deep Cleaning Skin Whitening Facial Foam | Chemical Free | With Milk Enzymes & Aloe Vera Gel | For All Skin Types | 50 gm (Pack of 2)',185,148,'388034'],
+    ['Lotus Herbals Whiteglow 3 In 1 Deep Cleaning Skin Whitening Facial Foam | Chemical Free | With Milk Enzymes & Aloe Vera Gel | For All Skin Types | 50 gm (Combo)',185,148,'388036'],
+    ['Lotus Herbals Whiteglow 3 In 1 Deep Cleaning Skin Whitening Facial Foam | Chemical Free | With Milk Enzymes & Aloe Vera Gel | For All Skin Types | 50 gm (Travel)',185,148,'388039']
+  ];
+  const psel = new Set();
+  function sPrdRender(){
+    $('s-prd').innerHTML = SPRD.map((p,i)=>'<tr>'
+      + '<td><input type="checkbox" class="spc" '+(psel.has(i)?'checked':'')+' onclick="sPPick('+i+',this)"></td>'
+      + '<td><i class="ri-image-line" style="color:var(--g30);font-size:16px"></i></td>'
+      + '<td><span class="cmp-nm" style="max-width:560px">'+esc(p[0])+'</span></td>'
+      + '<td>Face Wash and Cleanser</td><td>Lotus Herbals</td><td>₹'+p[1]+'</td></tr>').join('');
+    $('s-psel').textContent = psel.size + ' selected';
+    $('s-sim').textContent = psel.size ? '₹' + (psel.size*86.3).toFixed(1) + ' K' : '₹0';
+  }
+  window.sPPick = function(i,cb){ cb.checked ? psel.add(i) : psel.delete(i); sPrdRender(); };
+  window.sPAll = function(cb){ SPRD.forEach((_,i)=> cb.checked ? psel.add(i) : psel.delete(i)); sPrdRender(); };
+  sPrdRender();
+
+  /* ---------- step 3a: bidding ---------- */
+  let strat = 'Manual Bidding';
+  window.sStrat = function(el){
+    document.querySelectorAll('#s-strat .bcard').forEach(c=>{ c.classList.remove('on'); c.querySelector('.pick').textContent='Choose'; });
+    el.classList.add('on'); el.querySelector('.pick').textContent='Selected';
+    strat = el.dataset.v;
+    $('s-roasf').classList.toggle('hide', strat!=='Smart Bidding (ROAS)');
+  };
+  window.sCbm = function(el){ document.querySelectorAll('#s-cbm .bcard').forEach(c=>c.classList.remove('on')); el.classList.add('on'); };
+
+  const SCAT = [
+    ['Skincare > Cleanser > Face Wash and Cleanser',28.40,31.20],
+    ['Bath and Body > Bath & Shower > Soap',31.82,33.16],
+    ['Bath and Body > Body Care > Body Lotion & Moisturizer',32.03,35.97],
+    ['Makeup > Brush & Tool > Makeup Bag & Organizer',14.72,17.35],
+    ['Makeup > Eye Makeup > Eyeliner',33.79,36.10],
+    ['Makeup > Eye Makeup > Kajal',27.17,28.28],
+    ['Makeup > Eye Makeup > Mascara',40.14,43.88],
+    ['Makeup > Face Makeup > BB & CC cream',23.25,27.40]
+  ];
+  const cbid = {};
+  window.sCatRender = function(q){
+    q = (q||'').toLowerCase();
+    $('s-cat').innerHTML = SCAT.map((c,i)=>({c,i})).filter(o=>!q || o.c[0].toLowerCase().includes(q)).map(({c,i})=>'<tr>'
+      + '<td><input type="checkbox" '+(i in cbid?'checked':'')+' onclick="sCPick('+i+',this)"></td>'
+      + '<td>'+esc(c[0])+'</td>'
+      + '<td class="r"><b>₹'+c[1].toFixed(2)+' – ₹'+c[2].toFixed(2)+'</b></td>'
+      + '<td class="r">'+(i in cbid ? '<input class="bidin" value="'+cbid[i]+'" oninput="sCBid('+i+',this.value)">' : '-')+'</td></tr>').join('');
+  };
+  window.sCPick = function(i,cb){ if (cb.checked) cbid[i] = SCAT[i][1].toFixed(2); else delete cbid[i]; sCatRender(); };
+  window.sCBid = function(i,v){ cbid[i] = v; };
+  sCatRender();
+
+  /* ---------- step 3b: negative keywords ---------- */
+  let nk = [{kw:'',mt:'Exact'}];
+  function sNkRender(){
+    $('s-nk').innerHTML = nk.map((r,i)=>'<div class="nkrow">'
+      + '<input class="thin" type="text" placeholder="Enter negative keyword" value="'+esc(r.kw)+'" oninput="sNkSet('+i+',\'kw\',this.value)">'
+      + '<button class="icobtn" onclick="sNkDel('+i+')"><i class="ri-delete-bin-line"></i></button></div>').join('');
+    sNkChips();
+  }
+  function sNkChips(){
+    const f = nk.map((r,i)=>({...r,i})).filter(r=>r.kw.trim());
+    $('s-nkchips').innerHTML = f.map(r=>'<span class="nkchip">'+esc(r.kw.trim())+' <button onclick="sNkDel('+r.i+')">×</button></span>').join('');
+  }
+  window.sNkSet = function(i,k,v){ nk[i][k] = v; sNkChips(); };
+  window.sNkAdd = function(){ nk.push({kw:'',mt:'Exact'}); sNkRender(); const ins = $('s-nk').querySelectorAll('input'); ins[ins.length-1].focus(); };
+  window.sNkDel = function(i){ nk.splice(i,1); if (!nk.length) nk.push({kw:'',mt:'Exact'}); sNkRender(); };
+  sNkRender();
+
+  /* ---------- step 4: review ---------- */
+  function sReview(){
+    const v = id => ($(id).value||'').trim();
+    $('r-name').textContent = v('s-name') || 'Summer Sale';
+    const b = v('s-bud') || '5000';
+    $('r-bud').textContent = '₹' + Number(b.replace(/[^0-9.]/g,'')||0).toLocaleString('en-IN');
+    $('r-start').textContent = v('s-start') || '—';
+    $('r-dur').textContent = v('s-end') ? 'Until ' + v('s-end') : 'Open-ended';
+    $('r-pace').textContent = document.querySelector('#s-pace label.on .t').textContent;
+    $('r-strat').textContent = strat;
+    $('r-roasrow').classList.toggle('hide', strat!=='Smart Bidding (ROAS)');
+    $('r-roas').textContent = v('s-roas');
+    const cats = Object.keys(cbid).map(i=>SCAT[i][0].split(' > ').pop() + ' · ₹' + cbid[i]);
+    $('r-cat').textContent = cats.length ? cats.join(', ') : 'Face Wash and Cleanser';
+    $('r-ext').innerHTML = ext ? '<span class="ext-on">On</span>' : '<span class="ext-off">Off</span>';
+
+    $('r-nkcard').classList.toggle('hide', !ext);
+    const f = nk.filter(r=>r.kw.trim());
+    $('r-nkh').textContent = 'Negative Keywords (' + f.length + ')';
+    $('r-nk').innerHTML = f.length
+      ? f.map(r=>'<span class="nkchip">'+esc(r.kw.trim())+'</span>').join('')
+      : '<span class="muted" style="font-size:11.5px">No negative keywords added. Your ads can show on every Search matching your bid categories.</span>';
+
+    const sel = [...psel].sort();
+    $('r-ph').textContent = 'Selected Products (' + sel.length + ')';
+    $('r-prd').innerHTML = sel.length ? sel.map(i=>{ const p=SPRD[i]; return '<tr>'
+      + '<td><i class="ri-image-line" style="color:var(--g30);font-size:16px"></i></td>'
+      + '<td><span class="cmp-nm" style="max-width:420px;white-space:normal">'+esc(p[0])+'</span></td>'
+      + '<td>Face Wash and Cleanser</td><td>Lotus Herbals</td><td>₹'+p[1]+'</td><td>₹'+p[2]+'</td>'
+      + '<td><span class="flag f-ok">In Stock</span></td><td class="mono">'+p[3]+'</td></tr>'; }).join('')
+      : '<tr><td colspan="8" class="muted">No products selected. Go back to Step 2.</td></tr>';
+  }
+})();
+</script>
+
 </body>
 </html>
