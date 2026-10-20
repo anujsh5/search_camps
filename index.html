@@ -471,6 +471,66 @@
   .ext-on{color:var(--green);font-weight:800}
   .ext-off{color:var(--g40);font-weight:800}
   .steps button.skip{display:none}
+
+  /* ---------- Product Display Ads (PDA) ---------- */
+  .st-learn{color:var(--purple);font-weight:800;font-size:11.5px}
+  .st-paused{color:var(--g40);font-weight:800;font-size:11.5px}
+  .lvltag{margin-left:auto;font-size:10px;font-weight:800;background:var(--g10);color:var(--g50);border-radius:5px;padding:2px 7px}
+  .bcard.on .lvltag{background:var(--purple);color:#fff}
+  .tlbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--g40);margin:16px 0 8px}
+  .tlist{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .trow{display:flex;align-items:center;gap:9px;border:1px solid var(--g20);border-radius:8px;padding:10px 12px;background:#fff;cursor:pointer;font-size:12px;font-weight:600;color:var(--g70)}
+  .trow:hover{border-color:var(--purple)}
+  .trow.on{border-color:var(--purple);background:var(--purple-lt);color:var(--purple-d)}
+  .trow .im{margin-left:auto;font-size:10.5px;color:var(--g40);font-weight:600}
+  .trow input{accent-color:var(--purple)}
+  .lockchip{display:inline-flex;align-items:center;gap:8px;background:var(--purple-lt);border:1px solid var(--purple-mid);color:var(--purple-d);border-radius:8px;padding:6px 10px;font-size:11.5px;font-weight:700;margin:14px 8px 0 0}
+  .lockchip i{font-size:13px}
+  .lockchip button{color:var(--purple);font-size:11px;font-weight:800;text-decoration:underline;margin-left:4px}
+  .avail{display:grid;grid-template-columns:2fr 1fr 1fr;gap:0;border:1px solid var(--g20);border-radius:10px;overflow:hidden;margin-top:16px;background:#fff}
+  .avail>div{padding:14px 16px;border-right:1px solid var(--g20)}
+  .avail>div:last-child{border-right:none}
+  .avail .l{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--g40)}
+  .avail .v{font-size:18px;font-weight:800;color:var(--g90);margin-top:5px}
+  .avail .v.sm{font-size:12.5px;font-weight:700;line-height:1.45}
+  .calc{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--g20);border-radius:10px;overflow:hidden;background:#fff;margin-top:6px}
+  .calc>div{padding:13px 15px;border-right:1px solid var(--g20);text-align:center}
+  .calc>div:last-child{border-right:none}
+  .calc .l{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--g40)}
+  .calc .v{font-size:17px;font-weight:800;color:var(--g90);margin-top:5px;font-variant-numeric:tabular-nums}
+  .calc .fin{background:var(--purple-lt)} .calc .fin .v{color:var(--purple)}
+  .elig{display:flex;gap:9px;align-items:center;border-radius:8px;padding:9px 12px;font-size:11.5px;font-weight:700;margin-top:12px}
+  .elig.ok{background:var(--green-lt);color:var(--green);border:1px solid #BFE7D2}
+  .elig.bad{background:var(--red-lt);color:var(--red);border:1px solid #F5C2C2}
+  .elig.idle{background:var(--g08);color:var(--g50);border:1px solid var(--g20)}
+  .cntbar{display:flex;align-items:center;justify-content:space-between;margin:4px 0 12px;font-size:11.5px;color:var(--g50)}
+  .cntbar b{color:var(--purple)}
+  .cntbar .bad{color:var(--red);font-weight:700}
+  .vchip{display:inline-block;font-size:9.5px;font-weight:800;background:var(--g10);color:var(--g50);border-radius:5px;padding:2px 7px}
+  .ontgt{font-size:10px;font-weight:800;color:var(--green)}
+  .offtgt{font-size:10px;font-weight:700;color:var(--g40)}
+  tr.dis td{opacity:.5}
+  .trule{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .ofld{position:relative}
+  .ofld label{position:absolute;top:-7px;left:10px;background:#fff;padding:0 4px;font-size:10px;font-weight:600;color:var(--g50);z-index:1}
+  .ofld select{border:1px solid var(--g30);border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--g90);background:#fff;min-width:170px;outline:0}
+  .ofld.wide select{min-width:360px}
+  .ofld select:focus{border-color:var(--purple);box-shadow:0 0 0 1px var(--purple)}
+  .ofld select:disabled{color:var(--g40);background:#fff;border-color:var(--g20)}
+  .anyof{font-size:12px;color:var(--g50);white-space:nowrap}
+  .tpath{font-size:12.5px;color:var(--g70);font-weight:600}
+  .tim{font-size:10.5px;color:var(--g40)}
+  .trm{margin-left:auto;color:var(--red);font-size:11.5px;font-weight:800}
+  .addbtn{border:1px solid var(--purple);color:var(--purple);background:#fff;border-radius:7px;padding:8px 18px;font-size:12px;font-weight:800}
+  .addbtn:disabled{border-color:var(--g20);color:var(--g30);cursor:not-allowed}
+  .avrow{display:grid;grid-template-columns:1fr 54px 90px;gap:10px;align-items:center;font-size:12px;font-weight:600;padding:3px 0}
+  .avrow .avv{text-align:right;font-variant-numeric:tabular-nums;font-weight:800;color:var(--g90)}
+  .avbar{height:6px;border-radius:4px;background:var(--g10);overflow:hidden}
+  .avbar i{display:block;height:100%;background:var(--purple);border-radius:4px}
+  .avtot{border-top:1px solid var(--g20);margin-top:4px;padding-top:6px;font-weight:800;color:var(--g90)}
+  .avsub{font-size:10.5px;font-weight:600;color:var(--g50);margin-top:4px;line-height:1.4}
+  .learnbox{display:flex;gap:12px;align-items:flex-start}
+  .learnbox ul{margin:8px 0 0 16px;font-size:11.5px;color:var(--g70);line-height:1.7}
 </style>
 </head>
 <body>
@@ -494,7 +554,7 @@
         <a href="#" class="nv">Product Display Ads - Test</a>
         <a href="#" class="nv">Visibility Campaigns</a>
         <a href="#" class="nv">Takeover</a>
-        <a href="#" class="nv">Product Display Ads</a>
+        <a href="#" class="nv" id="nv-pda" onclick="go('pda','Product Display Ads',this)">Product Display Ads</a>
       </div>
     </div>
 
@@ -1217,6 +1277,111 @@
 
   </section>
 
+  <!-- ======================= PRODUCT DISPLAY ADS ======================= -->
+  <section class="page-section" id="pg-pda">
+
+    <div class="ph" style="margin-bottom:14px">
+      <h1 style="font-size:15px">Campaigns</h1>
+    </div>
+
+    <div class="banner">
+      <button class="x" onclick="this.closest('.banner').style.display='none'"><i class="ri-close-line"></i></button>
+      <h2>Product Display Ads are live on PDP</h2>
+      <p>Put your product card at the top of product pages in your category. Bid on CPM, target by L1, L2 or L3.</p>
+      <div class="cvbox"><div class="l">Avg Daily PDP Impressions</div><div class="v">65.9K</div></div>
+      <svg class="spark" viewBox="0 0 290 120" fill="none">
+        <path d="M4 96 C60 92 90 74 120 56 C150 38 180 30 286 22" stroke="#5BE49B" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round"/>
+        <circle cx="152" cy="36" r="7" fill="#FFB020"/><circle cx="152" cy="36" r="3" fill="#fff"/>
+      </svg>
+    </div>
+
+    <div class="sect-lbl">Product Display Ads Analytics</div>
+
+    <div class="card" style="padding:0">
+      <div class="chd" style="border-bottom:none;padding-bottom:6px">
+        <div class="ttl"><h2>Performance Summary</h2></div>
+        <div class="ctools"><button class="dl" onclick="tst('Downloading performance summary · CSV')"><i class="ri-download-2-line"></i></button></div>
+      </div>
+      <div style="padding:0 18px 18px">
+        <div class="kpigrid">
+          <div class="c"><div class="dots">···</div><div class="v">₹8,46,320.00</div><div class="l">Attributed GMV <i class="ri-information-line qi has-tip" data-tip="GMV from orders placed within 7 days of a click on your ad."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">1,912</div><div class="l">Attributed Orders <i class="ri-information-line qi has-tip" data-tip="Orders placed within 7 days of a click on your ad."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">4.82</div><div class="l">ROAS</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">₹1,75,560.00</div><div class="l">Ad Spend <i class="ri-information-line qi has-tip" data-tip="Total debited from your wallet. You pay per 1,000 impressions at your charged CPM."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">8,94,400</div><div class="l">Impressions <i class="ri-information-line qi has-tip" data-tip="Billed impressions, including impressions served while a campaign is in Learning."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">12,074</div><div class="l">Ad Clicks</div></div>
+          <div class="c"><div class="dots">···</div><div class="v">196.29</div><div class="l">Charged CPM <i class="ri-information-line qi has-tip" data-tip="Average price paid per 1,000 impressions: your base bid × targeting multiplier, never below the placement floor."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">1.35%</div><div class="l">CTR% <i class="ri-information-line qi has-tip" data-tip="Clicks divided by impressions."></i></div></div>
+          <div class="c"><div class="dots">···</div><div class="v">1</div><div class="l">Campaigns in Learning <i class="ri-information-line qi has-tip" data-tip="New campaigns test every product you added (at least 500 impressions each, up to 3 days) before picking the best one to serve."></i></div></div>
+        </div>
+        <div class="trend">
+          <div class="hd"><div class="t">Trend</div><div class="metsel">Metrics : 2 selections <i class="ri-close-line"></i></div></div>
+          <div class="lg-dots">
+            <span><i style="background:#4C6FFF"></i>ROAS</span><span><i style="background:#22C1D6"></i>Charged CPM</span>
+            <span><i style="background:#F5A623"></i>Impressions</span><span><i style="background:#2FBF71"></i>Attributed Orders</span>
+            <span><i style="background:#8E7CFF"></i>CTR %</span><span><i style="background:#5AA9FF"></i>Ad Clicks</span>
+            <span><i style="background:#E2506B"></i>Attributed GMV</span><span><i style="background:#C0281C"></i>Ad Spend</span>
+          </div>
+          <svg viewBox="0 0 900 120" style="width:100%;height:110px;margin-top:6px" fill="none">
+            <text x="0" y="12" font-size="9" fill="#948FA0">60.0k</text>
+            <path d="M20 92 C140 84 220 70 320 72 C440 75 540 52 660 50 C760 48 830 38 880 36" stroke="#4C6FFF" stroke-width="2"/>
+            <path d="M20 104 C140 98 220 90 320 86 C450 80 560 76 700 70 C790 66 850 60 880 58" stroke="#E2506B" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="chd">
+        <div><div class="ttl"><h2>Campaigns</h2></div></div>
+        <div class="ctools2">
+          <div class="srch2"><i class="ri-search-line"></i><input placeholder="Search campaigns..."></div>
+          <button class="btn-o"><i class="ri-equalizer-line"></i> Filter</button>
+          <button class="btn-o off" disabled>Bulk Edit</button>
+          <button class="btn-cta" onclick="wizPOpen()">+ Create New Campaign</button>
+        </div>
+      </div>
+      <div class="tw">
+        <table class="dense">
+          <thead><tr>
+            <th style="width:26px"><input type="checkbox"></th>
+            <th>Status</th><th>Name</th><th>Targeting</th><th>Categories</th><th>Products</th><th>Serving Product</th>
+            <th>Base CPM</th><th>Charged CPM</th><th>Daily Budget</th><th>Spend</th><th>Impressions</th><th>Clicks</th><th>CTR</th>
+            <th>Start Date</th><th>End Date</th><th>Campaign ID</th><th>Actions</th>
+          </tr></thead>
+          <tbody id="b-cmp-p"></tbody>
+        </table>
+      </div>
+      <div class="pag">
+        <div class="rp">Rows per page: <select><option>10</option><option>25</option></select></div>
+        <div id="p-pag">1–5 of 5</div>
+        <div class="ar"><button><i class="ri-arrow-left-s-line"></i></button><button><i class="ri-arrow-right-s-line"></i></button></div>
+      </div>
+    </div>
+
+    <div class="card" style="padding-bottom:6px">
+      <div class="chd" style="border-bottom:none;padding-bottom:4px">
+        <div><div class="ttl"><h2>Performance</h2></div></div>
+        <div class="ctools"><button class="dl" onclick="tst('Downloading funnel · CSV')"><i class="ri-download-2-line"></i></button></div>
+      </div>
+      <div class="tabs">
+        <button class="on">Campaign Funnel</button><button>Product Funnel</button><button>Category Funnel</button>
+      </div>
+      <div style="padding:12px 18px 0"><button class="btn-o"><i class="ri-table-line"></i> Campaign ID <i class="ri-arrow-down-s-line"></i></button></div>
+      <div class="tw" style="margin-top:10px">
+        <table class="dense">
+          <thead><tr>
+            <th>Date</th><th>Campaign Name</th><th>Campaign ID</th><th>Campaign Status</th><th>Targeting</th><th>Served Product ID</th>
+            <th>Spend</th><th>Impressions</th><th>Ad Clicks</th><th>CTR</th><th>Charged CPM</th>
+            <th>Attributed Orders (7D)</th><th>Attributed GMV (7D)</th><th>ROAS</th>
+          </tr></thead>
+          <tbody id="b-fun-p"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
   <!-- ======================= STUB ======================= -->
   <section class="page-section" id="pg-stub">
     <div class="ph"><h1 id="stub-nm">—</h1></div>
@@ -1642,6 +1807,166 @@
   </div>
 </div>
 
+<!-- ======================= CREATE PRODUCT DISPLAY ADS CAMPAIGN ======================= -->
+<div class="wiz" id="wizP">
+  <div class="wiz-hd">
+    <h1>Create Product Display Ads Campaign</h1>
+    <button class="x" onclick="pClose()"><i class="ri-close-line"></i></button>
+  </div>
+
+  <div class="steps">
+    <button id="pst1" class="on" onclick="pTab(1)"><span class="ic"><i class="ri-information-line"></i></span> Step 1: Basic Information</button>
+    <button id="pst2" onclick="pTab(2)"><span class="ic"><i class="ri-node-tree"></i></span> Step 2: Category Targeting</button>
+    <button id="pst3" onclick="pTab(3)"><span class="ic"><i class="ri-shopping-cart-line"></i></span> Step 3: Products</button>
+    <button id="pst4" onclick="pTab(4)"><span class="ic"><i class="ri-equalizer-line"></i></span> Step 4: Bid &amp; Budget</button>
+    <button id="pst5" onclick="pTab(5)"><span class="ic"><i class="ri-checkbox-circle-line"></i></span> Step 5: Review</button>
+  </div>
+
+  <div class="wiz-bd">
+    <div class="simbar"><div class="simpill"><span class="b"><i class="ri-sparkling-2-line"></i> Campaign Estimate</span><span>Charged CPM: <b id="p-simc">—</b></span><span class="has-tip" data-tip="Upper bound: the lower of what your budget buys and what your categories deliver. Actual delivery depends on the auction.">Max daily impressions: <b id="p-simi">—</b></span></div></div>
+
+    <!-- ---------------- STEP 1 ---------------- -->
+    <div class="wstep on" id="pws1">
+      <div class="fcard lav">
+        <div class="hd2">
+          <div class="sq"><i class="ri-wallet-3-line"></i></div>
+          <div><div class="t">Select Wallet for this Campaign</div><div class="s">Choose which wallet will fund this campaign</div></div>
+        </div>
+        <select class="selbox" id="p-wal">
+          <option>Primary Wallet - INR 5,96,557.85</option>
+          <option>Display - INR 3,20,000.00</option>
+        </select>
+      </div>
+
+      <div class="fcard">
+        <div class="hd2">
+          <div class="sq"><i class="ri-layout-top-line"></i></div>
+          <div><div class="t">Placement: Product Detail Page · Top</div><div class="s">Your product card shows at the top of product pages that match your category targeting. You pick the categories in Step 2.</div></div>
+        </div>
+        <div class="fld"><label>Campaign Name</label><input type="text" id="p-name" placeholder="Lakme Face Makeup PDP"></div>
+        <div class="fld"><label>Start Date &amp; Time</label><div class="withic"><input type="text" id="p-start" value="21/10/2026 10:00 AM"><i class="ri-calendar-line"></i></div></div>
+        <div class="fld" style="margin-bottom:0"><label>End Date &amp; Time <span class="opt">(Optional)</span></label><div class="withic"><input type="text" id="p-end" placeholder="dd/mm/yyyy, h:mm am/pm"><i class="ri-calendar-line"></i></div></div>
+      </div>
+    </div>
+
+    <!-- ---------------- STEP 2 ---------------- -->
+    <div class="wstep" id="pws2">
+      <div class="fcard">
+        <div class="hd2">
+          <div class="sq"><i class="ri-shapes-line"></i></div>
+          <div><div class="t">Product Catalog Targeting</div><div class="s">Define the product categories your campaign will target. Choose one level (L1, L2, or L3); all selections must be at that same level. L1 allows one category only. This is a mandatory step.</div></div>
+        </div>
+        <div class="tlbl" style="color:var(--g90);text-transform:none;letter-spacing:0;font-size:12px">Selected Targeting</div>
+        <div id="p-picks"></div>
+        <div class="trule" id="p-addrow"></div>
+        <div class="hint2" id="p-rule"></div>
+      </div>
+
+      <div class="fcard">
+        <h3 style="margin-bottom:4px">Available Inventory</h3>
+        <p style="font-size:11px;color:var(--g50)">Based on product pages in your selected categories.</p>
+        <div class="avail">
+          <div><div class="l">Selected</div><div class="v sm" id="p-av-sel">Nothing selected yet</div></div>
+          <div><div class="l">Avg Daily Impressions (last 30 days)</div><div class="v" id="p-av-imp">—</div></div>
+          <div><div class="l">CPM Multiplier</div><div class="v" id="p-av-mult">—</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------------- STEP 3 ---------------- -->
+    <div class="wstep" id="pws3">
+      <div class="fcard">
+        <h3 style="margin-bottom:4px">Products to Promote <i class="ri-information-line qi has-tip" data-tip="Each product is tested during Learning. The best performer becomes your ad."></i></h3>
+        <p style="font-size:11px;color:var(--g50);margin-bottom:12px" id="p-prd-sub">Your brand's products in the targeted L1. Pick 2 to 10.</p>
+        <div class="ssrch" style="margin-top:0"><i class="ri-search-line"></i><input placeholder="Search products..." oninput="pPrdRender(this.value)"></div>
+        <div class="cntbar"><span><b id="p-pcnt">0</b> of 10 selected · minimum 2</span><span id="p-pwarn"></span></div>
+        <div class="tw">
+          <table class="dense">
+            <thead><tr><th style="width:26px"></th><th>Image</th><th>Name</th><th>Category</th><th>Fit</th><th>Price</th><th>Availability</th><th>Variants</th><th>Product ID</th></tr></thead>
+            <tbody id="p-prd"></tbody>
+          </table>
+        </div>
+        <div class="carry"><i class="ri-stack-line"></i> Variants are added automatically. If one variant goes out of stock, an in-stock variant of the same product keeps your ad running.</div>
+      </div>
+    </div>
+
+    <!-- ---------------- STEP 4 ---------------- -->
+    <div class="wstep" id="pws4">
+      <div class="fcard">
+        <h3>Bid</h3>
+        <div class="fld" style="max-width:300px"><label>Base CPM Bid (₹ per 1,000 impressions)</label><input type="text" id="p-bid" placeholder="150" oninput="pBidCalc()"></div>
+        <div class="calc">
+          <div><div class="l">Base CPM</div><div class="v" id="p-c-base">—</div></div>
+          <div><div class="l">× Targeting Multiplier</div><div class="v" id="p-c-mult">—</div></div>
+          <div><div class="l">= Charged CPM</div><div class="v" id="p-c-chg">—</div></div>
+          <div><div class="l">Floor CPM</div><div class="v" id="p-c-floor">—</div></div>
+          <div class="fin"><div class="l">You Pay (CPM)</div><div class="v" id="p-c-fin">—</div></div>
+        </div>
+        <div class="elig idle" id="p-elig"><i class="ri-information-line"></i><span>Enter a base bid to check eligibility.</span></div>
+      </div>
+
+      <div class="fcard">
+        <h3>Budget</h3>
+        <div class="fld" style="max-width:300px"><label>Daily Budget (INR)</label><input type="text" id="p-bud" placeholder="5000" oninput="pBidCalc()"></div>
+        <div class="carry" style="margin-top:0"><i class="ri-flashlight-line"></i> No pacing. Your daily budget is spent as impressions come in, so it can run out early in the day on busy days.</div>
+      </div>
+    </div>
+
+    <!-- ---------------- STEP 5 ---------------- -->
+    <div class="wstep" id="pws5">
+      <div class="rev2">
+        <div class="rv">
+          <h4>Basic Information</h4>
+          <div class="l2"><span class="k">Campaign Name</span><span class="v" id="pr-name">—</span></div>
+          <div class="l2"><span class="k">Campaign Type</span><span class="v">Awareness</span></div>
+          <div class="l2"><span class="k">Sub-type</span><span class="v">Product Display Ads</span></div>
+          <div class="l2"><span class="k">Placement</span><span class="v">PDP · Top</span></div>
+          <div class="l2"><span class="k">Wallet</span><span class="v" id="pr-wal">—</span></div>
+          <div class="l2"><span class="k">Duration</span><span class="v" id="pr-dur">—</span></div>
+        </div>
+        <div class="rv">
+          <h4>Targeting, Bid &amp; Budget</h4>
+          <div class="l2"><span class="k">Targeting Level</span><span class="v" id="pr-lvl">—</span></div>
+          <div class="l2"><span class="k">Categories</span><span class="v" id="pr-cat" style="text-align:right;max-width:60%">—</span></div>
+          <div class="l2"><span class="k">Base CPM</span><span class="v" id="pr-bid">—</span></div>
+          <div class="l2"><span class="k">You Pay (CPM)</span><span class="v" id="pr-fin">—</span></div>
+          <div class="l2"><span class="k">Daily Budget</span><span class="v" id="pr-bud">—</span></div>
+          <div class="l2"><span class="k">Pacing</span><span class="v">None</span></div>
+        </div>
+      </div>
+      <div class="fcard lav">
+        <div class="learnbox">
+          <div class="sq" style="width:30px;height:30px;border-radius:8px;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0"><i class="ri-flask-line"></i></div>
+          <div>
+            <div style="font-size:13px;font-weight:800;color:var(--g90)">Your campaign starts in Learning</div>
+            <ul>
+              <li>Each product you added gets at least 500 impressions, for up to 3 days.</li>
+              <li>Learning impressions are billed at your CPM, like any other impression.</li>
+              <li>After Learning, the best-performing product becomes your ad.</li>
+              <li>If it goes out of stock, the next best product takes over automatically.</li>
+              <li>Changing the product list later restarts Learning.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="rv">
+        <h4 id="pr-ph">Selected Products (0)</h4>
+        <div class="tw">
+          <table class="dense">
+            <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Fit</th><th>Price</th><th>Availability</th><th>Variants</th><th>Product ID</th></tr></thead>
+            <tbody id="pr-prd"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wiz-ft">
+    <button class="btn-s" onclick="pBack()">Back</button>
+    <button class="btn-p" id="p-next" onclick="pNext()">Next</button>
+  </div>
+</div>
+
 <div id="tt"></div>
 <div class="ovl" id="ovl" onclick="closeD()"></div>
 <aside class="drw" id="drawer">
@@ -1802,15 +2127,15 @@
   };
   window.setB = function(l){ $('blbl').textContent=l; $('bm').classList.add('hide'); tst('Brand switched to '+l); };
 
-  const PAGES = { overview:'Overview', bizq:'Business Queue', finq:'Finance Queue', wadj:'Wallet adjustments', search:'Search Only', ssc:'Smart Shopping' };
+  const PAGES = { overview:'Overview', bizq:'Business Queue', finq:'Finance Queue', wadj:'Wallet adjustments', search:'Search Only', ssc:'Smart Shopping', pda:'Product Display Ads' };
   window.go = function(id, label, el){
     document.querySelectorAll('a.nv').forEach(a=>a.classList.remove('on'));
     if (el) el.classList.add('on');
-    const target = ['overview','finq','search','ssc'].includes(id) ? id : null;
+    const target = ['overview','finq','search','ssc','pda'].includes(id) ? id : null;
     document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
     if (target) $('pg-'+target).classList.add('active');
     else { $('pg-stub').classList.add('active'); $('stub-nm').textContent = label; }
-    $('crumb2').innerHTML = (id==='search' ? ' / Campaign / Performance / <b>Search Only</b>' : id==='ssc' ? ' / Campaign / Performance / <b>Smart Shopping</b>' : ' / <b>'+label+'</b>');
+    $('crumb2').innerHTML = (id==='search' ? ' / Campaign / Performance / <b>Search Only</b>' : id==='ssc' ? ' / Campaign / Performance / <b>Smart Shopping</b>' : id==='pda' ? ' / Campaign / Awareness / <b>Product Display Ads</b>' : ' / <b>'+label+'</b>');
     window.scrollTo(0,0);
     return false;
   };
@@ -2510,6 +2835,336 @@
       + '<td>Face Wash and Cleanser</td><td>Lotus Herbals</td><td>₹'+p[1]+'</td><td>₹'+p[2]+'</td>'
       + '<td><span class="flag f-ok">In Stock</span></td><td class="mono">'+p[3]+'</td></tr>'; }).join('')
       : '<tr><td colspan="8" class="muted">No products selected. Go back to Step 2.</td></tr>';
+  }
+})();
+</script>
+
+<script>
+/* ================= PRODUCT DISPLAY ADS: landing + create wizard ================= */
+(function(){
+  const $ = i => document.getElementById(i);
+  const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+  const inr = n => '₹' + Number(n).toLocaleString('en-IN',{maximumFractionDigits:2});
+  const num = id => Number((($(id)||{}).value||'').replace(/[^0-9.]/g,'')) || 0;
+  const fmtImp = k => k >= 100 ? (k/100).toFixed(1)+'L' : k.toFixed(1)+'K';   /* input in thousands */
+
+  /* ---------- config (sandbox values) ---------- */
+  const FLOOR = 150;                       /* Floor CPM for PDP-top — placeholder until set in Placement Master */
+  const MULT = {1:1.0, 2:1.2, 3:1.3};
+  const LVLN = {1:'L1', 2:'L2', 3:'L3'};
+
+  /* taxonomy → avg daily PDP impressions (thousands), last 30 days */
+  const TAX = {
+    'Makeup':   {'Face Makeup':{'Foundation':9.1,'Compact':4.2,'Primer':2.1,'BB & CC Cream':3.0},
+                 'Eye Makeup':{'Kajal':5.4,'Eyeliner':3.8,'Mascara':2.9},
+                 'Lip Makeup':{'Lipstick':8.6,'Lip Gloss':1.9,'Lip Liner':1.1},
+                 'Brush & Tool':{'Makeup Brush':1.6,'Makeup Bag & Organizer':0.7},
+                 'Makeup Gift & Value Set':{'Makeup Kit':0.9},
+                 'Nail':{'Nail Polish':2.4,'Nail Remover':0.6}},
+    'Skincare': {'Moisturizer':{'Day Cream':4.4,'Night Cream':2.2,'Face Moisturizer':3.1},
+                 'Cleanser':{'Face Wash':5.2,'Micellar Water':1.4},
+                 'Serum':{'Face Serum':3.5,'Vitamin C Serum':1.8}},
+    'Haircare': {'Shampoo':{'Anti-Dandruff Shampoo':2.6,'Hair Fall Shampoo':2.3},
+                 'Hair Oil':{'Hair Oil':2.0}},
+    'Bath and Body': {'Body and Cloth Accessory':{'Body Tape':0.4,'Fashion Tape':0.3,'Shapewear':0.8,'Sweat Control':0.5},
+                 'Bath & Shower':{'Soap':3.1,'Body Wash':2.7}}
+  };
+  const sum = o => typeof o === 'number' ? o : Object.values(o).reduce((a,v)=>a+sum(v),0);
+  const PDP_TOTAL = 65.9;   /* avg daily PDP impressions (K), last 30 days — all categories */
+  (function scale(o, f){ for (const k in o){ if (typeof o[k]==='number') o[k] = Math.round(o[k]*f*10)/10; else scale(o[k], f); } })(TAX, PDP_TOTAL/sum(TAX));
+
+  /* brand catalogue: id, name, L1, L2, L3, price, inStock, product_ids for same internal product */
+  const PRD = [
+    ['412301','Lakme 9 to 5 Primer + Matte Powder Foundation Compact','Makeup','Face Makeup','Compact',649,true,5],
+    ['412302','Lakme Perfecting Liquid Foundation','Makeup','Face Makeup','Foundation',349,true,3],
+    ['412303','Lakme 9 to 5 Weightless Mousse Foundation','Makeup','Face Makeup','Foundation',599,true,4],
+    ['412304','Lakme Absolute Argan Oil Serum Foundation SPF 45','Makeup','Face Makeup','Foundation',899,true,2],
+    ['412305','Lakme Absolute Blur Perfect Makeup Primer','Makeup','Face Makeup','Primer',799,false,1],
+    ['412306','Lakme 9 to 5 CC Cream','Makeup','Face Makeup','BB & CC Cream',299,true,2],
+    ['412307','Lakme Eyeconic Kajal','Makeup','Eye Makeup','Kajal',225,true,2],
+    ['412308','Lakme Eyeconic Curling Mascara','Makeup','Eye Makeup','Mascara',475,true,1],
+    ['412309','Lakme Insta Eye Liner','Makeup','Eye Makeup','Eyeliner',199,true,1],
+    ['412310','Lakme 9 to 5 Primer + Matte Lipstick','Makeup','Lip Makeup','Lipstick',599,true,3],
+    ['412311','Lakme Absolute Matte Melt Liquid Lip Color','Makeup','Lip Makeup','Lipstick',800,true,4],
+    ['412312','Lakme Forever Matte Liquid Lip Colour','Makeup','Lip Makeup','Lip Gloss',249,false,2],
+    ['412313','Lakme Sun Expert SPF 50 Ultra Matte Gel','Skincare','Moisturizer','Day Cream',349,true,2],
+    ['412314','Lakme Absolute Perfect Radiance Night Creme','Skincare','Moisturizer','Night Cream',499,true,1],
+    ['412315','Lakme Peach Milk Moisturiser','Skincare','Moisturizer','Face Moisturizer',249,true,3],
+    ['412316','Lakme Blush & Glow Strawberry Face Wash','Skincare','Cleanser','Face Wash',199,true,2],
+    ['412317','Lakme 9 to 5 Vitamin C+ Facial Serum','Skincare','Serum','Vitamin C Serum',449,false,1]
+  ];
+
+  /* ---------- landing: campaigns list ---------- */
+  const PCMP = [
+    ['Live','Lakme_FaceMakeup_PDP_L2','L2','Face Makeup, Eye Makeup',5,'412302',140,168,6000,'48,216','2,87,000','3,961','1.38%','Sep 28, 2026','Nov 30, 2026','7104'],
+    ['Live','Lakme_Lipstick_PDP_L3','L3','Lipstick',3,'412311',140,182,4000,'39,494','2,17,000','3,124','1.44%','Sep 30, 2026','Oct 31, 2026','7111'],
+    ['Learning','Lakme_Foundation_Primer_L3','L3','Foundation, Primer, Compact',6,'—',150,195,5000,'9,945','51,000','612','1.20%','Oct 19, 2026','Nov 19, 2026','7129'],
+    ['Live','Lakme_Skincare_PDP_L1','L1','Skincare',4,'412313',180,180,3500,'44,280','2,46,000','2,987','1.21%','Sep 15, 2026','Oct 31, 2026','7087'],
+    ['Paused','Lakme_Kajal_Festive_L3','L3','Kajal',2,'412307',130,169,2500,'33,625','1,99,000','1,390','0.70%','Sep 1, 2026','Oct 15, 2026','7042']
+  ];
+  const ST_CLS = {Live:'st-active', Learning:'st-learn', Paused:'st-paused'};
+  function cmpRender(){
+    $('b-cmp-p').innerHTML = PCMP.map(c=>'<tr>'
+      + '<td><input type="checkbox"></td>'
+      + '<td><span class="'+ST_CLS[c[0]]+'">'+c[0]+'</span></td>'
+      + '<td><span class="cmp-nm has-tip" data-tip="'+esc(c[1])+'">'+esc(c[1])+'</span></td>'
+      + '<td>'+c[2]+'</td><td style="line-height:1.5">'+c[3].split(', ').map(esc).join('<br>')+'</td>'
+      + '<td>'+c[4]+'</td>'
+      + '<td>'+(c[0]==='Learning' ? '<span class="st-learn has-tip" data-tip="Testing all products. Best performer is picked within 3 days.">Testing '+c[4]+'</span>' : '<span class="mono">'+c[5]+'</span>')+'</td>'
+      + '<td>'+inr(c[6])+'</td><td>'+inr(c[7])+'</td><td>'+inr(c[8])+'</td>'
+      + '<td>Rs. '+c[9]+'</td><td>'+c[10]+'</td><td>'+c[11]+'</td><td>'+c[12]+'</td>'
+      + '<td>'+c[13]+'</td><td>'+c[14]+'</td><td>'+c[15]+'</td>'
+      + '<td><i class="ri-bar-chart-line" style="color:var(--g50);margin-right:9px"></i><i class="ri-more-2-fill" style="color:var(--g50)"></i></td></tr>').join('');
+    $('p-pag').textContent = '1–'+PCMP.length+' of '+PCMP.length;
+  }
+  cmpRender();
+
+  const PFUN = [
+    ['19/10/2026','Lakme_FaceMakeup_PDP_L2','7104','LIVE','L2','412302','6,720','40,000','552','1.38%','168.00','46','₹21,160','3.15'],
+    ['19/10/2026','Lakme_Lipstick_PDP_L3','7111','LIVE','L3','412311','5,642','31,000','446','1.44%','182.00','52','₹33,280','5.90'],
+    ['19/10/2026','Lakme_Foundation_Primer_L3','7129','LEARNING','L3','412303','9,945','51,000','612','1.20%','195.00','29','₹17,110','1.72'],
+    ['19/10/2026','Lakme_Skincare_PDP_L1','7087','LIVE','L1','412313','5,040','28,000','339','1.21%','180.00','33','₹11,880','2.36']
+  ];
+  $('b-fun-p').innerHTML = PFUN.map(f=>'<tr>'
+    + '<td>'+f[0]+'</td><td><span class="cmp-nm">'+f[1]+'</span></td><td class="mono">'+f[2]+'</td>'
+    + '<td><span class="flag '+(f[3]==='LIVE'?'f-ok':'f-warn')+'">'+f[3]+'</span></td><td>'+f[4]+'</td><td class="mono">'+f[5]+'</td>'
+    + f.slice(6).map(v=>'<td>'+v+'</td>').join('') + '</tr>').join('');
+
+  /* ---------- wizard state ---------- */
+  let st = 1, lvl = 0, L1 = null, L2 = null;
+  const sel = new Set(), psel = new Set();
+  const ICONS = ['','ri-information-line','ri-node-tree','ri-shopping-cart-line','ri-equalizer-line','ri-checkbox-circle-line'];
+
+  function resetWiz(){
+    st=1; lvl=0; L1=null; L2=null; sel.clear(); psel.clear(); picks=[]; pendLvl=0; prodL1=null;
+    ['p-name','p-end','p-bid','p-bud'].forEach(i=>$(i).value='');
+  }
+  window.wizPOpen = function(){ resetWiz(); $('wizP').classList.add('on'); pGo(1); };
+  window.pClose = function(){ $('wizP').classList.remove('on'); };
+
+  window.pGo = function(n){
+    st = n;
+    for (let i=1;i<=5;i++){
+      $('pws'+i).classList.toggle('on', i===n);
+      const b = $('pst'+i);
+      b.classList.toggle('on', i===n); b.classList.toggle('done', i<n);
+      b.querySelector('.ic').innerHTML = '<i class="'+(i<n?'ri-checkbox-circle-fill':ICONS[i])+'"></i>';
+    }
+    $('p-next').textContent = n===5 ? 'Save & Launch' : 'Next';
+    if (n===2) pTreeRender();
+    if (n===3) pPrdRender();
+    if (n===4) pBidCalc();
+    if (n===5) pReview();
+    pSim();
+    $('wizP').querySelector('.wiz-bd').scrollTop = 0;
+  };
+
+  function valid(s){
+    if (s===2 && !sel.size){ tst('Pick a targeting level and at least one category'); return false; }
+    if (s===4){
+      const b = num('p-bid');
+      if (!b){ tst('Enter a base CPM bid'); return false; }
+      if (b*MULT[lvl] < FLOOR){ tst('Charged CPM is below the ₹'+FLOOR+' floor. Raise your base bid.'); return false; }
+      if (!num('p-bud')){ tst('Enter a daily budget'); return false; }
+    }
+    if (s===3 && psel.size < 2){ tst('Select at least 2 products'); return false; }
+    return true;
+  }
+  window.pTab = function(n){ for (let s=1;s<n;s++){ if(!valid(s)){ pGo(s); return; } } pGo(n); };
+  window.pNext = function(){
+    if (st===5){ launch(); return; }
+    if (!valid(st)) return;
+    pGo(st+1);
+  };
+  window.pBack = function(){ if (st===1){ pClose(); return; } pGo(st-1); };
+
+  /* ---------- step 2: targeting (rule rows: level · is any of · category) ---------- */
+  let picks = [], pendLvl = 0, prodL1 = null;
+  const curL1 = () => lvl===1 ? ([...sel][0]||null) : L1;
+  function sync(){
+    L1 = picks.length ? picks[0][0] : null;
+    L2 = (lvl===3 && picks.length) ? picks[0][1] : null;
+    sel.clear(); picks.forEach(p=>sel.add(p[lvl-1]));
+    if (curL1() !== prodL1){ psel.clear(); prodL1 = curL1(); }   /* products are scoped to the L1 */
+  }
+  function allPaths(n){
+    const out = [];
+    for (const a in TAX){
+      if (n===1){ out.push([a]); continue; }
+      for (const b in TAX[a]){
+        if (n===2){ out.push([a,b]); continue; }
+        for (const c in TAX[a][b]) out.push([a,b,c]);
+      }
+    }
+    return out;
+  }
+  function options(){
+    const n = picks.length ? lvl : pendLvl;
+    if (!n || (n===1 && picks.length)) return [];
+    let o = allPaths(n);
+    if (picks.length){ const p0 = picks[0]; o = o.filter(p => p[0]===p0[0] && (n<3 || p[1]===p0[1])); }
+    const have = new Set(picks.map(p=>p.join('>')));
+    return o.filter(p => !have.has(p.join('>')));
+  }
+  const pathTxt = p => p.join(' > ');
+  const pathImp = p => p.length===1 ? sum(TAX[p[0]]) : p.length===2 ? sum(TAX[p[0]][p[1]]) : TAX[p[0]][p[1]][p[2]];
+
+  window.pTreeRender = function(){
+    sync();
+    $('p-picks').innerHTML = picks.length ? picks.map((p,i)=>'<div class="trule">'
+      + '<div class="ofld"><label>Level</label><select disabled><option>Category '+LVLN[lvl]+'</option></select></div>'
+      + '<span class="anyof">is any of</span><span class="tpath">'+esc(pathTxt(p))+'</span>'
+      + '<span class="tim">'+fmtImp(pathImp(p))+'/day</span>'
+      + '<button class="trm" onclick="pRm('+i+')">Remove</button></div>').join('')
+      : '<div class="hint2" style="margin:0 0 14px">No categories added yet.</div>';
+    const locked = picks.length > 0, n = locked ? lvl : pendLvl, opts = options(), l1full = locked && lvl===1;
+    const lv = '<div class="ofld"><label>Category Level</label><select '+(locked?'disabled':'')+' onchange="pSetLvl(this.value)">'
+      + (locked ? '' : '<option value="0"'+(pendLvl?'':' selected')+'>Select level</option>')
+      + [1,2,3].map(k=>'<option value="'+k+'"'+(n===k?' selected':'')+'>Category '+LVLN[k]+(locked?'':' · '+MULT[k].toFixed(1)+'x CPM')+'</option>').join('')
+      + '</select></div>';
+    const ph = l1full ? 'L1 already set' : !n ? 'Select category level first' : !opts.length ? 'No more categories available' : 'Select category';
+    const cat = '<div class="ofld wide"><label>Category</label><select id="p-catsel" '+((l1full||!n||!opts.length)?'disabled':'')+' onchange="pCatChg()">'
+      + '<option value="">'+ph+'</option>'
+      + opts.map(p=>'<option value="'+esc(p.join('|'))+'">'+esc(pathTxt(p))+'</option>').join('') + '</select></div>';
+    $('p-addrow').innerHTML = lv + '<span class="anyof">is any of</span>' + cat + '<button class="addbtn" id="p-addb" disabled onclick="pAdd()">Add</button>';
+    $('p-rule').textContent = !locked ? 'Pick a level, then a category. Deeper levels reach fewer, more relevant product pages and carry a higher CPM multiplier.'
+      : lvl===1 ? 'L1 targeting allows one category only. Remove it to change.'
+      : lvl===2 ? 'You can add more L2s under '+L1+'. To switch L1 or level, remove all selections.'
+      : 'You can add more L3s under '+L1+' > '+L2+'. To switch L2, L1 or level, remove all selections.';
+    pAvail();
+  };
+  window.pSetLvl = v => { pendLvl = +v; pTreeRender(); };
+  window.pCatChg = () => { $('p-addb').disabled = !$('p-catsel').value; };
+  window.pAdd = function(){
+    const v = $('p-catsel').value; if (!v) return;
+    if (!picks.length) lvl = pendLvl;
+    const before = availK();
+    picks.push(v.split('|'));
+    pTreeRender();
+    tst('+'+fmtImp(availK()-before)+'/day · reach now '+fmtImp(availK())+'/day');
+  };
+  window.pRm = function(i){
+    const before = availK();
+    picks.splice(i,1);
+    if (!picks.length){ pendLvl = lvl; lvl = 0; }
+    pTreeRender();
+    tst('−'+fmtImp(before-availK())+'/day · reach now '+(availK()?fmtImp(availK())+'/day':'none'));
+  };
+
+  function availK(){
+    if (!sel.size) return 0;
+    if (lvl===1) return sum(TAX[[...sel][0]]);
+    if (lvl===2) return [...sel].reduce((a,k)=>a+sum(TAX[L1][k]),0);
+    return [...sel].reduce((a,k)=>a+TAX[L1][L2][k],0);
+  }
+  function selLabel(){
+    if (!sel.size) return '';
+    if (lvl===1) return [...sel][0];
+    if (lvl===2) return L1+' › '+[...sel].join(', ');
+    return L1+' › '+L2+' › '+[...sel].join(', ');
+  }
+  function pAvail(){
+    const tot = availK();
+    $('p-av-sel').innerHTML = sel.size ? '<div style="color:var(--g40);font-size:10.5px;margin-bottom:6px">'+LVLN[lvl]+' · '+picks.length+' selected</div>'
+      + picks.map(p=>{ const v = pathImp(p); return '<div class="avrow"><span>'+esc(pathTxt(p))+'</span><span class="avv">'+fmtImp(v)+'</span>'
+        + '<span class="avbar"><i style="width:'+Math.max(3, v/tot*100).toFixed(1)+'%"></i></span></div>'; }).join('')
+      + (picks.length>1 ? '<div class="avrow avtot"><span>Total</span><span class="avv">'+fmtImp(tot)+'</span><span></span></div>' : '')
+      : 'Nothing selected yet';
+    $('p-av-imp').innerHTML = sel.size ? fmtImp(tot) + '<div class="avsub">'+(tot/PDP_TOTAL*100).toFixed(1)+'% of all PDP impressions ('+fmtImp(PDP_TOTAL)+'/day)</div>' : '—';
+    $('p-av-mult').textContent = lvl ? MULT[lvl].toFixed(1)+'x' : '—';
+    pSim();
+  }
+
+  /* ---------- step 3: bid ---------- */
+  function finCPM(){ const c = num('p-bid')*(MULT[lvl]||1); return c >= FLOOR ? Math.max(c, FLOOR) : 0; }
+  window.pBidCalc = function(){
+    const b = num('p-bid'), m = MULT[lvl]||1, c = b*m;
+    $('p-c-base').textContent = b ? inr(b) : '—';
+    $('p-c-mult').textContent = lvl ? m.toFixed(1)+'x ('+LVLN[lvl]+')' : '—';
+    $('p-c-chg').textContent = b ? inr(c.toFixed(2)) : '—';
+    $('p-c-floor').textContent = inr(FLOOR);
+    const e = $('p-elig');
+    if (!b){ e.className='elig idle'; e.innerHTML='<i class="ri-information-line"></i><span>Enter a base bid to check eligibility.</span>'; $('p-c-fin').textContent='—'; }
+    else if (c < FLOOR){
+      const need = Math.ceil(FLOOR/m*100)/100;
+      e.className='elig bad'; e.innerHTML='<i class="ri-error-warning-line"></i><span>Charged CPM '+inr(c.toFixed(2))+' is below the '+inr(FLOOR)+' floor. This campaign will not serve. Raise your base bid to at least '+inr(need)+'.</span>';
+      $('p-c-fin').textContent='—';
+    } else {
+      e.className='elig ok'; e.innerHTML='<i class="ri-checkbox-circle-line"></i><span>Eligible. You pay '+inr(Math.max(c,FLOOR).toFixed(2))+' per 1,000 impressions.</span>';
+      $('p-c-fin').textContent = inr(Math.max(c,FLOOR).toFixed(2));
+    }
+    pSim();
+  };
+  function estDaily(){
+    const f = finCPM(), bud = num('p-bud'), av = availK()*1000;
+    if (!f || !bud) return 0;
+    return Math.min(bud/f*1000, av);
+  }
+  function pSim(){
+    const f = finCPM();
+    $('p-simc').textContent = f ? inr(f.toFixed(2)) : '—';
+    const e = estDaily();
+    $('p-simi').textContent = e ? fmtImp(e/1000) : '—';
+  }
+
+  /* ---------- step 4: products ---------- */
+  function onTarget(p){
+    if (lvl===1) return true;
+    if (lvl===2) return sel.has(p[3]);
+    return p[3]===L2 && sel.has(p[4]);
+  }
+  const fit = p => onTarget(p) ? '<span class="ontgt">In targeted category</span>' : '<span class="offtgt has-tip" data-tip="Allowed: any of your products in the targeted L1 can be promoted.">Elsewhere in '+esc(p[2])+'</span>';
+  const vars = p => p[7]>1 ? '<span class="vchip has-tip" data-tip="All '+p[7]+' product IDs for this product are included automatically.">+'+(p[7]-1)+' auto-included</span>' : '<span class="muted">—</span>';
+  const stock = p => p[6] ? '<span class="flag f-ok">In Stock</span>' : '<span class="flag f-bad">Out of Stock</span>';
+
+  window.pPrdRender = function(q){
+    q = (typeof q==='string' ? q : '').toLowerCase();
+    const l1 = curL1();
+    $('p-prd-sub').textContent = l1 ? 'Your brand’s products in '+l1+'. Pick 2 to 10. Products outside your targeted '+LVLN[lvl]+'s are allowed.' : 'Pick your targeting in Step 2 first.';
+    const rows = PRD.map((p,i)=>({p,i})).filter(o=>o.p[2]===l1 && (!q || o.p[1].toLowerCase().includes(q)));
+    rows.sort((a,b)=> (onTarget(b.p)-onTarget(a.p)) || (b.p[6]-a.p[6]));
+    $('p-prd').innerHTML = rows.length ? rows.map(({p,i})=>'<tr class="'+(p[6]?'':'dis')+'">'
+      + '<td><input type="checkbox" '+(psel.has(i)?'checked':'')+(p[6]?'':' disabled')+' onclick="pPick('+i+',this)"></td>'
+      + '<td><i class="ri-image-line" style="color:var(--g30);font-size:16px"></i></td>'
+      + '<td><span class="cmp-nm" style="max-width:380px">'+esc(p[1])+'</span></td>'
+      + '<td>'+esc(p[3])+' › '+esc(p[4])+'</td><td>'+fit(p)+'</td>'
+      + '<td>₹'+p[5]+'</td><td>'+stock(p)+'</td><td>'+vars(p)+'</td><td class="mono">'+p[0]+'</td></tr>').join('')
+      : '<tr><td colspan="9" class="muted">No Lakme products in '+esc(l1||'this category')+'.</td></tr>';
+    $('p-pcnt').textContent = psel.size;
+    $('p-pwarn').innerHTML = psel.size && psel.size < 2 ? '<span class="bad">Add at least '+(2-psel.size)+' more</span>' : '';
+  };
+  window.pPick = function(i,cb){
+    if (cb.checked){
+      if (psel.size >= 10){ cb.checked = false; tst('Maximum 10 products per campaign'); return; }
+      psel.add(i);
+    } else psel.delete(i);
+    pPrdRender($('pws3').querySelector('.ssrch input').value);
+  };
+
+  /* ---------- step 5: review + launch ---------- */
+  function pReview(){
+    const v = id => ($(id).value||'').trim();
+    $('pr-name').textContent = v('p-name') || 'Lakme Face Makeup PDP';
+    $('pr-wal').textContent = $('p-wal').value.split(' - ')[0];
+    $('pr-dur').textContent = v('p-end') ? v('p-start') + ' → ' + v('p-end') : 'From ' + v('p-start') + ' · Open-ended';
+    $('pr-lvl').textContent = LVLN[lvl] + ' · ' + MULT[lvl].toFixed(1) + 'x CPM';
+    $('pr-cat').innerHTML = picks.map(p=>'<div>'+esc(pathTxt(p))+'</div>').join('');
+    $('pr-bid').textContent = inr(num('p-bid'));
+    $('pr-fin').textContent = inr(finCPM().toFixed(2));
+    $('pr-bud').textContent = inr(num('p-bud'));
+    const s = [...psel];
+    $('pr-ph').textContent = 'Selected Products (' + s.length + ')';
+    $('pr-prd').innerHTML = s.map(i=>{ const p = PRD[i]; return '<tr>'
+      + '<td><i class="ri-image-line" style="color:var(--g30);font-size:16px"></i></td>'
+      + '<td><span class="cmp-nm" style="max-width:380px;white-space:normal">'+esc(p[1])+'</span></td>'
+      + '<td>'+esc(p[3])+' › '+esc(p[4])+'</td><td>'+fit(p)+'</td><td>₹'+p[5]+'</td><td>'+stock(p)+'</td><td>'+vars(p)+'</td><td class="mono">'+p[0]+'</td></tr>'; }).join('');
+  }
+  function launch(){
+    const name = ($('p-name').value||'').trim() || 'Lakme Face Makeup PDP';
+    const d = new Date(), fmt = x => x.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    PCMP.unshift(['Learning', name, LVLN[lvl], [...sel].join(', '), psel.size, '—', num('p-bid'), +finCPM().toFixed(2), num('p-bud'), '0', '0', '0', '0.00%', fmt(d), ($('p-end').value||'N/A').split(' ')[0], String(7130 + PCMP.length)]);
+    cmpRender(); pClose();
+    tst('Product Display Ads campaign launched · now in Learning');
   }
 })();
 </script>
